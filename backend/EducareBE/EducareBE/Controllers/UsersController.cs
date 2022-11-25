@@ -38,7 +38,7 @@ namespace EducareBE.Controllers
             await _dbContext.Users.AddAsync(user);
             await _dbContext.SaveChangesAsync();
 
-            return Ok(user);
+            return Ok(true);
         }
 
         [HttpPost("login")]
