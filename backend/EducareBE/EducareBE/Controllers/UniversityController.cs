@@ -25,7 +25,7 @@ namespace EducareBE.Controllers
         }
 
         [HttpPost("add-university")]
-        public async Task<IActionResult> AddUniversity(string UnivesrityName)
+        public async Task<IActionResult> AddUniversity(string univesrityName)
         {
             var itExists = await _dbContext.Universities
                 .AnyAsync(x => x.Name == univesrityName);
@@ -36,7 +36,7 @@ namespace EducareBE.Controllers
 
             var university = new University
             {
-                Name = UnivesrityName,
+                Name = univesrityName,
             };
 
             await _dbContext.Universities.AddAsync(university);
