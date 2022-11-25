@@ -12,8 +12,8 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace EducareBE.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    [Migration("20221125221738_AddDbSetForCoursesAndFields")]
-    partial class AddDbSetForCoursesAndFields
+    [Migration("20221125231656_InitialMigration")]
+    partial class InitialMigration
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
@@ -32,6 +32,9 @@ namespace EducareBE.Migrations
 
                     SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"), 1L, 1);
 
+                    b.Property<bool>("IsFavoirt")
+                        .HasColumnType("bit");
+
                     b.Property<string>("Name")
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
@@ -49,17 +52,19 @@ namespace EducareBE.Migrations
 
                     SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"), 1L, 1);
 
-                    b.Property<int>("FieldId")
+                    b.Property<int?>("FieldId")
                         .HasColumnType("int");
 
                     b.Property<string>("Name")
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
+                    b.Property<int>("UniversityId")
+                        .HasColumnType("int");
+
                     b.HasKey("Id");
 
-                    b.HasIndex("FieldId")
-                        .IsUnique();
+                    b.HasIndex("FieldId");
 
                     b.ToTable("Faculties");
                 });
@@ -72,7 +77,7 @@ namespace EducareBE.Migrations
 
                     SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"), 1L, 1);
 
-                    b.Property<int>("CourseId")
+                    b.Property<int?>("CourseId")
                         .HasColumnType("int");
 
                     b.Property<string>("Name")
@@ -81,8 +86,7 @@ namespace EducareBE.Migrations
 
                     b.HasKey("Id");
 
-                    b.HasIndex("CourseId")
-                        .IsUnique();
+                    b.HasIndex("CourseId");
 
                     b.ToTable("Fields");
                 });
@@ -95,22 +99,16 @@ namespace EducareBE.Migrations
 
                     SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"), 1L, 1);
 
-                    b.Property<int>("FacultyId")
+                    b.Property<int?>("FacultyId")
                         .HasColumnType("int");
 
                     b.Property<string>("Name")
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<int?>("UserId")
-                        .HasColumnType("int");
-
                     b.HasKey("Id");
 
-                    b.HasIndex("FacultyId")
-                        .IsUnique();
-
-                    b.HasIndex("UserId");
+                    b.HasIndex("FacultyId");
 
                     b.ToTable("Universities");
                 });
@@ -143,10 +141,8 @@ namespace EducareBE.Migrations
             modelBuilder.Entity("EducareBE.Models.Entities.Faculty", b =>
                 {
                     b.HasOne("EducareBE.Models.Entities.Field", "Field")
-                        .WithOne("Faculty")
-                        .HasForeignKey("EducareBE.Models.Entities.Faculty", "FieldId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
+                        .WithMany("Faculties")
+                        .HasForeignKey("FieldId");
 
                     b.Navigation("Field");
                 });
@@ -154,44 +150,32 @@ namespace EducareBE.Migrations
             modelBuilder.Entity("EducareBE.Models.Entities.Field", b =>
                 {
                     b.HasOne("EducareBE.Models.Entities.Course", "Course")
-                        .WithOne("Field")
-                        .HasForeignKey("EducareBE.Models.Entities.Field", "CourseId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
+                        .WithMany("Fields")
+                        .HasForeignKey("CourseId");
 
                     b.Navigation("Course");
                 });
 
             modelBuilder.Entity("EducareBE.Models.Entities.University", b =>
                 {
-                    b.HasOne("EducareBE.Models.Entities.Faculty", "Faculty")
-                        .WithOne("University")
-                        .HasForeignKey("EducareBE.Models.Entities.University", "FacultyId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
-                    b.HasOne("EducareBE.Models.Entities.User", "User")
-                        .WithMany()
-                        .HasForeignKey("UserId");
-
-                    b.Navigation("Faculty");
-
-                    b.Navigation("User");
+                    b.HasOne("EducareBE.Models.Entities.Faculty", null)
+                        .WithMany("Universities")
+                        .HasForeignKey("FacultyId");
                 });
 
             modelBuilder.Entity("EducareBE.Models.Entities.Course", b =>
                 {
-                    b.Navigation("Field");
+                    b.Navigation("Fields");
                 });
 
             modelBuilder.Entity("EducareBE.Models.Entities.Faculty", b =>
                 {
-                    b.Navigation("University");
+                    b.Navigation("Universities");
                 });
 
             modelBuilder.Entity("EducareBE.Models.Entities.Field", b =>
                 {
-                    b.Navigation("Faculty");
+                    b.Navigation("Faculties");
                 });
 #pragma warning restore 612, 618
         }

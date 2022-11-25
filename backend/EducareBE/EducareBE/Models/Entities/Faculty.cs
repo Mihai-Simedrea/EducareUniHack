@@ -7,6 +7,7 @@
         // one to one
 
         // one to many
+        public int UniversityId { get; set; }
         public ICollection<University?> Universities { get; set; }
         public Field? Field { get; set; }
     }

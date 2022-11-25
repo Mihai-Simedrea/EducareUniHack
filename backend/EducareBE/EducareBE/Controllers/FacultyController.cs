@@ -20,19 +20,19 @@ namespace EducareBE.Controllers
 
 
         [HttpGet("{id}")]
-        public async Task<IActionResult> GetAllFaculties(int Id)
+        public async Task<IActionResult> GetAllFaculties(int id)
         {
-            var faculties = await _dbContext.Universities
-                .Where(x => x.Id == Id)
+            var faculties = await _dbContext.Faculties
+                .Where(x => x.UniversityId == id)
                 .ToListAsync();
             return Ok(faculties);
         }
 
-        [HttpPost("add-faculty")]
-        public async Task<IActionResult> AddUniversity(string facultyName)
+        [HttpPost("add-faculty/{id}")]
+        public async Task<IActionResult> AddFaculty(int id, string facultyName)
         {
             var itExists = await _dbContext.Faculties
-                .AnyAsync(x => x.Name == facultyName);
+                .AnyAsync(x => x.Name == facultyName && x.UniversityId == id);
             if (itExists)
             {
                 return Ok(false);
@@ -40,6 +40,7 @@ namespace EducareBE.Controllers
 
             var faculty = new Faculty
             {
+                UniversityId = id,
                 Name = facultyName,
             };
 
