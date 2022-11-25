@@ -5,6 +5,7 @@ import UniversityOrFieldCard from "./Components/UniversityOrFieldCard";
 import {CourseCard} from "./Components/CourseCard";
 import {Box, Typography} from "@mui/material";
 import {SearchBar} from "./Components/SearchBar";
+import {CourseHeader} from "./Components/CourseHeader";
 
 function App() {
     const [searchedText, setSearchedText] = useState("");
@@ -12,7 +13,7 @@ function App() {
     return (
         <div className="App">
             <header className="App-header">
-                <SearchBar searchedText={searchedText} setSearchedText={setSearchedText}/>
+                <CourseHeader courseAbbreviation={"AC"}/>
             </header>
         </div>
     );
