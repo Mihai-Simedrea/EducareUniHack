@@ -24,11 +24,11 @@ namespace EducareBE.Controllers
             return Ok(universites);
         }
 
-        [HttpPost]
+        [HttpPost("add-university")]
         public async Task<IActionResult> AddUniversity(string UnivesrityName)
         {
             var itExists = await _dbContext.Universities
-                .AnyAsync(x => x.Name == UnivesrityName);
+                .AnyAsync(x => x.Name == univesrityName);
             if (itExists)
             {
                 return Ok(false);
