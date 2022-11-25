@@ -1,5 +1,4 @@
 ﻿using EducareBE.Data;
-using EducareBE.Models.DtoModels;
 using EducareBE.Models.Entities;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
@@ -9,13 +8,14 @@ namespace EducareBE.Controllers
     [ApiController]
     [Route("api/[controller]")]
     public class UniversityController : Controller
-    {public ApplicationDbContext _dbContext;
+    {
+        public ApplicationDbContext _dbContext;
 
         public UniversityController(ApplicationDbContext dbContext)
         {
             _dbContext = dbContext;
         }
-        
+
 
         [HttpGet]
         public async Task<IActionResult> GetAllUniveristies()
@@ -27,8 +27,8 @@ namespace EducareBE.Controllers
         [HttpPost]
         public async Task<IActionResult> AddUniversity(string UnivesrityName)
         {
-            var itExists = await _dbContext.Users
-                .AnyAsync(x => x.Email == UnivesrityName);
+            var itExists = await _dbContext.Universities
+                .AnyAsync(x => x.Name == UnivesrityName);
             if (itExists)
             {
                 return Ok(false);
@@ -36,7 +36,7 @@ namespace EducareBE.Controllers
 
             var university = new University
             {
-                Name  = UnivesrityName,
+                Name = UnivesrityName,
             };
 
             await _dbContext.Universities.AddAsync(university);
