@@ -20,6 +20,14 @@ namespace EducareBE.Controllers
         [HttpPost("register")]
         public async Task<IActionResult> Register(UserRegisterDto request)
         {
+
+            var itExists = await _dbContext.Users
+               .AnyAsync(x => x.Email == request.Email && x.Password == request.Password);
+            if (itExists)
+            {
+                return Ok(false); 
+            }
+
             var user = new User
             {
                 Email = request.Email,
@@ -30,7 +38,7 @@ namespace EducareBE.Controllers
             await _dbContext.Users.AddAsync(user);
             await _dbContext.SaveChangesAsync();
 
-            return Ok(user);
+            return Ok(true);
         }
 
         [HttpPost("login")]
