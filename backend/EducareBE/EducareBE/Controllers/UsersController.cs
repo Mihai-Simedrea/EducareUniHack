@@ -2,6 +2,7 @@
 using EducareBE.Models.DtoModels;
 using EducareBE.Models.Entities;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.EntityFrameworkCore;
 
 namespace EducareBE.Controllers
 {
@@ -16,13 +17,14 @@ namespace EducareBE.Controllers
             _dbContext = dbContext;
         }
 
-        [HttpPost]
-        public async Task<IActionResult> AddUser(UserDto request)
+        [HttpPost("register")]
+        public async Task<IActionResult> Register(UserRegisterDto request)
         {
             var user = new User
             {
-                UserName = request.UserName,
-                Password = request.Password
+                Email = request.Email,
+                Password = request.Password,
+                UserName = request.UserName
             };
 
             await _dbContext.Users.AddAsync(user);
@@ -30,7 +32,17 @@ namespace EducareBE.Controllers
 
             return Ok(user);
         }
-            
+
+        [HttpPost("login")]
+        public async Task<IActionResult> LogIn(UserLoginDto request)
+        {
+
+            var itExists = await _dbContext.Users
+                .AnyAsync(x => x.Email == request.Email && x.Password == request.Password);
+
+            return Ok(itExists);
+        }
+
         [HttpGet]
         public IActionResult GetAllUsers()
         {

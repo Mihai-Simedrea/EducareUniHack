@@ -1,6 +1,6 @@
-﻿namespace EducareBE.Models.Entities
+﻿namespace EducareBE.Models.DtoModels
 {
-    public class User : BaseEntity
+    public class UserRegisterDto
     {
         public string Email { get; set; }
         public string Password { get; set; }
