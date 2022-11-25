@@ -12,8 +12,8 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace EducareBE.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    [Migration("20221125214938_addNewTablesinDb")]
-    partial class addNewTablesinDb
+    [Migration("20221125220720_InitialMigration")]
+    partial class InitialMigration
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
@@ -24,7 +24,7 @@ namespace EducareBE.Migrations
 
             SqlServerModelBuilderExtensions.UseIdentityColumns(modelBuilder, 1L, 1);
 
-            modelBuilder.Entity("EducareBE.Models.Entities.University", b =>
+            modelBuilder.Entity("EducareBE.Models.Entities.Faculty", b =>
                 {
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
@@ -38,6 +38,34 @@ namespace EducareBE.Migrations
 
                     b.HasKey("Id");
 
+                    b.ToTable("Faculties");
+                });
+
+            modelBuilder.Entity("EducareBE.Models.Entities.University", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int");
+
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"), 1L, 1);
+
+                    b.Property<int>("FacultyId")
+                        .HasColumnType("int");
+
+                    b.Property<string>("Name")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<int?>("UserId")
+                        .HasColumnType("int");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("FacultyId")
+                        .IsUnique();
+
+                    b.HasIndex("UserId");
+
                     b.ToTable("Universities");
                 });
 
@@ -49,25 +77,13 @@ namespace EducareBE.Migrations
 
                     SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"), 1L, 1);
 
-                    b.Property<int?>("CourseId")
-                        .HasColumnType("int");
-
                     b.Property<string>("Email")
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<int?>("FacultyId")
-                        .HasColumnType("int");
-
-                    b.Property<int?>("FiledId")
-                        .HasColumnType("int");
-
                     b.Property<string>("Password")
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
-
-                    b.Property<int?>("UniversityId")
-                        .HasColumnType("int");
 
                     b.Property<string>("UserName")
                         .IsRequired()
@@ -75,23 +91,29 @@ namespace EducareBE.Migrations
 
                     b.HasKey("Id");
 
-                    b.HasIndex("UniversityId")
-                        .IsUnique()
-                        .HasFilter("[UniversityId] IS NOT NULL");
-
                     b.ToTable("Users");
-                });
-
-            modelBuilder.Entity("EducareBE.Models.Entities.User", b =>
-                {
-                    b.HasOne("EducareBE.Models.Entities.University", null)
-                        .WithOne("User")
-                        .HasForeignKey("EducareBE.Models.Entities.User", "UniversityId");
                 });
 
             modelBuilder.Entity("EducareBE.Models.Entities.University", b =>
                 {
+                    b.HasOne("EducareBE.Models.Entities.Faculty", "Faculty")
+                        .WithOne("University")
+                        .HasForeignKey("EducareBE.Models.Entities.University", "FacultyId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.HasOne("EducareBE.Models.Entities.User", "User")
+                        .WithMany()
+                        .HasForeignKey("UserId");
+
+                    b.Navigation("Faculty");
+
                     b.Navigation("User");
+                });
+
+            modelBuilder.Entity("EducareBE.Models.Entities.Faculty", b =>
+                {
+                    b.Navigation("University");
                 });
 #pragma warning restore 612, 618
         }

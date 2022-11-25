@@ -4,6 +4,7 @@ using EducareBE.Data;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 #nullable disable
@@ -11,9 +12,10 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace EducareBE.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    partial class ApplicationDbContextModelSnapshot : ModelSnapshot
+    [Migration("20221125222358_RemakeMigration")]
+    partial class RemakeMigration
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -47,7 +49,7 @@ namespace EducareBE.Migrations
 
                     SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"), 1L, 1);
 
-                    b.Property<int?>("FieldId")
+                    b.Property<int>("FieldId")
                         .HasColumnType("int");
 
                     b.Property<string>("Name")
@@ -56,7 +58,8 @@ namespace EducareBE.Migrations
 
                     b.HasKey("Id");
 
-                    b.HasIndex("FieldId");
+                    b.HasIndex("FieldId")
+                        .IsUnique();
 
                     b.ToTable("Faculties");
                 });
@@ -69,7 +72,7 @@ namespace EducareBE.Migrations
 
                     SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"), 1L, 1);
 
-                    b.Property<int?>("CourseId")
+                    b.Property<int>("CourseId")
                         .HasColumnType("int");
 
                     b.Property<string>("Name")
@@ -78,7 +81,8 @@ namespace EducareBE.Migrations
 
                     b.HasKey("Id");
 
-                    b.HasIndex("CourseId");
+                    b.HasIndex("CourseId")
+                        .IsUnique();
 
                     b.ToTable("Fields");
                 });
@@ -138,8 +142,10 @@ namespace EducareBE.Migrations
             modelBuilder.Entity("EducareBE.Models.Entities.Faculty", b =>
                 {
                     b.HasOne("EducareBE.Models.Entities.Field", "Field")
-                        .WithMany("Faculties")
-                        .HasForeignKey("FieldId");
+                        .WithOne("Faculty")
+                        .HasForeignKey("EducareBE.Models.Entities.Faculty", "FieldId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
 
                     b.Navigation("Field");
                 });
@@ -147,8 +153,10 @@ namespace EducareBE.Migrations
             modelBuilder.Entity("EducareBE.Models.Entities.Field", b =>
                 {
                     b.HasOne("EducareBE.Models.Entities.Course", "Course")
-                        .WithMany("Fields")
-                        .HasForeignKey("CourseId");
+                        .WithOne("Field")
+                        .HasForeignKey("EducareBE.Models.Entities.Field", "CourseId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
 
                     b.Navigation("Course");
                 });
@@ -170,7 +178,7 @@ namespace EducareBE.Migrations
 
             modelBuilder.Entity("EducareBE.Models.Entities.Course", b =>
                 {
-                    b.Navigation("Fields");
+                    b.Navigation("Field");
                 });
 
             modelBuilder.Entity("EducareBE.Models.Entities.Faculty", b =>
@@ -180,7 +188,7 @@ namespace EducareBE.Migrations
 
             modelBuilder.Entity("EducareBE.Models.Entities.Field", b =>
                 {
-                    b.Navigation("Faculties");
+                    b.Navigation("Faculty");
                 });
 #pragma warning restore 612, 618
         }

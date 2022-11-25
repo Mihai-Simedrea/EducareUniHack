@@ -7,11 +7,11 @@
         public string UserName { get; set; }
         
         // one to one
-        public int? UniversityId { get; set; }
-        public int? FacultyId { get; set; }     
-        public int? FiledId { get; set; } 
+        //public int? UniversityId { get; set; }
+        //public int? FacultyId { get; set; }     
+        // public int? FiledId { get; set; } 
 
         // many to many
-        public int? CourseId { get; set; }
+        // public int? CourseId { get; set; }
     }
 }
