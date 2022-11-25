@@ -16,5 +16,6 @@ namespace EducareBE.Data
         }
 
         public DbSet<User> Users { get; set; }
+        public DbSet<University> Universities { get; set; }
     }
 }
