@@ -3,7 +3,7 @@
     public class Course : BaseEntity
     {
         public string Name { get; set;  }
-
+        public bool IsFavoirt { get; set; } = false;
         // one to one
 
         // one to many
