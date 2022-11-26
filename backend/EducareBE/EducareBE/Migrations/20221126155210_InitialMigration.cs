@@ -1,4 +1,5 @@
-﻿using Microsoft.EntityFrameworkCore.Migrations;
+﻿
+using Microsoft.EntityFrameworkCore.Migrations;
 
 #nullable disable
 
@@ -14,7 +15,9 @@ namespace EducareBE.Migrations
                 {
                     Id = table.Column<int>(type: "int", nullable: false)
                         .Annotation("SqlServer:Identity", "1, 1"),
-                    Name = table.Column<string>(type: "nvarchar(max)", nullable: false)
+                    Name = table.Column<string>(type: "nvarchar(max)", nullable: false),
+                    TotalSubjects = table.Column<int>(type: "int", nullable: false),
+                    TotalExercices = table.Column<int>(type: "int", nullable: false)
                 },
                 constraints: table =>
                 {
@@ -63,7 +66,7 @@ namespace EducareBE.Migrations
                         .Annotation("SqlServer:Identity", "1, 1"),
                     UniversityName = table.Column<string>(type: "nvarchar(max)", nullable: false),
                     FieldName = table.Column<string>(type: "nvarchar(max)", nullable: false),
-                    DegreeName = table.Column<string>(type: "nvarchar(max)", nullable: false),
+                    FacultyName = table.Column<string>(type: "nvarchar(max)", nullable: false),
                     StudyYear = table.Column<int>(type: "int", nullable: false),
                     NumberOfLikes = table.Column<int>(type: "int", nullable: false),
                     NumberOfPosts = table.Column<int>(type: "int", nullable: false),
@@ -107,6 +110,7 @@ namespace EducareBE.Migrations
                         .Annotation("SqlServer:Identity", "1, 1"),
                     Name = table.Column<string>(type: "nvarchar(max)", nullable: false),
                     IsFavorite = table.Column<bool>(type: "bit", nullable: false),
+                    Year = table.Column<int>(type: "int", nullable: true),
                     FieldId = table.Column<int>(type: "int", nullable: true)
                 },
                 constraints: table =>
@@ -117,6 +121,34 @@ namespace EducareBE.Migrations
                         column: x => x.FieldId,
                         principalTable: "Fields",
                         principalColumn: "Id");
+                });
+
+            migrationBuilder.CreateTable(
+                name: "EnrolledCourses",
+                columns: table => new
+                {
+                    Id = table.Column<int>(type: "int", nullable: false)
+                        .Annotation("SqlServer:Identity", "1, 1"),
+                    CourseId = table.Column<int>(type: "int", nullable: false),
+                    UserId = table.Column<int>(type: "int", nullable: false),
+                    IsFavoirte = table.Column<bool>(type: "bit", nullable: true),
+                    IsEnrolled = table.Column<bool>(type: "bit", nullable: true)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_EnrolledCourses", x => x.Id);
+                    table.ForeignKey(
+                        name: "FK_EnrolledCourses_Courses_CourseId",
+                        column: x => x.CourseId,
+                        principalTable: "Courses",
+                        principalColumn: "Id",
+                        onDelete: ReferentialAction.Cascade);
+                    table.ForeignKey(
+                        name: "FK_EnrolledCourses_Users_UserId",
+                        column: x => x.UserId,
+                        principalTable: "Users",
+                        principalColumn: "Id",
+                        onDelete: ReferentialAction.Cascade);
                 });
 
             migrationBuilder.CreateTable(
@@ -165,6 +197,16 @@ namespace EducareBE.Migrations
                 column: "FieldId");
 
             migrationBuilder.CreateIndex(
+                name: "IX_EnrolledCourses_CourseId",
+                table: "EnrolledCourses",
+                column: "CourseId");
+
+            migrationBuilder.CreateIndex(
+                name: "IX_EnrolledCourses_UserId",
+                table: "EnrolledCourses",
+                column: "UserId");
+
+            migrationBuilder.CreateIndex(
                 name: "IX_Faculties_UniversityId",
                 table: "Faculties",
                 column: "UniversityId");
@@ -193,6 +235,9 @@ namespace EducareBE.Migrations
 
         protected override void Down(MigrationBuilder migrationBuilder)
         {
+            migrationBuilder.DropTable(
+                name: "EnrolledCourses");
+
             migrationBuilder.DropTable(
                 name: "Profiles");
 

@@ -34,11 +34,11 @@ namespace EducareBE.Controllers
                     CourseId = courseId,
                     IsFavoirte = true
                 };
+                await _dbContext.EnrolledCourses.AddAsync(enrolledCourse);
             }
 
             enrolledCourse.IsFavoirte = true;
-
-            await _dbContext.EnrolledCourses.AddAsync(enrolledCourse);
+            // _dbContext.Entry(enrolledCourse).State = EntityState.Modified;
             await _dbContext.SaveChangesAsync();
 
             return Ok(enrolledCourse);

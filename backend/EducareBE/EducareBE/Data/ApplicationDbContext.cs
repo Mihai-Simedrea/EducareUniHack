@@ -1,7 +1,5 @@
 ﻿using EducareBE.Models.Entities;
 using Microsoft.EntityFrameworkCore;
-using static Microsoft.EntityFrameworkCore.DbLoggerCategory.Database;
-using System.Reflection.Emit;
 
 namespace EducareBE.Data
 {
@@ -26,6 +24,25 @@ namespace EducareBE.Data
                 .HasOne(a => a.Profile)
                 .WithOne(b => b.User)
                 .HasForeignKey<Profile>(b => b.UserId);
+
+            modelBuilder.Entity<EnrolledCourses>()
+                .HasOne<Course>(sc => sc.Course)
+                .WithMany(s => s.EnrolledCourses)
+                .HasForeignKey(sc => sc.CourseId);
+
+
+            modelBuilder.Entity<EnrolledCourses>()
+                .HasOne<User>(sc => sc.User)
+                .WithMany(s => s.EnrolledCourses)
+                .HasForeignKey(sc => sc.UserId);
+
+
+            PopulateUniversity(modelBuilder);
+            PopulateFaculty(modelBuilder);
+            PopulateFields(modelBuilder);
+            PopulateCourses(modelBuilder);
+            PopulateSubects(modelBuilder);
+
         }
 
         public DbSet<User> Users { get; set; }
@@ -37,5 +54,107 @@ namespace EducareBE.Data
         public DbSet<SubjectAddedBy> SubjectsAddedBy { get; set;}
         public DbSet<Profile> Profiles { get; set; }
         public DbSet<EnrolledCourses> EnrolledCourses { get; set; }
+
+
+
+        private void PopulateUniversity(ModelBuilder modelBuilder) 
+        {
+            modelBuilder.Entity<University>()
+            .HasData(
+                new University
+                {
+                    Id = 1,
+                    Name = "Polytechnic University of Timisoara"
+                },
+                 new University
+                 {
+                     Id = 2,
+                     Name = "Vest University of Timisoara"
+                 }
+            );
+        }
+
+        private void PopulateFaculty(ModelBuilder modelBuilder)
+        {
+            modelBuilder.Entity<Faculty>()
+            .HasData(
+                new Faculty
+                {
+                    Id = 1,
+                    Name = "Automation And Computers",
+                    UniversityId = 1
+                },
+                new Faculty
+                {
+                    Id = 2,
+                    Name = "Electronics and Telecomunication",
+                    UniversityId = 2
+                },
+                new Faculty
+                {
+                    Id = 3,
+                    Name = "Faculty of Finance and Banking",
+                    UniversityId = 2
+                }
+            );
+        }
+
+
+        private void PopulateFields(ModelBuilder modelBuilder)
+        {
+            modelBuilder.Entity<Field>()
+            .HasData(
+                new Field
+                {
+                    Id = 1,
+                    Name = "Informatics",
+                    FacultyId = 1
+                },
+                new Field
+                {
+                    Id = 2,
+                    Name = "Computers and Information Technology",
+                    FacultyId = 1
+                },
+                new Field
+                {
+                    Id = 3,
+                    Name = "Informatics",
+                    FacultyId = 2
+                }
+            );
+        }
+
+        private void PopulateCourses(ModelBuilder modelBuilder)
+        {
+            modelBuilder.Entity<Course>()
+            .HasData(
+                new Course
+                {
+                    Id = 1,
+                    Name = "POO",
+                    Year = 2,
+                    FieldId = 2
+                },
+                new Course
+                {
+                    Id = 2,
+                    Name = "SDA",
+                    Year = 2,
+                    FieldId = 2
+                },
+                new Course
+                {
+                    Id = 3,
+                    Name = "TD",
+                    Year = 4,
+                    FieldId = 2
+                }
+            );
+        }
+
+        private void PopulateSubects(ModelBuilder modelBuilder) 
+        { 
+        }
     }
 }

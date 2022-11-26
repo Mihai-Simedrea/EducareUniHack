@@ -12,7 +12,7 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace EducareBE.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    [Migration("20221126095637_InitialMigration")]
+    [Migration("20221126155210_InitialMigration")]
     partial class InitialMigration
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -42,11 +42,43 @@ namespace EducareBE.Migrations
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
+                    b.Property<int?>("Year")
+                        .HasColumnType("int");
+
                     b.HasKey("Id");
 
                     b.HasIndex("FieldId");
 
                     b.ToTable("Courses");
+                });
+
+            modelBuilder.Entity("EducareBE.Models.Entities.EnrolledCourses", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int");
+
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"), 1L, 1);
+
+                    b.Property<int>("CourseId")
+                        .HasColumnType("int");
+
+                    b.Property<bool?>("IsEnrolled")
+                        .HasColumnType("bit");
+
+                    b.Property<bool?>("IsFavoirte")
+                        .HasColumnType("bit");
+
+                    b.Property<int>("UserId")
+                        .HasColumnType("int");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("CourseId");
+
+                    b.HasIndex("UserId");
+
+                    b.ToTable("EnrolledCourses");
                 });
 
             modelBuilder.Entity("EducareBE.Models.Entities.Faculty", b =>
@@ -101,7 +133,7 @@ namespace EducareBE.Migrations
 
                     SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"), 1L, 1);
 
-                    b.Property<string>("DegreeName")
+                    b.Property<string>("FacultyName")
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
@@ -195,6 +227,12 @@ namespace EducareBE.Migrations
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
+                    b.Property<int>("TotalExercices")
+                        .HasColumnType("int");
+
+                    b.Property<int>("TotalSubjects")
+                        .HasColumnType("int");
+
                     b.HasKey("Id");
 
                     b.ToTable("Universities");
@@ -232,6 +270,25 @@ namespace EducareBE.Migrations
                         .HasForeignKey("FieldId");
 
                     b.Navigation("Field");
+                });
+
+            modelBuilder.Entity("EducareBE.Models.Entities.EnrolledCourses", b =>
+                {
+                    b.HasOne("EducareBE.Models.Entities.Course", "Course")
+                        .WithMany("EnrolledCourses")
+                        .HasForeignKey("CourseId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.HasOne("EducareBE.Models.Entities.User", "User")
+                        .WithMany("EnrolledCourses")
+                        .HasForeignKey("UserId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.Navigation("Course");
+
+                    b.Navigation("User");
                 });
 
             modelBuilder.Entity("EducareBE.Models.Entities.Faculty", b =>
@@ -283,6 +340,8 @@ namespace EducareBE.Migrations
 
             modelBuilder.Entity("EducareBE.Models.Entities.Course", b =>
                 {
+                    b.Navigation("EnrolledCourses");
+
                     b.Navigation("Subjects");
                 });
 
@@ -308,6 +367,8 @@ namespace EducareBE.Migrations
 
             modelBuilder.Entity("EducareBE.Models.Entities.User", b =>
                 {
+                    b.Navigation("EnrolledCourses");
+
                     b.Navigation("Profile")
                         .IsRequired();
                 });
