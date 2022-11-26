@@ -1,6 +1,8 @@
-﻿using EducareBE.Data;
+﻿using AutoMapper;
+using EducareBE.Data;
 using EducareBE.Models.DtoModels;
 using EducareBE.Models.Entities;
+using EducareBE.Models.ViewModels;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 
@@ -11,11 +13,13 @@ namespace EducareBE.Controllers
     public class FacultyController : Controller
     {
 
-        public ApplicationDbContext _dbContext;
+        private ApplicationDbContext _dbContext;
+        private readonly IMapper _mapper;
 
-        public FacultyController(ApplicationDbContext dbContext)
+        public FacultyController(ApplicationDbContext dbContext, IMapper mapper)
         {
             _dbContext = dbContext;
+            _mapper = mapper;
         }
 
 
@@ -26,7 +30,8 @@ namespace EducareBE.Controllers
                 .Include(x => x.Fields)
                 .Where(x => x.UniversityId == id)
                 .ToListAsync();
-            return Ok(faculties);
+
+            return Ok(_mapper.Map<List<GetFacultiesViewModel>>(faculties));
         }
 
         [HttpPost("add-faculty/{id}")]
