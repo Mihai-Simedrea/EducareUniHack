@@ -1,5 +1,7 @@
-﻿using EducareBE.Data;
+﻿using AutoMapper;
+using EducareBE.Data;
 using EducareBE.Models.Entities;
+using EducareBE.Models.ViewModels;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 
@@ -10,13 +12,13 @@ namespace EducareBE.Controllers
     public class FieldController : Controller
     {
         public ApplicationDbContext _dbContext;
+        private readonly IMapper _mapper;
 
-
-        public FieldController(ApplicationDbContext dbContext)
+        public FieldController(ApplicationDbContext dbContext, IMapper mapper)
         {
             _dbContext = dbContext;
+           _mapper = mapper;
         }
-
 
         [HttpGet("{id}")]
         public async Task<IActionResult> GetAllFields(int id)
@@ -25,7 +27,7 @@ namespace EducareBE.Controllers
                 .Include(x => x.Courses)
                 .Where(x => x.FacultyId == id)
                 .ToListAsync();
-            return Ok(fields);
+            return Ok(_mapper.Map<List<GetFieldsViewModel>>(fields));
         }
 
         [HttpPost("add-field/{id}")]
