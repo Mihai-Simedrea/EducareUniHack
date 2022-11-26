@@ -1,4 +1,5 @@
 ﻿using AutoMapper;
+using EducareBE.Models.DtoModels;
 using EducareBE.Models.Entities;
 using EducareBE.Models.ViewModels;
 
@@ -8,7 +9,12 @@ namespace EducareBE.Mapping
     {
         public MappingProfile()
         {
-            CreateMap<University, GetUniversityViewModel>().ReverseMap(); 
+            CreateMap<Course, AddCourseDto>().ReverseMap();
+
+
+            CreateMap<University, GetUniversityViewModel>().ReverseMap();
+            CreateMap<Field, GetFieldViewModel>().ReverseMap();
+            CreateMap<Course, GetCourseViewModel>().ReverseMap();
         }
       
     }

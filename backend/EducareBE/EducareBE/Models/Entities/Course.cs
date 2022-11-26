@@ -2,8 +2,9 @@
 {
     public class Course : BaseEntity
     {
-        public string Name { get; set;  }
+        public string Name { get; set; }
         public bool IsFavorite { get; set; }
+        public int? Year { get; set; }
         // one to one
 
         // one to many
