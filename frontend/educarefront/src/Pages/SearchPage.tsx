@@ -53,7 +53,7 @@ export function SearchPage() {
 
 
     return (
-        <Box sx={styles.container}>
+        <Box sx={styles.container} key={"69420"}>
             <SearchBar
                 searchedText={inputText}
                 setSearchedText={setInputText}
@@ -63,6 +63,7 @@ export function SearchPage() {
                 list={list}
                 searchedText={inputText}
                 searchBy={"University"}
+                key={"666"}
             />
             <LabelBottomNavigation icon={2}/>
 
