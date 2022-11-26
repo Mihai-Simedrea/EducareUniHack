@@ -12,7 +12,7 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace EducareBE.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    [Migration("20221126155210_InitialMigration")]
+    [Migration("20221126173131_InitialMigration")]
     partial class InitialMigration
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -50,6 +50,32 @@ namespace EducareBE.Migrations
                     b.HasIndex("FieldId");
 
                     b.ToTable("Courses");
+
+                    b.HasData(
+                        new
+                        {
+                            Id = 1,
+                            FieldId = 2,
+                            IsFavorite = false,
+                            Name = "POO",
+                            Year = 2
+                        },
+                        new
+                        {
+                            Id = 2,
+                            FieldId = 2,
+                            IsFavorite = false,
+                            Name = "SDA",
+                            Year = 2
+                        },
+                        new
+                        {
+                            Id = 3,
+                            FieldId = 2,
+                            IsFavorite = false,
+                            Name = "TD",
+                            Year = 4
+                        });
                 });
 
             modelBuilder.Entity("EducareBE.Models.Entities.EnrolledCourses", b =>
@@ -101,6 +127,26 @@ namespace EducareBE.Migrations
                     b.HasIndex("UniversityId");
 
                     b.ToTable("Faculties");
+
+                    b.HasData(
+                        new
+                        {
+                            Id = 1,
+                            Name = "Automation And Computers",
+                            UniversityId = 1
+                        },
+                        new
+                        {
+                            Id = 2,
+                            Name = "Electronics and Telecomunication",
+                            UniversityId = 2
+                        },
+                        new
+                        {
+                            Id = 3,
+                            Name = "Faculty of Finance and Banking",
+                            UniversityId = 2
+                        });
                 });
 
             modelBuilder.Entity("EducareBE.Models.Entities.Field", b =>
@@ -123,6 +169,55 @@ namespace EducareBE.Migrations
                     b.HasIndex("FacultyId");
 
                     b.ToTable("Fields");
+
+                    b.HasData(
+                        new
+                        {
+                            Id = 1,
+                            FacultyId = 1,
+                            Name = "Informatics"
+                        },
+                        new
+                        {
+                            Id = 2,
+                            FacultyId = 1,
+                            Name = "Computers and Information Technology"
+                        },
+                        new
+                        {
+                            Id = 3,
+                            FacultyId = 2,
+                            Name = "Informatics"
+                        });
+                });
+
+            modelBuilder.Entity("EducareBE.Models.Entities.Like", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int");
+
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"), 1L, 1);
+
+                    b.Property<int>("DislikesCount")
+                        .HasColumnType("int");
+
+                    b.Property<int>("LikesCount")
+                        .HasColumnType("int");
+
+                    b.Property<int>("SubjectAddedById")
+                        .HasColumnType("int");
+
+                    b.Property<int>("UserId")
+                        .HasColumnType("int");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("SubjectAddedById");
+
+                    b.HasIndex("UserId");
+
+                    b.ToTable("Likes");
                 });
 
             modelBuilder.Entity("EducareBE.Models.Entities.Profile", b =>
@@ -195,12 +290,6 @@ namespace EducareBE.Migrations
 
                     SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"), 1L, 1);
 
-                    b.Property<int>("Dislikes")
-                        .HasColumnType("int");
-
-                    b.Property<int>("Likes")
-                        .HasColumnType("int");
-
                     b.Property<string>("Name")
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
@@ -236,6 +325,22 @@ namespace EducareBE.Migrations
                     b.HasKey("Id");
 
                     b.ToTable("Universities");
+
+                    b.HasData(
+                        new
+                        {
+                            Id = 1,
+                            Name = "Polytechnic University of Timisoara",
+                            TotalExercices = 0,
+                            TotalSubjects = 0
+                        },
+                        new
+                        {
+                            Id = 2,
+                            Name = "Vest University of Timisoara",
+                            TotalExercices = 0,
+                            TotalSubjects = 0
+                        });
                 });
 
             modelBuilder.Entity("EducareBE.Models.Entities.User", b =>
@@ -309,6 +414,25 @@ namespace EducareBE.Migrations
                     b.Navigation("Faculty");
                 });
 
+            modelBuilder.Entity("EducareBE.Models.Entities.Like", b =>
+                {
+                    b.HasOne("EducareBE.Models.Entities.SubjectAddedBy", "SubjectAddedBy")
+                        .WithMany("Likes")
+                        .HasForeignKey("SubjectAddedById")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.HasOne("EducareBE.Models.Entities.User", "User")
+                        .WithMany("Likes")
+                        .HasForeignKey("UserId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.Navigation("SubjectAddedBy");
+
+                    b.Navigation("User");
+                });
+
             modelBuilder.Entity("EducareBE.Models.Entities.Profile", b =>
                 {
                     b.HasOne("EducareBE.Models.Entities.User", "User")
@@ -360,6 +484,11 @@ namespace EducareBE.Migrations
                     b.Navigation("SubjectsAddedBy");
                 });
 
+            modelBuilder.Entity("EducareBE.Models.Entities.SubjectAddedBy", b =>
+                {
+                    b.Navigation("Likes");
+                });
+
             modelBuilder.Entity("EducareBE.Models.Entities.University", b =>
                 {
                     b.Navigation("Faculties");
@@ -368,6 +497,8 @@ namespace EducareBE.Migrations
             modelBuilder.Entity("EducareBE.Models.Entities.User", b =>
                 {
                     b.Navigation("EnrolledCourses");
+
+                    b.Navigation("Likes");
 
                     b.Navigation("Profile")
                         .IsRequired();

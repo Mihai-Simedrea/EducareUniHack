@@ -36,6 +36,15 @@ namespace EducareBE.Data
                 .WithMany(s => s.EnrolledCourses)
                 .HasForeignKey(sc => sc.UserId);
 
+            modelBuilder.Entity<Like>()
+                .HasOne<User>(sc => sc.User)
+                .WithMany(s => s.Likes)
+                .HasForeignKey(sc => sc.UserId);
+
+            modelBuilder.Entity<Like>()
+                .HasOne<SubjectAddedBy>(sc => sc.SubjectAddedBy)
+                .WithMany(s => s.Likes)
+                .HasForeignKey(sc => sc.SubjectAddedById);
 
             PopulateUniversity(modelBuilder);
             PopulateFaculty(modelBuilder);
@@ -54,7 +63,7 @@ namespace EducareBE.Data
         public DbSet<SubjectAddedBy> SubjectsAddedBy { get; set;}
         public DbSet<Profile> Profiles { get; set; }
         public DbSet<EnrolledCourses> EnrolledCourses { get; set; }
-
+        public DbSet<Like> Likes { get; set; }
 
 
         private void PopulateUniversity(ModelBuilder modelBuilder) 

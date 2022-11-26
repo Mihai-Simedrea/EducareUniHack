@@ -1,5 +1,4 @@
-﻿
-using Microsoft.EntityFrameworkCore.Migrations;
+﻿using Microsoft.EntityFrameworkCore.Migrations;
 
 #nullable disable
 
@@ -177,8 +176,6 @@ namespace EducareBE.Migrations
                     Id = table.Column<int>(type: "int", nullable: false)
                         .Annotation("SqlServer:Identity", "1, 1"),
                     Name = table.Column<string>(type: "nvarchar(max)", nullable: false),
-                    Likes = table.Column<int>(type: "int", nullable: false),
-                    Dislikes = table.Column<int>(type: "int", nullable: false),
                     SubjectId = table.Column<int>(type: "int", nullable: true)
                 },
                 constraints: table =>
@@ -190,6 +187,89 @@ namespace EducareBE.Migrations
                         principalTable: "Subjects",
                         principalColumn: "Id");
                 });
+
+            migrationBuilder.CreateTable(
+                name: "Likes",
+                columns: table => new
+                {
+                    Id = table.Column<int>(type: "int", nullable: false)
+                        .Annotation("SqlServer:Identity", "1, 1"),
+                    UserId = table.Column<int>(type: "int", nullable: false),
+                    SubjectAddedById = table.Column<int>(type: "int", nullable: false),
+                    LikesCount = table.Column<int>(type: "int", nullable: false),
+                    DislikesCount = table.Column<int>(type: "int", nullable: false)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_Likes", x => x.Id);
+                    table.ForeignKey(
+                        name: "FK_Likes_SubjectsAddedBy_SubjectAddedById",
+                        column: x => x.SubjectAddedById,
+                        principalTable: "SubjectsAddedBy",
+                        principalColumn: "Id",
+                        onDelete: ReferentialAction.Cascade);
+                    table.ForeignKey(
+                        name: "FK_Likes_Users_UserId",
+                        column: x => x.UserId,
+                        principalTable: "Users",
+                        principalColumn: "Id",
+                        onDelete: ReferentialAction.Cascade);
+                });
+
+            migrationBuilder.InsertData(
+                table: "Universities",
+                columns: new[] { "Id", "Name", "TotalExercices", "TotalSubjects" },
+                values: new object[] { 1, "Polytechnic University of Timisoara", 0, 0 });
+
+            migrationBuilder.InsertData(
+                table: "Universities",
+                columns: new[] { "Id", "Name", "TotalExercices", "TotalSubjects" },
+                values: new object[] { 2, "Vest University of Timisoara", 0, 0 });
+
+            migrationBuilder.InsertData(
+                table: "Faculties",
+                columns: new[] { "Id", "Name", "UniversityId" },
+                values: new object[] { 1, "Automation And Computers", 1 });
+
+            migrationBuilder.InsertData(
+                table: "Faculties",
+                columns: new[] { "Id", "Name", "UniversityId" },
+                values: new object[] { 2, "Electronics and Telecomunication", 2 });
+
+            migrationBuilder.InsertData(
+                table: "Faculties",
+                columns: new[] { "Id", "Name", "UniversityId" },
+                values: new object[] { 3, "Faculty of Finance and Banking", 2 });
+
+            migrationBuilder.InsertData(
+                table: "Fields",
+                columns: new[] { "Id", "FacultyId", "Name" },
+                values: new object[] { 1, 1, "Informatics" });
+
+            migrationBuilder.InsertData(
+                table: "Fields",
+                columns: new[] { "Id", "FacultyId", "Name" },
+                values: new object[] { 2, 1, "Computers and Information Technology" });
+
+            migrationBuilder.InsertData(
+                table: "Fields",
+                columns: new[] { "Id", "FacultyId", "Name" },
+                values: new object[] { 3, 2, "Informatics" });
+
+            migrationBuilder.InsertData(
+                table: "Courses",
+                columns: new[] { "Id", "FieldId", "IsFavorite", "Name", "Year" },
+                values: new object[] { 1, 2, false, "POO", 2 });
+
+            migrationBuilder.InsertData(
+                table: "Courses",
+                columns: new[] { "Id", "FieldId", "IsFavorite", "Name", "Year" },
+                values: new object[] { 2, 2, false, "SDA", 2 });
+
+            migrationBuilder.InsertData(
+                table: "Courses",
+                columns: new[] { "Id", "FieldId", "IsFavorite", "Name", "Year" },
+                values: new object[] { 3, 2, false, "TD", 4 });
 
             migrationBuilder.CreateIndex(
                 name: "IX_Courses_FieldId",
@@ -217,6 +297,16 @@ namespace EducareBE.Migrations
                 column: "FacultyId");
 
             migrationBuilder.CreateIndex(
+                name: "IX_Likes_SubjectAddedById",
+                table: "Likes",
+                column: "SubjectAddedById");
+
+            migrationBuilder.CreateIndex(
+                name: "IX_Likes_UserId",
+                table: "Likes",
+                column: "UserId");
+
+            migrationBuilder.CreateIndex(
                 name: "IX_Profiles_UserId",
                 table: "Profiles",
                 column: "UserId",
@@ -237,6 +327,9 @@ namespace EducareBE.Migrations
         {
             migrationBuilder.DropTable(
                 name: "EnrolledCourses");
+
+            migrationBuilder.DropTable(
+                name: "Likes");
 
             migrationBuilder.DropTable(
                 name: "Profiles");
