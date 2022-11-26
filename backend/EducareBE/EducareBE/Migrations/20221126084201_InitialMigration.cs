@@ -43,7 +43,7 @@ namespace EducareBE.Migrations
                     Id = table.Column<int>(type: "int", nullable: false)
                         .Annotation("SqlServer:Identity", "1, 1"),
                     Name = table.Column<string>(type: "nvarchar(max)", nullable: false),
-                    UniversityId = table.Column<int>(type: "int", nullable: false)
+                    UniversityId = table.Column<int>(type: "int", nullable: true)
                 },
                 constraints: table =>
                 {
@@ -52,8 +52,7 @@ namespace EducareBE.Migrations
                         name: "FK_Faculties_Universities_UniversityId",
                         column: x => x.UniversityId,
                         principalTable: "Universities",
-                        principalColumn: "Id",
-                        onDelete: ReferentialAction.Cascade);
+                        principalColumn: "Id");
                 });
 
             migrationBuilder.CreateTable(
@@ -63,7 +62,7 @@ namespace EducareBE.Migrations
                     Id = table.Column<int>(type: "int", nullable: false)
                         .Annotation("SqlServer:Identity", "1, 1"),
                     Name = table.Column<string>(type: "nvarchar(max)", nullable: false),
-                    FacultyId = table.Column<int>(type: "int", nullable: false)
+                    FacultyId = table.Column<int>(type: "int", nullable: true)
                 },
                 constraints: table =>
                 {
@@ -72,8 +71,7 @@ namespace EducareBE.Migrations
                         name: "FK_Fields_Faculties_FacultyId",
                         column: x => x.FacultyId,
                         principalTable: "Faculties",
-                        principalColumn: "Id",
-                        onDelete: ReferentialAction.Cascade);
+                        principalColumn: "Id");
                 });
 
             migrationBuilder.CreateTable(
@@ -84,7 +82,7 @@ namespace EducareBE.Migrations
                         .Annotation("SqlServer:Identity", "1, 1"),
                     Name = table.Column<string>(type: "nvarchar(max)", nullable: false),
                     IsFavorite = table.Column<bool>(type: "bit", nullable: false),
-                    FieldId = table.Column<int>(type: "int", nullable: false)
+                    FieldId = table.Column<int>(type: "int", nullable: true)
                 },
                 constraints: table =>
                 {
@@ -93,8 +91,7 @@ namespace EducareBE.Migrations
                         name: "FK_Courses_Fields_FieldId",
                         column: x => x.FieldId,
                         principalTable: "Fields",
-                        principalColumn: "Id",
-                        onDelete: ReferentialAction.Cascade);
+                        principalColumn: "Id");
                 });
 
             migrationBuilder.CreateIndex(
