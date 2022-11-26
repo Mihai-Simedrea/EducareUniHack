@@ -7,11 +7,11 @@ namespace EducareBE.Controllers
 {
     [ApiController]
     [Route("api/[controller]")]
-    public class CourseCoutnroller : Controller
+    public class CourseController : Controller
     {    
         public ApplicationDbContext _dbContext;
 
-        public CourseCoutnroller(ApplicationDbContext dbContext)
+        public CourseController(ApplicationDbContext dbContext)
         {
             _dbContext = dbContext;
         }
@@ -26,7 +26,7 @@ namespace EducareBE.Controllers
         }
 
         [HttpPost("add-course/{id}")]
-        public async Task<IActionResult> AddFaculty(int id, string courseName)
+        public async Task<IActionResult> AddCourse(int id, string courseName)
         {
             var itExists = await _dbContext.Courses
                 .AnyAsync(x => x.Name == courseName && x.FieldId == id);
