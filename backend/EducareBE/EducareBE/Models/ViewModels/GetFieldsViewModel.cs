@@ -1,11 +1,8 @@
 ﻿namespace EducareBE.Models.ViewModels
 {
-    public class GetCourseViewModel
+    public class GetFieldsViewModel
     {
         public int Id { get; set; }
         public string Name { get; set; }
-        public int? Year { get; set; }
-        public int? FieldId { get; set; } 
-
     }
 }
