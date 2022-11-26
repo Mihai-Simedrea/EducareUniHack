@@ -12,6 +12,10 @@ export function SearchBar(props: Props) {
 
     const styles = {
         container: {
+            width:"100vw",
+            display:"flex",
+            alignItems:"center",
+            justifyContent:"center",
             height: 128-56,
             paddingTop: "56px",
             boxShadow: '0px 0px 10px #7C7C7C',
