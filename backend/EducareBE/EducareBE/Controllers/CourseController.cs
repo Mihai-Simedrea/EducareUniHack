@@ -2,6 +2,7 @@
 using EducareBE.Data;
 using EducareBE.Models.DtoModels;
 using EducareBE.Models.Entities;
+using EducareBE.Models.ViewModels;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 
@@ -26,20 +27,21 @@ namespace EducareBE.Controllers
             var courses = await _dbContext.Courses
                 .Where(x => x.FieldId == id)
                 .ToListAsync();
-            return Ok(courses);
+            return Ok(_mapper.Map<List<GetCourseViewModel>>(courses));
         }
 
-        [HttpPost("add-course/{id}")]
-        public async Task<IActionResult> AddCourse(int id, [FromBody]AddCourseDto courseDto)
+        [HttpPost("add-course")]
+        public async Task<IActionResult> AddCourse([FromBody]AddCourseDto courseDto)
         {
             var itExists = await _dbContext.Courses
-                .AnyAsync(x => x.Name == courseDto.Name && x.FieldId == id);
+                .AnyAsync(x => x.Name == courseDto.Name && x.FieldId == courseDto.FieldId);
             if (itExists)
             {
                 return Ok(false);
             }
 
-            var course = await _dbContext.Courses.AddAsync(_mapper.Map<Course>(courseDto));
+            var course = _mapper.Map<Course>(courseDto);
+            await _dbContext.Courses.AddAsync(_mapper.Map<Course>(courseDto));
             await _dbContext.SaveChangesAsync();
 
             return Ok(course);
