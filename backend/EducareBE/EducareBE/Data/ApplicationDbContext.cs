@@ -52,7 +52,7 @@ namespace EducareBE.Data
             PopulateFields(modelBuilder);
             PopulateCourses(modelBuilder);
             PopulateSubjects (modelBuilder);
-            PopulateSubjectsAddedBy(modelBuilder);
+           // PopulateSubjectsAddedBy(modelBuilder);
 
             //PopulateUsers(modelBuilder);
            // PopulateEnroledCourses(modelBuilder);
