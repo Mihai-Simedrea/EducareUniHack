@@ -11,7 +11,7 @@ namespace EducareBE.Controllers
     [Route("api/[controller]")]
     public class UniversityController : Controller
     {
-        private ApplicationDbContext _dbContext;
+        private readonly ApplicationDbContext _dbContext;
         private readonly IMapper _mapper;
 
         public UniversityController(ApplicationDbContext dbContext, IMapper mapper)

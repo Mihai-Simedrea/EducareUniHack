@@ -17,6 +17,7 @@ namespace EducareBE.Mapping
             CreateMap<University, GetUniversityViewModel>().ReverseMap();
             CreateMap<Field, GetFieldsViewModel>().ReverseMap();
             CreateMap<Course, GetCourseViewModel>().ReverseMap();
+            CreateMap<Subject, GetAllSubjectsDto>().ReverseMap();
         }
       
     }

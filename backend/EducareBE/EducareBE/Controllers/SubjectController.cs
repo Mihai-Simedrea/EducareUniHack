@@ -1,5 +1,7 @@
-﻿using EducareBE.Data;
+﻿using AutoMapper;
+using EducareBE.Data;
 using EducareBE.Models.Entities;
+using EducareBE.Models.ViewModels;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 
@@ -9,11 +11,13 @@ namespace EducareBE.Controllers
     [Route("api/[controller]")]
     public class SubjectController : Controller
     {
-        public ApplicationDbContext _dbContext;
+        private readonly ApplicationDbContext _dbContext;
+        private readonly IMapper _mapper;
 
-        public SubjectController(ApplicationDbContext dbContext)
+        public SubjectController(ApplicationDbContext dbContext, IMapper mapper)
         {
             _dbContext = dbContext;
+            _mapper = mapper;
         }
 
         [HttpGet("{id}")]
@@ -23,7 +27,7 @@ namespace EducareBE.Controllers
                 .Include(x => x.Course)
                 .Where(x => x.CourseId == id)
                 .ToListAsync();
-            return Ok(subjects);
+            return Ok(_mapper.Map<GetAllSubjectsDto>(subjects));
         }
 
         [HttpPost("add-subject/{id}")]
