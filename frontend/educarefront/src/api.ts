@@ -237,40 +237,7 @@ export class ApiClient {
     /**
      * @return Success
      */
-    universityGet(): Promise<void> {
-        let url_ = this.baseUrl + "/api/University";
-        url_ = url_.replace(/[?&]$/, "");
-
-        let options_: RequestInit = {
-            method: "GET",
-            headers: {
-            }
-        };
-
-        return this.http.fetch(url_, options_).then((_response: Response) => {
-            return this.processUniversityGet(_response);
-        });
-    }
-
-    protected processUniversityGet(response: Response): Promise<void> {
-        const status = response.status;
-        let _headers: any = {}; if (response.headers && response.headers.forEach) { response.headers.forEach((v: any, k: any) => _headers[k] = v); };
-        if (status === 200) {
-            return response.text().then((_responseText) => {
-            return;
-            });
-        } else if (status !== 200 && status !== 204) {
-            return response.text().then((_responseText) => {
-            return throwException("An unexpected server error occurred.", status, _responseText, _headers);
-            });
-        }
-        return Promise.resolve<void>(null as any);
-    }
-
-    /**
-     * @return Success
-     */
-    universityGet(id: number): Promise<void> {
+    university(id: number): Promise<void> {
         let url_ = this.baseUrl + "/api/University/{id}";
         if (id === undefined || id === null)
             throw new Error("The parameter 'id' must be defined.");
@@ -284,11 +251,11 @@ export class ApiClient {
         };
 
         return this.http.fetch(url_, options_).then((_response: Response) => {
-            return this.processUniversityGet(_response);
+            return this.processUniversity(_response);
         });
     }
 
-    protected processUniversityGet(response: Response): Promise<void> {
+    protected processUniversity(response: Response): Promise<void> {
         const status = response.status;
         let _headers: any = {}; if (response.headers && response.headers.forEach) { response.headers.forEach((v: any, k: any) => _headers[k] = v); };
         if (status === 200) {
@@ -729,6 +696,75 @@ export class UniversityClient {
     constructor(baseUrl?: string, http?: { fetch(url: RequestInfo, init?: RequestInit): Promise<Response> }) {
         this.http = http ? http : window as any;
         this.baseUrl = baseUrl !== undefined && baseUrl !== null ? baseUrl : "";
+    }
+
+    /**
+     * @return Success
+     */
+    getAllUniversities(): Promise<void> {
+        let url_ = this.baseUrl + "/api/University/get-all-universities";
+        url_ = url_.replace(/[?&]$/, "");
+
+        let options_: RequestInit = {
+            method: "GET",
+            headers: {
+            }
+        };
+
+        return this.http.fetch(url_, options_).then((_response: Response) => {
+            return this.processGetAllUniversities(_response);
+        });
+    }
+
+    protected processGetAllUniversities(response: Response): Promise<void> {
+        const status = response.status;
+        let _headers: any = {}; if (response.headers && response.headers.forEach) { response.headers.forEach((v: any, k: any) => _headers[k] = v); };
+        if (status === 200) {
+            return response.text().then((_responseText) => {
+            return;
+            });
+        } else if (status !== 200 && status !== 204) {
+            return response.text().then((_responseText) => {
+            return throwException("An unexpected server error occurred.", status, _responseText, _headers);
+            });
+        }
+        return Promise.resolve<void>(null as any);
+    }
+
+    /**
+     * @return Success
+     */
+    getAllUniversitiesByName(universityName: string): Promise<void> {
+        let url_ = this.baseUrl + "/api/University/get-all-universities-by-name/{universityName}";
+        if (universityName === undefined || universityName === null)
+            throw new Error("The parameter 'universityName' must be defined.");
+        url_ = url_.replace("{universityName}", encodeURIComponent("" + universityName));
+        url_ = url_.replace(/[?&]$/, "");
+
+        let options_: RequestInit = {
+            method: "GET",
+            headers: {
+            }
+        };
+
+        return this.http.fetch(url_, options_).then((_response: Response) => {
+            return this.processGetAllUniversitiesByName(_response);
+        });
+    }
+
+    protected processGetAllUniversitiesByName(response: Response): Promise<void> {
+        const status = response.status;
+        let _headers: any = {}; if (response.headers && response.headers.forEach) { response.headers.forEach((v: any, k: any) => _headers[k] = v); };
+        if (status === 200) {
+            return response.text().then((_responseText) => {
+            return;
+            });
+        } else if (status !== 200 && status !== 204) {
+            return response.text().then((_responseText) => {
+            return throwException("An unexpected server error occurred.", status, _responseText, _headers);
+            });
+        }
+        return Promise.resolve<void>(null as any);
     }
 
     /**

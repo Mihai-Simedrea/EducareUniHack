@@ -14,7 +14,9 @@ const Register=()=>{
     const [errorView,setErrorView]=useState("none");
     const userbackend=new UsersClient();
     const handleSubmit= async()=>{
-        await userbackend.register({email:email,userName:username,password:password} as UserRegisterDto)
+       const res =await userbackend.register({email:email,userName:username,password:password} as UserRegisterDto);
+    //    const resolve=await res.json;
+       console.log(res);
     }
     useEffect(()=>{
         
@@ -52,7 +54,7 @@ const Register=()=>{
             ></CardMedia>
         </Card>
     <Box
-    sx={{ width: "20rem",
+    sx={{ width: "352px",
           display: "flex",
           flexDirection: "column",
           justifyContent: "flex-start",
@@ -61,7 +63,7 @@ const Register=()=>{
           boxShadow:'10',
           gap:'10px',
           backgroundColor:'white',
-          borderRadius:'10px'
+          borderRadius:'30px'
           }}
           component='form'
           onSubmit={(e)=>{
