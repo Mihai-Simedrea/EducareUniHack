@@ -83,17 +83,17 @@ namespace EducareBE.Data
                 },
                 new University
                 {
-                    Id = 2,
+                    Id = 3,
                     Name = "Vest University of Timisoara"
                 },
                 new University
                 {
-                    Id = 3,
+                    Id = 4,
                     Name = "Standford University"
                 },
                 new University
                 {
-                    Id = 4,
+                    Id = 5,
                     Name = "Massachusetts Institute of Technology"
                 }
             );
