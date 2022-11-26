@@ -1,0 +1,15 @@
+.row{
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    border-radius: 10px;
+    box-shadow: 0 0 10px #565656;
+    width: 352px;
+    padding: 10px;
+}
+.row > p{
+    margin: 0;
+} 
+.row > input{
+    width: 30px;
+}
