@@ -29,11 +29,11 @@ export function SearchList(props: Props) {
                 list?.map((element, index) => {
                     //console.log(element.id)
                     return  <UniversityOrFieldCard
-                        key={element.id}
+                        key={index}
                         universityOrFieldName={element.name}
                         nrOfMaterialsUploaded={element.totalSubjects}
                         nrOfExercises={element.totalExercices}
-                        nrOfFields={element.totalExercices}
+                        nrOfFields={"69"}
                         isUniversity={searchBy === "University"}
                         id={element.id}
                     />
