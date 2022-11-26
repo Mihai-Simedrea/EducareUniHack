@@ -6,13 +6,13 @@
         public string Password { get; set; }
         public string UserName { get; set; }
         public Profile Profile { get; set; }
-        
+
         // one to one
         //public int? UniversityId { get; set; }
         //public int? FacultyId { get; set; }     
         // public int? FiledId { get; set; } 
 
         // many to many
-        // public int? CourseId { get; set; }
+        public ICollection<EnrolledCourses>? EnrolledCourses { get; set; }
     }
 }
