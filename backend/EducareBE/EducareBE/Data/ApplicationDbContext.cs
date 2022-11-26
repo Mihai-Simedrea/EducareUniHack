@@ -123,8 +123,9 @@ namespace EducareBE.Data
                 },
                 new Faculty
                 {
-                    Id = 3,
-                    Name = "Faculty of Mechanical Engineerin"
+                    Id = 4,
+                    Name = "Faculty of Mechanical Engineerin",
+                    UniversityId = 1,
                 },
                 new Faculty
                 {
