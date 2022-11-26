@@ -1,9 +1,8 @@
 import {SearchBar} from "../Components/SearchBar";
 import {useEffect, useState} from "react";
 import {SearchList} from "../Components/SearchList";
-import {UniversityClient} from "../api";
-import HandleUniversity from "../endpoints/HandleUniversity";
 import {Box} from "@mui/material";
+import HandleUniversity from "../endpoints/HandleUniversity";
 import LabelBottomNavigation from "../Components/LabelBottomNavigation";
 
 export type UniversityOrField = {

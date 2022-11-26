@@ -53,5 +53,6 @@ export default function UniversityOrFieldCard(props: Props) {
                 </Typography>
             </CardContent>
         </Card>
+
     )
 }

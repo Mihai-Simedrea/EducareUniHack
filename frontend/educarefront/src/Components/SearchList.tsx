@@ -37,9 +37,10 @@ export function SearchList(props: Props) {
                     />
                 })
             }
+            <Box sx={{marginTop:"142px"}}></Box>
 
         </Box>
     )
-    console.log(list);
+    // console.log(list);
     // return <></>
 }

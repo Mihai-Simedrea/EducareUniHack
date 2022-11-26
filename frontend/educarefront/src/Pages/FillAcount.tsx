@@ -12,7 +12,7 @@ import {
 } from "@mui/material";
 import InputLabel from "@mui/material/InputLabel";
 import { height } from "@mui/system";
-import { useNavigate,Navigate} from "react-router-dom";
+import {useNavigate, Navigate, Link} from "react-router-dom";
 import { useState, useEffect } from "react";
 import useLocal from "../CustomHooks/useLocal";
 import HandleUserData from "../endpoints/HandleUserData";
@@ -273,12 +273,14 @@ useEffect(()=>{
           }}
         >
           <Button
+              component = {Link}
             variant="contained"
             color="success"
             sx={{ width: "30%" }}
             type="submit"
+            to="/search"
           >
-            Submit
+              Submit
           </Button>
         </Box>
       </Box>
