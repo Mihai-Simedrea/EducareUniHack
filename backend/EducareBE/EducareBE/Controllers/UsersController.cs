@@ -58,7 +58,7 @@ namespace EducareBE.Controllers
             return Ok(_dbContext.Users.Include(x => x.Profile).ToList());
         }
 
-        [HttpGet]
+        [HttpGet("get-user-by-email")]
         public async Task<IActionResult> GetUserByEmail(string Email)
         {
             var user = _dbContext.Users
