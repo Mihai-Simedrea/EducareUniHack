@@ -17,10 +17,10 @@ namespace EducareBE.Controllers
             _dbContext = dbContext;
         }
 
-        [HttpGet("{userId}")]
-        public IActionResult GetProfile(int userId)
+        [HttpGet("{userEmail}")]
+        public IActionResult GetProfile(string userEmail)
         {
-            return Ok(_dbContext.Profiles.Where(x => x.UserId == userId));
+            return Ok(_dbContext.Profiles.Where(x => x.User.Email == userEmail));
         }
 
         [HttpPost("profile/{id}")]
@@ -31,7 +31,7 @@ namespace EducareBE.Controllers
                 UserId = id,
                 UniversityName = request.UniversityName,
                 FieldName = request.FieldName,
-                DegreeName = request.DegreeName,
+                FacultyName = request.FacultyName,
                 StudyYear = request.StudyYear
             };
 
