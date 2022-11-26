@@ -4,7 +4,26 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="716c660c-5dfc-4213-904e-f4f6a0d33a4b" name="Changes" comment="" />
+    <list default="true" id="716c660c-5dfc-4213-904e-f4f6a0d33a4b" name="Changes" comment="SearchPage WIP">
+      <change afterPath="$PROJECT_DIR$/frontend/educarefront/src/Assets/Images/Logo.svg" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/frontend/educarefront/src/Components/SimpleHeader.css" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/frontend/educarefront/src/Components/SimpleHeader.tsx" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/frontend/educarefront/src/Components/SubjectRow.css" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/frontend/educarefront/src/Components/SubjectRow.tsx" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/frontend/educarefront/src/Pages/CreateTest.tsx" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/frontend/educarefront/src/Pages/Favorite.tsx" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/frontend/educarefront/src/Pages/Home.tsx" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/frontend/educarefront/src/Pages/Universitati.tsx" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/frontend/educarefront/src/endpoints/HandleCourses.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/frontend/educarefront/src/App.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/frontend/educarefront/src/App.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/frontend/educarefront/src/Components/LabelBottomNavigation.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/frontend/educarefront/src/Components/LabelBottomNavigation.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/frontend/educarefront/src/Components/Profile.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/frontend/educarefront/src/Components/Profile.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/frontend/educarefront/src/Components/SearchBar.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/frontend/educarefront/src/Components/SearchBar.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/frontend/educarefront/src/Pages/FillAcount.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/frontend/educarefront/src/Pages/FillAcount.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/frontend/educarefront/src/Pages/LogIn.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/frontend/educarefront/src/Pages/LogIn.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/frontend/educarefront/src/Pages/Register.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/frontend/educarefront/src/Pages/Register.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/frontend/educarefront/src/endpoints/HandleUserData.ts" beforeDir="false" afterPath="$PROJECT_DIR$/frontend/educarefront/src/endpoints/HandleUserData.ts" afterDir="false" />
+    </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
@@ -36,7 +55,7 @@
     "node.js.selected.package.eslint": "(autodetect)",
     "node.js.selected.package.tslint": "(autodetect)",
     "nodejs_package_manager_path": "npm",
-    "ts.external.directory.path": "C:\\Users\\Kaarl\\AppData\\Local\\JetBrains\\Toolbox\\apps\\PhpStorm\\ch-0\\222.4345.15\\plugins\\JavaScriptLanguage\\jsLanguageServicesImpl\\external",
+    "ts.external.directory.path": "C:\\Users\\Kaarl\\Desktop\\UniHack\\EducareUniHack\\frontend\\educarefront\\node_modules\\typescript\\lib",
     "vue.rearranger.settings.migration": "true"
   }
 }]]></component>
