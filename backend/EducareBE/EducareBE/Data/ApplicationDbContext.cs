@@ -21,6 +21,11 @@ namespace EducareBE.Data
             modelBuilder.Entity<University>()
                 .HasMany(c => c.Faculties)
                 .WithOne(e => e.University);
+
+            modelBuilder.Entity<User>()
+                .HasOne(a => a.Profile)
+                .WithOne(b => b.User)
+                .HasForeignKey<Profile>(b => b.UserId);
         }
 
         public DbSet<User> Users { get; set; }
@@ -30,5 +35,6 @@ namespace EducareBE.Data
         public DbSet<Course> Courses { get; set; }
         public DbSet<Subject> Subjects { get; set; }
         public DbSet<SubjectAddedBy> SubjectsAddedBy { get; set;}
+        public DbSet<Profile> Profiles { get; set; }
     }
 }

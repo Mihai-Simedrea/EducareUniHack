@@ -55,7 +55,7 @@ namespace EducareBE.Controllers
         public IActionResult GetAllUsers()
         {
 
-            return Ok(_dbContext.Users.ToList());
+            return Ok(_dbContext.Users.Include(x => x.Profile).ToList());
         }
     }
 }
