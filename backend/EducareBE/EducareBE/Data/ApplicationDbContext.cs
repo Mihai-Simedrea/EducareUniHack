@@ -50,7 +50,7 @@ namespace EducareBE.Data
             PopulateFaculty(modelBuilder);
             PopulateFields(modelBuilder);
             PopulateCourses(modelBuilder);
-            PopulateSubects(modelBuilder);
+            PopulateSubjects (modelBuilder);
 
         }
 
@@ -176,14 +176,13 @@ namespace EducareBE.Data
                 {
                     Id = 2,
                     Name = "Polymorphism",
-                    FieldId = 1
+                    CourseId = 1
                 },
                 new Subject
                 {
                     Id = 3,
                     Name = "Errors",
-                    Year = 4,
-                    FieldId = 1
+                    CourseId = 1
                 }
             );
         }
