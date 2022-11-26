@@ -6,6 +6,8 @@ using Microsoft.EntityFrameworkCore;
 
 namespace EducareBE.Controllers
 {
+    [ApiController]
+    [Route("api/[controller]")]
     public class LikeController : Controller
     {
         public ApplicationDbContext _dbContext;

@@ -51,6 +51,7 @@ namespace EducareBE.Data
             PopulateFields(modelBuilder);
             PopulateCourses(modelBuilder);
             PopulateSubjects (modelBuilder);
+            PopulateSubjectsAddedBy(modelBuilder);
 
         }
 
@@ -185,6 +186,43 @@ namespace EducareBE.Data
                     CourseId = 1
                 }
             );
+        }
+
+        private void PopulateSubjectsAddedBy(ModelBuilder modelBuilder)
+        {
+            modelBuilder.Entity<SubjectAddedBy>()
+            .HasData(
+                new SubjectAddedBy
+                {
+                    Id = 1,
+                    Name = "Objects",
+                    SubjectId = 1
+                },
+                new SubjectAddedBy
+                {
+                    Id = 2,
+                    Name = "Classes",
+                    SubjectId = 1
+                },
+                new SubjectAddedBy
+                {
+                    Id = 3,
+                    Name = "ClassesMaterial",
+                    SubjectId = 1
+                },
+                new SubjectAddedBy
+                {
+                    Id = 4,
+                    Name = "Poly",
+                    SubjectId = 2
+                },
+                new SubjectAddedBy
+                {
+                    Id = 5,
+                    Name = "ErrorMaterial",
+                    SubjectId = 3
+                }
+           );
         }
     }
 }
