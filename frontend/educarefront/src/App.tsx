@@ -9,10 +9,12 @@ import PlusButton from "./Components/PlusButton"
 
 function App() {
   return (
-    //<DropdownList subject='Relatia de mostenire'></DropdownList>
-    //<CardMaterials subject={"Definitii si Teoreme"} username={"Kaarl"} date={"23-10-2022"} likes={56} dislikes={8} isLiked={true} isDisliked={false}></CardMaterials>
-    //<CardExercises title={"Exercitii din culegere"} username="Kaarl" date='23-10-2022' ></CardExercises>
+    <>
+    <DropdownList subject='Relatia de mostenire'></DropdownList>
+    <CardMaterials title={"Definitii si Teoreme"} username={"Kaarl"} date={"23-10-2022"} likes={56} dislikes={8} isLiked={true} isDisliked={false}></CardMaterials>
+    <CardExercises title={"Exercitii din culegere"} username="Kaarl" date='23-10-2022' ></CardExercises>
     <PlusButton></PlusButton>
+    </>
     );
 }
 
