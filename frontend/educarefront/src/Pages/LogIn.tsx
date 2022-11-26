@@ -3,14 +3,25 @@ import { height } from "@mui/system";
 import {useNavigate} from "react-router-dom"
 import {useState} from "react";
 import { UserLoginDto, UsersClient } from "../api";
-
+import HandleUserData from "../endpoints/HandleUserData";
+import HandleUniversity from "../endpoints/HandleUniversity";
 const LogIn = () => {
     const navigate=useNavigate();
-    const userbackend=new UsersClient();
+    const userend=HandleUserData();
+    const unibackend=HandleUniversity();
+
     const [email,setEmail]=useState(" ");
     const [password,setPassword]=useState(" ");
     const handleSubmit= async ()=>{
-        await userbackend.login({email:email,password:password} as UserLoginDto);
+        try {
+       const res=await userend.Login(email,password);
+        const resvalue=await res.json();
+        console.log(resvalue);
+        } catch (error) {
+            console.log(error);
+            
+        }
+       
     }
   return (
     <Box
