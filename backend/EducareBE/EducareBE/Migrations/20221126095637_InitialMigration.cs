@@ -56,6 +56,31 @@ namespace EducareBE.Migrations
                 });
 
             migrationBuilder.CreateTable(
+                name: "Profiles",
+                columns: table => new
+                {
+                    Id = table.Column<int>(type: "int", nullable: false)
+                        .Annotation("SqlServer:Identity", "1, 1"),
+                    UniversityName = table.Column<string>(type: "nvarchar(max)", nullable: false),
+                    FieldName = table.Column<string>(type: "nvarchar(max)", nullable: false),
+                    DegreeName = table.Column<string>(type: "nvarchar(max)", nullable: false),
+                    StudyYear = table.Column<int>(type: "int", nullable: false),
+                    NumberOfLikes = table.Column<int>(type: "int", nullable: false),
+                    NumberOfPosts = table.Column<int>(type: "int", nullable: false),
+                    UserId = table.Column<int>(type: "int", nullable: false)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_Profiles", x => x.Id);
+                    table.ForeignKey(
+                        name: "FK_Profiles_Users_UserId",
+                        column: x => x.UserId,
+                        principalTable: "Users",
+                        principalColumn: "Id",
+                        onDelete: ReferentialAction.Cascade);
+                });
+
+            migrationBuilder.CreateTable(
                 name: "Fields",
                 columns: table => new
                 {
@@ -94,6 +119,46 @@ namespace EducareBE.Migrations
                         principalColumn: "Id");
                 });
 
+            migrationBuilder.CreateTable(
+                name: "Subjects",
+                columns: table => new
+                {
+                    Id = table.Column<int>(type: "int", nullable: false)
+                        .Annotation("SqlServer:Identity", "1, 1"),
+                    Name = table.Column<string>(type: "nvarchar(max)", nullable: false),
+                    CourseId = table.Column<int>(type: "int", nullable: true)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_Subjects", x => x.Id);
+                    table.ForeignKey(
+                        name: "FK_Subjects_Courses_CourseId",
+                        column: x => x.CourseId,
+                        principalTable: "Courses",
+                        principalColumn: "Id");
+                });
+
+            migrationBuilder.CreateTable(
+                name: "SubjectsAddedBy",
+                columns: table => new
+                {
+                    Id = table.Column<int>(type: "int", nullable: false)
+                        .Annotation("SqlServer:Identity", "1, 1"),
+                    Name = table.Column<string>(type: "nvarchar(max)", nullable: false),
+                    Likes = table.Column<int>(type: "int", nullable: false),
+                    Dislikes = table.Column<int>(type: "int", nullable: false),
+                    SubjectId = table.Column<int>(type: "int", nullable: true)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_SubjectsAddedBy", x => x.Id);
+                    table.ForeignKey(
+                        name: "FK_SubjectsAddedBy_Subjects_SubjectId",
+                        column: x => x.SubjectId,
+                        principalTable: "Subjects",
+                        principalColumn: "Id");
+                });
+
             migrationBuilder.CreateIndex(
                 name: "IX_Courses_FieldId",
                 table: "Courses",
@@ -108,15 +173,40 @@ namespace EducareBE.Migrations
                 name: "IX_Fields_FacultyId",
                 table: "Fields",
                 column: "FacultyId");
+
+            migrationBuilder.CreateIndex(
+                name: "IX_Profiles_UserId",
+                table: "Profiles",
+                column: "UserId",
+                unique: true);
+
+            migrationBuilder.CreateIndex(
+                name: "IX_Subjects_CourseId",
+                table: "Subjects",
+                column: "CourseId");
+
+            migrationBuilder.CreateIndex(
+                name: "IX_SubjectsAddedBy_SubjectId",
+                table: "SubjectsAddedBy",
+                column: "SubjectId");
         }
 
         protected override void Down(MigrationBuilder migrationBuilder)
         {
             migrationBuilder.DropTable(
-                name: "Courses");
+                name: "Profiles");
+
+            migrationBuilder.DropTable(
+                name: "SubjectsAddedBy");
 
             migrationBuilder.DropTable(
                 name: "Users");
+
+            migrationBuilder.DropTable(
+                name: "Subjects");
+
+            migrationBuilder.DropTable(
+                name: "Courses");
 
             migrationBuilder.DropTable(
                 name: "Fields");

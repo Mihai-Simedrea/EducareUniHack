@@ -52,10 +52,10 @@ namespace EducareBE.Controllers
         }
 
         [HttpGet]
-        public IActionResult GetAllUsers()
+        public async Task<IActionResult> GetAllUsersAsync()
         {
-
-            return Ok(_dbContext.Users.Include(x => x.Profile).ToList());
+            var users = await _dbContext.Users.Include(x => x.Profile).ToListAsync();
+            return Ok(users);
         }
 
         [HttpGet("get-user-by-email")]

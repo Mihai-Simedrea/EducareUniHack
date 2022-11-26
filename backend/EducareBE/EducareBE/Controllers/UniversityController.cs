@@ -1,5 +1,7 @@
-﻿using EducareBE.Data;
+﻿using AutoMapper;
+using EducareBE.Data;
 using EducareBE.Models.Entities;
+using EducareBE.Models.ViewModels;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 
@@ -10,10 +12,12 @@ namespace EducareBE.Controllers
     public class UniversityController : Controller
     {
         public ApplicationDbContext _dbContext;
+        private readonly IMapper _mapper;
 
-        public UniversityController(ApplicationDbContext dbContext)
+        public UniversityController(ApplicationDbContext dbContext, IMapper mapper)
         {
             _dbContext = dbContext;
+            _mapper = mapper;
         }
 
 
@@ -21,15 +25,17 @@ namespace EducareBE.Controllers
         public async Task<IActionResult> GetAllUniveristies()
         {
             var universites = await _dbContext.Universities.Include(x => x.Faculties).ToListAsync();
-            return Ok(universites);
+
+         
+            return Ok(_mapper.Map<List<GetUniversityViewModel>>(universites));
         }
 
         [HttpGet("{id}")]
         public async Task<IActionResult> GetUniverstityById(int id)
         {
-            var university = _dbContext.Universities
+            var university = await _dbContext.Universities
                 .Include(x => x.Faculties)
-                .Where(x => x.Id == id).First();
+                .Where(x => x.Id == id).FirstOrDefaultAsync();
 
             return Ok(university);
         }
