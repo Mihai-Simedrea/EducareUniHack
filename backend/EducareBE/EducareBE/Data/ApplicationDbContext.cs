@@ -33,6 +33,8 @@ namespace EducareBE.Data
         public DbSet<Faculty> Faculties { get; set; }
         public DbSet<Field> Fields { get; set; }
         public DbSet<Course> Courses { get; set; }
+        public DbSet<Subject> Subjects { get; set; }
+        public DbSet<SubjectAddedBy> SubjectsAddedBy { get; set;}
         public DbSet<Profile> Profiles { get; set; }
     }
 }

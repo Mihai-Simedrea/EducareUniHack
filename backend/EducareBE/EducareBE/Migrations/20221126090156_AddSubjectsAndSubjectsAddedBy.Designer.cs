@@ -4,6 +4,7 @@ using EducareBE.Data;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 #nullable disable
@@ -11,9 +12,10 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace EducareBE.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    partial class ApplicationDbContextModelSnapshot : ModelSnapshot
+    [Migration("20221126090156_AddSubjectsAndSubjectsAddedBy")]
+    partial class AddSubjectsAndSubjectsAddedBy
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -89,46 +91,6 @@ namespace EducareBE.Migrations
                     b.HasIndex("FacultyId");
 
                     b.ToTable("Fields");
-                });
-
-            modelBuilder.Entity("EducareBE.Models.Entities.Profile", b =>
-                {
-                    b.Property<int>("Id")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("int");
-
-                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"), 1L, 1);
-
-                    b.Property<string>("DegreeName")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<string>("FieldName")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<int>("NumberOfLikes")
-                        .HasColumnType("int");
-
-                    b.Property<int>("NumberOfPosts")
-                        .HasColumnType("int");
-
-                    b.Property<int>("StudyYear")
-                        .HasColumnType("int");
-
-                    b.Property<string>("UniversityName")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<int>("UserId")
-                        .HasColumnType("int");
-
-                    b.HasKey("Id");
-
-                    b.HasIndex("UserId")
-                        .IsUnique();
-
-                    b.ToTable("Profiles");
                 });
 
             modelBuilder.Entity("EducareBE.Models.Entities.Subject", b =>
@@ -250,17 +212,6 @@ namespace EducareBE.Migrations
                     b.Navigation("Faculty");
                 });
 
-            modelBuilder.Entity("EducareBE.Models.Entities.Profile", b =>
-                {
-                    b.HasOne("EducareBE.Models.Entities.User", "User")
-                        .WithOne("Profile")
-                        .HasForeignKey("EducareBE.Models.Entities.Profile", "UserId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
-                    b.Navigation("User");
-                });
-
             modelBuilder.Entity("EducareBE.Models.Entities.Subject", b =>
                 {
                     b.HasOne("EducareBE.Models.Entities.Field", "Field")
@@ -299,12 +250,6 @@ namespace EducareBE.Migrations
             modelBuilder.Entity("EducareBE.Models.Entities.University", b =>
                 {
                     b.Navigation("Faculties");
-                });
-
-            modelBuilder.Entity("EducareBE.Models.Entities.User", b =>
-                {
-                    b.Navigation("Profile")
-                        .IsRequired();
                 });
 #pragma warning restore 612, 618
         }
