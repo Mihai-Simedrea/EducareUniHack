@@ -27,6 +27,7 @@ export function SearchBar(props: Props) {
             position: "fixed",
             backgroundColor: "white",
             top: 0,
+            left:0
         },
     };
 
@@ -48,12 +49,6 @@ export function SearchBar(props: Props) {
             />
             {searchBy === 'Courses' &&
                 <Box sx={{display: "flex", justifyContent: "center", alignItems: "center"}}>
-                    <Select>
-
-                    </Select>
-                    <Select>
-
-                    </Select>
                 </Box>
             }
         </Box>
