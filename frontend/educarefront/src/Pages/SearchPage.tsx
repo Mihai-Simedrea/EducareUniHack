@@ -48,12 +48,12 @@ export function SearchPage() {
         }
     };
 
-    // console.log(list);
+    console.log(list);
     //@ts-ignore
 
 
     return (
-        <Box sx={styles.container} key={"69420"}>
+        <Box sx={styles.container}>
             <SearchBar
                 searchedText={inputText}
                 setSearchedText={setInputText}
@@ -63,7 +63,6 @@ export function SearchPage() {
                 list={list}
                 searchedText={inputText}
                 searchBy={"University"}
-                key={"666"}
             />
             <LabelBottomNavigation icon={2}/>
 
