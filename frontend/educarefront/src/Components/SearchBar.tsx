@@ -17,6 +17,13 @@ export function SearchBar(props: Props) {
             boxShadow: '0px 0px 10px #7C7C7C',
             borderBottomRightRadius: "20px",
             borderBottomLeftRadius: "20px",
+<<<<<<< Updated upstream
+=======
+            position: "fixed",
+            backgroundColor: "white",
+            top: 0,
+            left: 0,
+>>>>>>> Stashed changes
         },
     }
 
