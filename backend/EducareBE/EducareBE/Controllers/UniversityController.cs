@@ -20,7 +20,7 @@ namespace EducareBE.Controllers
         [HttpGet]
         public async Task<IActionResult> GetAllUniveristies()
         {
-            var universites = await _dbContext.Universities.ToListAsync();
+            var universites = await _dbContext.Universities.Include(x => x.Faculties).ToListAsync();
             return Ok(universites);
         }
 

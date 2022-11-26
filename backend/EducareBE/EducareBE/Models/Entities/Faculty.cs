@@ -8,7 +8,7 @@
 
         // one to many
         public int UniversityId { get; set; }
-        public ICollection<University?> Universities { get; set; }
-        public Field? Field { get; set; }
+        public University University { get; set; }
+        // public Field? Field { get; set; }
     }
 }

@@ -44,6 +44,8 @@ namespace EducareBE.Controllers
                 Name = facultyName,
             };
 
+            // _dbContext.Universities.First(x => x.Id == id).Faculties.Add(faculty);
+
             await _dbContext.Faculties.AddAsync(faculty);
             await _dbContext.SaveChangesAsync();
 

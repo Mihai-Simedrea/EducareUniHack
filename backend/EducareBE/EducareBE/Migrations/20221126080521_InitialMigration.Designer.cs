@@ -12,7 +12,7 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace EducareBE.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    [Migration("20221125231656_InitialMigration")]
+    [Migration("20221126080521_InitialMigration")]
     partial class InitialMigration
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -31,6 +31,9 @@ namespace EducareBE.Migrations
                         .HasColumnType("int");
 
                     SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"), 1L, 1);
+
+                    b.Property<int>("FieldId")
+                        .HasColumnType("int");
 
                     b.Property<bool>("IsFavoirt")
                         .HasColumnType("bit");
@@ -66,6 +69,8 @@ namespace EducareBE.Migrations
 
                     b.HasIndex("FieldId");
 
+                    b.HasIndex("UniversityId");
+
                     b.ToTable("Faculties");
                 });
 
@@ -78,6 +83,9 @@ namespace EducareBE.Migrations
                     SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"), 1L, 1);
 
                     b.Property<int?>("CourseId")
+                        .HasColumnType("int");
+
+                    b.Property<int>("FacultyId")
                         .HasColumnType("int");
 
                     b.Property<string>("Name")
@@ -99,16 +107,11 @@ namespace EducareBE.Migrations
 
                     SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"), 1L, 1);
 
-                    b.Property<int?>("FacultyId")
-                        .HasColumnType("int");
-
                     b.Property<string>("Name")
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
                     b.HasKey("Id");
-
-                    b.HasIndex("FacultyId");
 
                     b.ToTable("Universities");
                 });
@@ -140,11 +143,17 @@ namespace EducareBE.Migrations
 
             modelBuilder.Entity("EducareBE.Models.Entities.Faculty", b =>
                 {
-                    b.HasOne("EducareBE.Models.Entities.Field", "Field")
+                    b.HasOne("EducareBE.Models.Entities.Field", null)
                         .WithMany("Faculties")
                         .HasForeignKey("FieldId");
 
-                    b.Navigation("Field");
+                    b.HasOne("EducareBE.Models.Entities.University", "University")
+                        .WithMany("Faculties")
+                        .HasForeignKey("UniversityId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.Navigation("University");
                 });
 
             modelBuilder.Entity("EducareBE.Models.Entities.Field", b =>
@@ -156,24 +165,17 @@ namespace EducareBE.Migrations
                     b.Navigation("Course");
                 });
 
-            modelBuilder.Entity("EducareBE.Models.Entities.University", b =>
-                {
-                    b.HasOne("EducareBE.Models.Entities.Faculty", null)
-                        .WithMany("Universities")
-                        .HasForeignKey("FacultyId");
-                });
-
             modelBuilder.Entity("EducareBE.Models.Entities.Course", b =>
                 {
                     b.Navigation("Fields");
                 });
 
-            modelBuilder.Entity("EducareBE.Models.Entities.Faculty", b =>
+            modelBuilder.Entity("EducareBE.Models.Entities.Field", b =>
                 {
-                    b.Navigation("Universities");
+                    b.Navigation("Faculties");
                 });
 
-            modelBuilder.Entity("EducareBE.Models.Entities.Field", b =>
+            modelBuilder.Entity("EducareBE.Models.Entities.University", b =>
                 {
                     b.Navigation("Faculties");
                 });

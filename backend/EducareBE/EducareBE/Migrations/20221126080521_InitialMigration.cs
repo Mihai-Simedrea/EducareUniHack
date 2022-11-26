@@ -15,11 +15,25 @@ namespace EducareBE.Migrations
                     Id = table.Column<int>(type: "int", nullable: false)
                         .Annotation("SqlServer:Identity", "1, 1"),
                     Name = table.Column<string>(type: "nvarchar(max)", nullable: false),
-                    IsFavoirt = table.Column<bool>(type: "bit", nullable: false)
+                    IsFavoirt = table.Column<bool>(type: "bit", nullable: false),
+                    FieldId = table.Column<int>(type: "int", nullable: false)
                 },
                 constraints: table =>
                 {
                     table.PrimaryKey("PK_Courses", x => x.Id);
+                });
+
+            migrationBuilder.CreateTable(
+                name: "Universities",
+                columns: table => new
+                {
+                    Id = table.Column<int>(type: "int", nullable: false)
+                        .Annotation("SqlServer:Identity", "1, 1"),
+                    Name = table.Column<string>(type: "nvarchar(max)", nullable: false)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_Universities", x => x.Id);
                 });
 
             migrationBuilder.CreateTable(
@@ -44,6 +58,7 @@ namespace EducareBE.Migrations
                     Id = table.Column<int>(type: "int", nullable: false)
                         .Annotation("SqlServer:Identity", "1, 1"),
                     Name = table.Column<string>(type: "nvarchar(max)", nullable: false),
+                    FacultyId = table.Column<int>(type: "int", nullable: false),
                     CourseId = table.Column<int>(type: "int", nullable: true)
                 },
                 constraints: table =>
@@ -74,25 +89,12 @@ namespace EducareBE.Migrations
                         column: x => x.FieldId,
                         principalTable: "Fields",
                         principalColumn: "Id");
-                });
-
-            migrationBuilder.CreateTable(
-                name: "Universities",
-                columns: table => new
-                {
-                    Id = table.Column<int>(type: "int", nullable: false)
-                        .Annotation("SqlServer:Identity", "1, 1"),
-                    Name = table.Column<string>(type: "nvarchar(max)", nullable: false),
-                    FacultyId = table.Column<int>(type: "int", nullable: true)
-                },
-                constraints: table =>
-                {
-                    table.PrimaryKey("PK_Universities", x => x.Id);
                     table.ForeignKey(
-                        name: "FK_Universities_Faculties_FacultyId",
-                        column: x => x.FacultyId,
-                        principalTable: "Faculties",
-                        principalColumn: "Id");
+                        name: "FK_Faculties_Universities_UniversityId",
+                        column: x => x.UniversityId,
+                        principalTable: "Universities",
+                        principalColumn: "Id",
+                        onDelete: ReferentialAction.Cascade);
                 });
 
             migrationBuilder.CreateIndex(
@@ -101,29 +103,29 @@ namespace EducareBE.Migrations
                 column: "FieldId");
 
             migrationBuilder.CreateIndex(
+                name: "IX_Faculties_UniversityId",
+                table: "Faculties",
+                column: "UniversityId");
+
+            migrationBuilder.CreateIndex(
                 name: "IX_Fields_CourseId",
                 table: "Fields",
                 column: "CourseId");
-
-            migrationBuilder.CreateIndex(
-                name: "IX_Universities_FacultyId",
-                table: "Universities",
-                column: "FacultyId");
         }
 
         protected override void Down(MigrationBuilder migrationBuilder)
         {
             migrationBuilder.DropTable(
-                name: "Universities");
+                name: "Faculties");
 
             migrationBuilder.DropTable(
                 name: "Users");
 
             migrationBuilder.DropTable(
-                name: "Faculties");
+                name: "Fields");
 
             migrationBuilder.DropTable(
-                name: "Fields");
+                name: "Universities");
 
             migrationBuilder.DropTable(
                 name: "Courses");

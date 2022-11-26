@@ -1,5 +1,7 @@
 ﻿using EducareBE.Models.Entities;
 using Microsoft.EntityFrameworkCore;
+using static Microsoft.EntityFrameworkCore.DbLoggerCategory.Database;
+using System.Reflection.Emit;
 
 namespace EducareBE.Data
 {
@@ -12,7 +14,13 @@ namespace EducareBE.Data
 
         public ApplicationDbContext(DbContextOptions options) : base(options)
         {
+        }
 
+        protected override void OnModelCreating(ModelBuilder modelBuilder)
+        {
+            modelBuilder.Entity<University>()
+                .HasMany(c => c.Faculties)
+                .WithOne(e => e.University);
         }
 
         public DbSet<User> Users { get; set; }
