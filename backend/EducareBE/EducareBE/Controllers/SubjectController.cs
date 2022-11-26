@@ -27,7 +27,7 @@ namespace EducareBE.Controllers
                 .Include(x => x.Course)
                 .Where(x => x.CourseId == id)
                 .ToListAsync();
-            return Ok(_mapper.Map<GetAllSubjectsDto>(subjects));
+            return Ok(_mapper.Map<List<GetAllSubjectsViewModel>>(subjects));
         }
 
         [HttpPost("add-subject/{id}")]
