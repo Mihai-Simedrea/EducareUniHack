@@ -1,5 +1,3 @@
-import HandleUniversity from "../endpoints/HandleUniversity";
-import {useEffect} from "react";
 import UniversityOrFieldCard from "./UniversityOrFieldCard";
 import {UniversityOrField} from "../Pages/SearchPage";
 import {Box} from "@mui/material";
@@ -29,11 +27,11 @@ export function SearchList(props: Props) {
                 list?.map((element, index) => {
                     //console.log(element.id)
                     return  <UniversityOrFieldCard
-                        key={element.id}
+                        key={index}
                         universityOrFieldName={element.name}
                         nrOfMaterialsUploaded={element.totalSubjects}
                         nrOfExercises={element.totalExercices}
-                        nrOfFields={element.totalExercices}
+                        nrOfFields={element.totalFields}
                         isUniversity={searchBy === "University"}
                         id={element.id}
                     />
@@ -42,6 +40,6 @@ export function SearchList(props: Props) {
 
         </Box>
     )
-    // console.log(list);
+    console.log(list);
     // return <></>
 }

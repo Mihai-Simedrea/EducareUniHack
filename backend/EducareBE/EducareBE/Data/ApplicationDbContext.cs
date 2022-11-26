@@ -52,6 +52,7 @@ namespace EducareBE.Data
             PopulateFields(modelBuilder);
             PopulateCourses(modelBuilder);
             PopulateSubjects (modelBuilder);
+            PopulateSubjectsAddedBy(modelBuilder);
 
             //PopulateUsers(modelBuilder);
            // PopulateEnroledCourses(modelBuilder);
@@ -93,7 +94,7 @@ namespace EducareBE.Data
                 },
                 new University
                 {
-                    Id = 4,
+                    Id = 5,
                     Name = "Massachusetts Institute of Technology"
                 },
                  new University

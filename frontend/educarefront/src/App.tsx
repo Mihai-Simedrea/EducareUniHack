@@ -5,10 +5,7 @@ import LogIn from './Pages/LogIn';
 import Register from './Pages/Register';
 import FillAcount from './Pages/FillAcount';
 import Profile from './Components/Profile';
-import { SimpleHeader } from './Components/SimpleHeader';
-import PlusButton from "../src/Components/PlusButton"
-import { SubjectRow } from './Components/SubjectRow';
-import { CreateTest } from './Pages/CreateTest';
+
 import {SearchPage} from "./Pages/SearchPage";
 function App() {
   const [exerciseNumber, setExerciseNumber] = useState(0)
@@ -21,6 +18,7 @@ function App() {
       <Route path='/AccountData' element={<FillAcount/>}/>
       <Route path="/Profile/:emailrouter" element={<Profile/>}/>
       <Route path="/search" element={<SearchPage/>}></Route>
+      <Route path="/Profile/:uid" element={<Profile/>}/>
 
     </Routes>
     
@@ -29,7 +27,7 @@ function App() {
     // <PlusButton></PlusButton>
     // <SubjectRow name='asdadsad' exerciseNumber={exerciseNumber} setExerciseNumber ={setExerciseNumber} ></SubjectRow>
     //<CreateTest name='POO'></CreateTest>
-   
+    // </BrowserRouter>
   );
 }
 
