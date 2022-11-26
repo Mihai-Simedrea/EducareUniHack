@@ -20,8 +20,8 @@ namespace EducareBE.Controllers
         public async Task<IActionResult> GetAllSubjects(int id)
         {
             var subjects = await _dbContext.Subjects
-                .Include(x => x.Field)
-                .Where(x => x.FieldId == id)
+                .Include(x => x.Course)
+                .Where(x => x.CourseId == id)
                 .ToListAsync();
             return Ok(subjects);
         }
@@ -30,7 +30,7 @@ namespace EducareBE.Controllers
         public async Task<IActionResult> AddSubject(int id, string subjectName)
         {
             var itExists = await _dbContext.Subjects
-                .AnyAsync(x => x.Name == subjectName && x.FieldId == id);
+                .AnyAsync(x => x.Name == subjectName && x.CourseId == id);
             if (itExists)
             {
                 return Ok(false);
@@ -38,7 +38,7 @@ namespace EducareBE.Controllers
 
             var subject = new Subject
             {
-                FieldId = id,
+                CourseId = id,
                 Name = subjectName,
             };
 

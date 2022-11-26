@@ -10,6 +10,6 @@
         public int? FacultyId { get; set; }
         public Faculty? Faculty { get; set; }
         public List<Course>? Courses { get; set; }
-        public List<Subject>? Subjects { get; set; }
+
     }
 }

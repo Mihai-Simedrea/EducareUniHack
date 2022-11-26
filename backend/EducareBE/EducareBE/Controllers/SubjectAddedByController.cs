@@ -52,10 +52,14 @@ namespace EducareBE.Controllers
         [HttpPost("{id}/like")]
         public async Task<IActionResult> LikeSubjectAddedBy(int id)
         {
-            var fields = await _dbContext.SubjectsAddedBy
-            .Include(x => x.Subject)
-            .Where(x => x.SubjectId == id)
-            .ToListAsync();
+            var subjectAddedBy = await _dbContext.SubjectsAddedBy
+                .Where(x => x.Id == id)
+                .FirstOrDefaultAsync();
+
+            //subjectAddedBy.Likes = subjectAddedBy.Likes += 1;
+            // TODO:
+
+
 
             return Ok();
         }
