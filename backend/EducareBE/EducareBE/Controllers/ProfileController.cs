@@ -18,27 +18,28 @@ namespace EducareBE.Controllers
         }
 
         [HttpGet("{userId}")]
-        public IActionResult GetProfile(int userId)
+        public async Task<IActionResult> GetProfile(int userId)
         {
-            return Ok(_dbContext.Profiles.Where(x => x.UserId == userId));
+            var profile = await _dbContext.Profiles.Where(x => x.UserId == userId).FirstOrDefaultAsync();
+            return Ok(profile);
         }
 
-        [HttpPost("profile/{id}")]
-        public async Task<IActionResult> CreateProfile(int id, ProfileDto request)
+        [HttpPost("profile/{userId}")]
+        public async Task<IActionResult> CreateProfile(int userId, ProfileDto request)
         {
             var profile = new Profile
             {
-                UserId = id,
+                UserId = userId,
                 UniversityName = request.UniversityName,
                 FieldName = request.FieldName,
-                DegreeName = request.DegreeName,
+                FacultyName = request.FacultyName,
                 StudyYear = request.StudyYear
             };
 
             await _dbContext.Profiles.AddAsync(profile);
             await _dbContext.SaveChangesAsync();
 
-            return Ok(true);
+            return Ok(profile.UserId);
         }
 
     }

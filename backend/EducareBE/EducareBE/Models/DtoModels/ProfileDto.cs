@@ -4,7 +4,7 @@
     {
         public string UniversityName { get; set; }
         public string FieldName { get; set; }
-        public string DegreeName { get; set; }
+        public string FacultyName { get; set; }
         public int StudyYear { get; set; }
     }
 }

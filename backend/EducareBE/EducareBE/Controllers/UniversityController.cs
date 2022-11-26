@@ -32,9 +32,36 @@ namespace EducareBE.Controllers
         public async Task<IActionResult> GetAllUniversitiesByName(string universityName)
         {
             var universities =
-                await _dbContext.Universities.Include(x => x.Faculties)
+                await _dbContext.Universities.Include(x => x.Faculties).ThenInclude(x => x.Fields).ThenInclude(x => x.Courses).ThenInclude(x => x.Subjects)
                 .Where(x => x.Name.Contains(universityName))
                 .ToListAsync();
+
+            foreach (var uni in universities)
+            {
+                uni.TotalExercices = -1;
+                if (uni.Faculties != null)
+                {
+                    foreach (var faculty in uni.Faculties)
+                    {
+                        if (faculty.Fields != null)
+                        {
+                            foreach (var fields in faculty.Fields)
+                            {
+                                if (fields.Courses != null)
+                                {
+                                    foreach (var course in fields.Courses)
+                                    {
+                                        if (course.Subjects != null)
+                                        {
+                                            uni.TotalSubjects = course.Subjects.Count;
+                                        }
+                                    }
+                                }
+                            }
+                        }
+                    }
+                }
+            }
 
             return Ok(_mapper.Map<List<GetUniversityViewModel>>(universities));
         }

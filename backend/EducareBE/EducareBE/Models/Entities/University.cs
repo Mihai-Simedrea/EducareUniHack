@@ -3,6 +3,8 @@
     public class University: BaseEntity
     {
         public string Name { get; set; }
+        public int TotalSubjects { get; set; }
+        public int TotalExercices { get; set; }
 
         // one to many
         public List<Faculty>? Faculties { get; set; }
