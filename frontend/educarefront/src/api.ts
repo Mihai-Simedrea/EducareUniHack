@@ -348,23 +348,23 @@ export class CourseClient {
     }
 
     /**
-     * @param courseName (optional) 
+     * @param body (optional) 
      * @return Success
      */
-    addCourse(id: number, courseName: string | undefined): Promise<void> {
-        let url_ = this.baseUrl + "/api/Course/add-course/{id}?";
+    addCourse(id: number, body: AddCourseDto | undefined): Promise<void> {
+        let url_ = this.baseUrl + "/api/Course/add-course/{id}";
         if (id === undefined || id === null)
             throw new Error("The parameter 'id' must be defined.");
         url_ = url_.replace("{id}", encodeURIComponent("" + id));
-        if (courseName === null)
-            throw new Error("The parameter 'courseName' cannot be null.");
-        else if (courseName !== undefined)
-            url_ += "courseName=" + encodeURIComponent("" + courseName) + "&";
         url_ = url_.replace(/[?&]$/, "");
 
+        const content_ = JSON.stringify(body);
+
         let options_: RequestInit = {
+            body: content_,
             method: "POST",
             headers: {
+                "Content-Type": "application/json",
             }
         };
 
@@ -893,6 +893,46 @@ export class UsersClient {
         }
         return Promise.resolve<void>(null as any);
     }
+}
+
+export class AddCourseDto implements IAddCourseDto {
+    name?: string | undefined;
+    year?: number | undefined;
+
+    constructor(data?: IAddCourseDto) {
+        if (data) {
+            for (var property in data) {
+                if (data.hasOwnProperty(property))
+                    (<any>this)[property] = (<any>data)[property];
+            }
+        }
+    }
+
+    init(_data?: any) {
+        if (_data) {
+            this.name = _data["name"];
+            this.year = _data["year"];
+        }
+    }
+
+    static fromJS(data: any): AddCourseDto {
+        data = typeof data === 'object' ? data : {};
+        let result = new AddCourseDto();
+        result.init(data);
+        return result;
+    }
+
+    toJSON(data?: any) {
+        data = typeof data === 'object' ? data : {};
+        data["name"] = this.name;
+        data["year"] = this.year;
+        return data;
+    }
+}
+
+export interface IAddCourseDto {
+    name?: string | undefined;
+    year?: number | undefined;
 }
 
 export class ProfileDto implements IProfileDto {
