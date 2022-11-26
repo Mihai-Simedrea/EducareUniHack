@@ -7,10 +7,10 @@
         // one to one
 
         // one to many
-        public int UniversityId { get; set; }
-        public University University { get; set; }
+        public int? UniversityId { get; set; }
+        public University? University { get; set; }
         // public Field? Field { get; set; }
 
-        public List<Field> Fields { get; set; }
+        public List<Field>? Fields { get; set; }
     }
 }

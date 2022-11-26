@@ -5,7 +5,7 @@
         public string Name { get; set; }
 
         // one to many
-        public List<Faculty> Faculties { get; set; }
+        public List<Faculty>? Faculties { get; set; }
 
     }
 }

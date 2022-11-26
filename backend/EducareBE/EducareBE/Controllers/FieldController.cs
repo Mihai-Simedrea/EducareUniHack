@@ -28,7 +28,7 @@ namespace EducareBE.Controllers
         }
 
         [HttpPost("add-field/{id}")]
-        public async Task<IActionResult> AddFaculty(int id, string fieldName)
+        public async Task<IActionResult> AddField(int id, string fieldName)
         {
             var itExists = await _dbContext.Fields
                 .AnyAsync(x => x.Name == fieldName && x.FacultyId == id);
