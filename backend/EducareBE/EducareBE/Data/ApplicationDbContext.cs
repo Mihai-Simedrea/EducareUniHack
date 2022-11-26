@@ -76,11 +76,26 @@ namespace EducareBE.Data
                     Id = 1,
                     Name = "Polytechnic University of Timisoara"
                 },
-                 new University
-                 {
-                     Id = 2,
-                     Name = "Vest University of Timisoara"
-                 }
+                new University
+                {
+                    Id = 2,
+                    Name = "Vest University of Timisoara"
+                },
+                new University
+                {
+                    Id = 2,
+                    Name = "Vest University of Timisoara"
+                },
+                new University
+                {
+                    Id = 3,
+                    Name = "Standford University"
+                },
+                new University
+                {
+                    Id = 4,
+                    Name = "Massachusetts Institute of Technology"
+                }
             );
         }
 
@@ -98,11 +113,22 @@ namespace EducareBE.Data
                 {
                     Id = 2,
                     Name = "Electronics and Telecomunication",
-                    UniversityId = 2
+                    UniversityId = 1
                 },
                 new Faculty
                 {
                     Id = 3,
+                    Name = "Faculty Of Managemen And Transportation ",
+                    UniversityId = 1
+                },
+                new Faculty
+                {
+                    Id = 3,
+                    Name = "Faculty of Mechanical Engineerin"
+                },
+                new Faculty
+                {
+                    Id = 5,
                     Name = "Faculty of Finance and Banking",
                     UniversityId = 2
                 }

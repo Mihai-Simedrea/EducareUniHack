@@ -64,6 +64,7 @@ export function SearchPage() {
                 searchedText={inputText}
                 searchBy={"University"}
             />
+            <LabelBottomNavigation icon={2}/>
 
         </Box>
     )
