@@ -25,7 +25,7 @@ namespace EducareBE.Data
             modelBuilder.Entity<User>()
                 .HasOne(a => a.Profile)
                 .WithOne(b => b.User)
-                .HasForeignKey<Profile>(b => b.UserId);
+                .HasForeignKey<Profile>(b => b.UserEmail);
         }
 
         public DbSet<User> Users { get; set; }
