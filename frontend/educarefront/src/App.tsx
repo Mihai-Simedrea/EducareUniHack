@@ -13,7 +13,16 @@ function App() {
     return (
         <div className="App">
             <header className="App-header">
-                <CourseHeader courseAbbreviation={"AC"}/>
+                <CourseHeader
+                    courseAbbreviation={"AC"}
+                    onHeartPress={()=>{
+                        console.log("heart")}}
+                    exercisesSelected={true}
+                    isFavourite={true}
+                    onEnrollButtonPress={()=>{
+                        console.log("enroll")
+                    }}
+                />
             </header>
         </div>
     );
