@@ -25,9 +25,18 @@ namespace EducareBE.Controllers
         public async Task<IActionResult> GetAllUniveristies()
         {
             var universites = await _dbContext.Universities.Include(x => x.Faculties).ToListAsync();
-
-         
             return Ok(_mapper.Map<List<GetUniversityViewModel>>(universites));
+        }
+
+        [HttpGet("get-all-universities-by-name/{universityName}")]
+        public async Task<IActionResult> GetAllUniversitiesByName(string universityName)
+        {
+            var universities =
+                await _dbContext.Universities.Include(x => x.Faculties)
+                .Where(x => x.Name.Contains(universityName))
+                .ToListAsync();
+
+            return Ok(_mapper.Map<List<GetUniversityViewModel>>(universities));
         }
 
         [HttpGet("{id}")]
