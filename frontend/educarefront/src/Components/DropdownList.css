@@ -1,0 +1,18 @@
+.dropdown{
+    width: 352px;
+    border-radius: 30px;
+    box-shadow: 0 0 20px rgb(124, 124, 124);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+}
+.head{
+    display: flex;
+    width: 90%;
+    justify-content: space-between;
+    margin: 0 10px;
+}
+.list{
+    margin: 10px;
+}

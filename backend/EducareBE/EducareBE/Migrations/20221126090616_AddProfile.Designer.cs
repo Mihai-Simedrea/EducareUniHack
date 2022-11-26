@@ -4,6 +4,7 @@ using EducareBE.Data;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 #nullable disable
@@ -11,9 +12,10 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace EducareBE.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    partial class ApplicationDbContextModelSnapshot : ModelSnapshot
+    [Migration("20221126090616_AddProfile")]
+    partial class AddProfile
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -131,56 +133,6 @@ namespace EducareBE.Migrations
                     b.ToTable("Profiles");
                 });
 
-            modelBuilder.Entity("EducareBE.Models.Entities.Subject", b =>
-                {
-                    b.Property<int>("Id")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("int");
-
-                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"), 1L, 1);
-
-                    b.Property<int?>("CourseId")
-                        .HasColumnType("int");
-
-                    b.Property<string>("Name")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
-
-                    b.HasKey("Id");
-
-                    b.HasIndex("CourseId");
-
-                    b.ToTable("Subjects");
-                });
-
-            modelBuilder.Entity("EducareBE.Models.Entities.SubjectAddedBy", b =>
-                {
-                    b.Property<int>("Id")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("int");
-
-                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"), 1L, 1);
-
-                    b.Property<int>("Dislikes")
-                        .HasColumnType("int");
-
-                    b.Property<int>("Likes")
-                        .HasColumnType("int");
-
-                    b.Property<string>("Name")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<int?>("SubjectId")
-                        .HasColumnType("int");
-
-                    b.HasKey("Id");
-
-                    b.HasIndex("SubjectId");
-
-                    b.ToTable("SubjectsAddedBy");
-                });
-
             modelBuilder.Entity("EducareBE.Models.Entities.University", b =>
                 {
                     b.Property<int>("Id")
@@ -261,29 +213,6 @@ namespace EducareBE.Migrations
                     b.Navigation("User");
                 });
 
-            modelBuilder.Entity("EducareBE.Models.Entities.Subject", b =>
-                {
-                    b.HasOne("EducareBE.Models.Entities.Course", "Course")
-                        .WithMany("Subjects")
-                        .HasForeignKey("CourseId");
-
-                    b.Navigation("Course");
-                });
-
-            modelBuilder.Entity("EducareBE.Models.Entities.SubjectAddedBy", b =>
-                {
-                    b.HasOne("EducareBE.Models.Entities.Subject", "Subject")
-                        .WithMany("SubjectsAddedBy")
-                        .HasForeignKey("SubjectId");
-
-                    b.Navigation("Subject");
-                });
-
-            modelBuilder.Entity("EducareBE.Models.Entities.Course", b =>
-                {
-                    b.Navigation("Subjects");
-                });
-
             modelBuilder.Entity("EducareBE.Models.Entities.Faculty", b =>
                 {
                     b.Navigation("Fields");
@@ -292,11 +221,6 @@ namespace EducareBE.Migrations
             modelBuilder.Entity("EducareBE.Models.Entities.Field", b =>
                 {
                     b.Navigation("Courses");
-                });
-
-            modelBuilder.Entity("EducareBE.Models.Entities.Subject", b =>
-                {
-                    b.Navigation("SubjectsAddedBy");
                 });
 
             modelBuilder.Entity("EducareBE.Models.Entities.University", b =>
