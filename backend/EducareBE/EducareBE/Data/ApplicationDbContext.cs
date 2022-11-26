@@ -162,8 +162,30 @@ namespace EducareBE.Data
             );
         }
 
-        private void PopulateSubects(ModelBuilder modelBuilder) 
-        { 
+        private void PopulateSubjects(ModelBuilder modelBuilder) 
+        {
+            modelBuilder.Entity<Subject>()
+            .HasData(
+                new Subject
+                {
+                    Id = 1,
+                    Name = "Objects and Classes",
+                    CourseId = 1
+                },
+                new Subject
+                {
+                    Id = 2,
+                    Name = "Polymorphism",
+                    FieldId = 1
+                },
+                new Subject
+                {
+                    Id = 3,
+                    Name = "Errors",
+                    Year = 4,
+                    FieldId = 1
+                }
+            );
         }
     }
 }

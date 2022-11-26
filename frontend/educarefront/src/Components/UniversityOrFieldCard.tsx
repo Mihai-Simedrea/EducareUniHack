@@ -1,21 +1,23 @@
 import {Card, CardContent, Typography} from "@mui/material";
-
+import  {Link} from "react-router-dom"
 interface Props {
     universityOrFieldName: string;
-    nrOfFields?: number;
-    nrOfMaterialsUploaded: number;
-    nrOfExercises: number;
+    nrOfFields?: string;
+    nrOfMaterialsUploaded: string;
+    nrOfExercises: string;
     isUniversity: boolean;
+    id:string;
 }
 
 export default function UniversityOrFieldCard(props: Props) {
-    const {universityOrFieldName, nrOfFields, nrOfMaterialsUploaded, nrOfExercises, isUniversity} = props;
+    const {universityOrFieldName, nrOfFields, nrOfMaterialsUploaded, nrOfExercises, isUniversity, id} = props;
 
     const styles = {
         container: {
             borderRadius: "30px",
             width: 352,
-            boxShadow: '0px 0px 20px #7C7C7C'
+            boxShadow: '0px 0px 20px #7C7C7C',
+            margin: "16px 0",
         },
         textTitle: {
             fontSize: 24,
@@ -31,9 +33,10 @@ export default function UniversityOrFieldCard(props: Props) {
 
     return (
         <Card sx={styles.container}>
-            <CardContent>
+            <CardContent key={id}>
                 <Typography sx={styles.textTitle}>
-                    {universityOrFieldName}
+                    <Link to={`/University/${id}`} style={{textDecoration: "none", color: "black"}}> {universityOrFieldName}</Link>
+
                 </Typography>
 
                 {isUniversity &&
