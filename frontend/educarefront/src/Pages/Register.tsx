@@ -2,21 +2,28 @@ import { Card, Box, CardMedia,TextField,Typography,Button,Alert } from "@mui/mat
 import { height } from "@mui/system";
 import {useNavigate} from "react-router-dom"
 import {useState,useEffect} from "react";
-import { UserRegisterDto, UsersClient } from "../api";
+import { UserRegisterDto, UsersClient } from "../api"
+import HandleUserData from "../endpoints/HandleUserData";
 
 
 const Register=()=>{
     const navigate=useNavigate();
     const [username,setUsername]=useState(" ");
     const [password,setPassword]=useState(" ");
-    const [passwordMatch,setPasswordMatch]=useState(" ");
+    const [passwordMatch,setPasswordMatch]=useState(" ")
     const [email,setEmail]=useState(" ");
     const [errorView,setErrorView]=useState("none");
-    const userbackend=new UsersClient();
+    const userbackend=HandleUserData();
     const handleSubmit= async()=>{
-       const res =await userbackend.register({email:email,userName:username,password:password} as UserRegisterDto);
-    //    const resolve=await res.json;
-       console.log(res);
+        try {
+       const res =await userbackend.Register(email,password,username);
+       const resvalue=await res.json();
+       console.log(resvalue);
+            
+        } catch (error) {
+            
+        }
+       
     }
     useEffect(()=>{
         
