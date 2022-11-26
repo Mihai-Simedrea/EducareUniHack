@@ -9,6 +9,8 @@ namespace EducareBE.Mapping
     {
         public MappingProfile()
         {
+            CreateMap<University, GetUniversityViewModel>().ReverseMap(); 
+            CreateMap<Faculty, GetFacultiesViewModel>().ReverseMap();
             CreateMap<Course, AddCourseDto>().ReverseMap();
 
 
