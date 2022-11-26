@@ -36,6 +36,7 @@ namespace EducareBE.Controllers
                 .Where(x => x.Name.Contains(universityName))
                 .ToListAsync();
 
+
             return Ok(_mapper.Map<List<GetUniversityViewModel>>(universities));
         }
 

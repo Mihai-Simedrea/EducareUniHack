@@ -23,12 +23,12 @@ namespace EducareBE.Controllers
             return Ok(_dbContext.Profiles.Where(x => x.User.Email == userEmail));
         }
 
-        [HttpPost("profile/{id}")]
-        public async Task<IActionResult> CreateProfile(int id, ProfileDto request)
+        [HttpPost("profile/{userEmail}")]
+        public async Task<IActionResult> CreateProfile(string userEmail, ProfileDto request)
         {
             var profile = new Profile
             {
-                UserId = id,
+                UserEmail = userEmail,
                 UniversityName = request.UniversityName,
                 FieldName = request.FieldName,
                 FacultyName = request.FacultyName,
@@ -38,7 +38,7 @@ namespace EducareBE.Controllers
             await _dbContext.Profiles.AddAsync(profile);
             await _dbContext.SaveChangesAsync();
 
-            return Ok(true);
+            return Ok(profile);
         }
 
     }
