@@ -21,7 +21,7 @@ namespace EducareBE.Controllers
         }
 
 
-        [HttpGet]
+        [HttpGet("get-all-universities")]
         public async Task<IActionResult> GetAllUniveristies()
         {
             var universites = await _dbContext.Universities.Include(x => x.Faculties).ToListAsync();
