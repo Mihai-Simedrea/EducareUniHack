@@ -20,11 +20,11 @@ namespace EducareBE.Controllers
         [HttpGet("{id}")]
         public async Task<IActionResult> GetAllSubjectsAddedBy(int id)
         {
-            var fields = await _dbContext.SubjectsAddedBy
+            var subjectsAddedBy = await _dbContext.SubjectsAddedBy
                 .Include(x => x.Subject)
                 .Where(x => x.SubjectId == id)
                 .ToListAsync();
-            return Ok(fields);
+            return Ok(subjectsAddedBy);
         }
 
         [HttpPost("add-subject-added-by/{id}")]
@@ -37,17 +37,34 @@ namespace EducareBE.Controllers
                 return Ok(false);
             }
 
-            var subjectsAddedBy = new SubjectAddedBy
+            var subjectAddedBy = new SubjectAddedBy
             {
                 SubjectId = id,
                 Name = subjectsAddedByName,
             };
 
-            await _dbContext.SubjectsAddedBy.AddAsync(subjectsAddedBy);
+            await _dbContext.SubjectsAddedBy.AddAsync(subjectAddedBy);
             await _dbContext.SaveChangesAsync();
 
-            return Ok(subjectsAddedBy);
+            return Ok(subjectAddedBy);
+        }
 
+        [HttpPost("{id}/like")]
+        public async Task<IActionResult> LikeSubjectAddedBy(int id)
+        {
+            var fields = await _dbContext.SubjectsAddedBy
+            .Include(x => x.Subject)
+            .Where(x => x.SubjectId == id)
+            .ToListAsync();
+
+            return Ok();
+        }
+
+        [HttpPost("{id}/dislike")]
+        public async Task<IActionResult> DislikeSubjectAddedBy(int id)
+        {
+
+            return Ok();
         }
     }
 }

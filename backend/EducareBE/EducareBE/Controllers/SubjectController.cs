@@ -19,11 +19,11 @@ namespace EducareBE.Controllers
         [HttpGet("{id}")]
         public async Task<IActionResult> GetAllSubjects(int id)
         {
-            var fields = await _dbContext.Subjects
+            var subjects = await _dbContext.Subjects
                 .Include(x => x.Field)
                 .Where(x => x.FieldId == id)
                 .ToListAsync();
-            return Ok(fields);
+            return Ok(subjects);
         }
 
         [HttpPost("add-subject/{id}")]
