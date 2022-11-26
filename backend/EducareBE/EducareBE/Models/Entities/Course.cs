@@ -7,6 +7,7 @@
         // one to one
 
         // one to many
+        public int FieldId { get; set; }
         public ICollection<Field?> Fields { get; set; }
     }
 }
