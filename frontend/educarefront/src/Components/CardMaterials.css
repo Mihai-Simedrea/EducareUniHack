@@ -1,0 +1,48 @@
+.card-materials{
+    display: flex ;
+    align-items: center;
+    justify-content: space-between;
+    width: 330px;
+    margin: 10px;
+    border-radius: 25px;
+    box-shadow: 0 0 10px rgb(202, 202, 202);
+}
+.like-dis{
+    display: flex;
+}
+.like-dis :nth-child(3){
+    margin-left: 15px;
+}
+.like-dis :nth-child(2){
+    position: relative;
+    top: -3px;
+}
+.like-dis :nth-child(4){
+    margin-right: 10px;
+}
+.card-materials-text{
+    margin-left: 15px;
+}
+.card-materials-text > h4{
+    font-size: 20px;
+    margin-bottom: 0;
+    margin-top: 0;
+    position: relative;
+    top: -10px;
+}
+.card-materials-text > p{
+    font-size: 12px;
+    margin-top: 0;
+    margin-bottom: 0;
+    position: relative;
+    top: -5px;
+}
+.btn-memoreaza{
+    margin-top:15px;   
+    margin-right: 15px;
+    background-color: #66bb6a;
+    border: none;
+    border-radius: 10px;
+    padding: 5px;
+    color: white;
+}

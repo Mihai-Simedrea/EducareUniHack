@@ -1,26 +1,19 @@
 import React from 'react';
 import logo from './logo.svg';
 import './App.css';
+import LabelBottomNavigation from './Components/LabelBottomNavigation';
+import CardMaterials from './Components/CardMaterials';
+import DropdownList from './Components/DropdownList';
+import CardExercises from './Components/CardExercises';
+import PlusButton from "./Components/PlusButton"
 
 function App() {
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.tsx</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
-  );
+    //<DropdownList subject='Relatia de mostenire'></DropdownList>
+    //<CardMaterials subject={"Definitii si Teoreme"} username={"Kaarl"} date={"23-10-2022"} likes={56} dislikes={8} isLiked={true} isDisliked={false}></CardMaterials>
+    //<CardExercises title={"Exercitii din culegere"} username="Kaarl" date='23-10-2022' ></CardExercises>
+    <PlusButton></PlusButton>
+    );
 }
 
 export default App;
