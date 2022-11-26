@@ -10,7 +10,6 @@
         public int NumberOfPosts { get; set; }
         
         // one to one
-        public string UserEmail { get; set; }
         public int UserId { get; set; }
         public User User { get; set; }
     }

@@ -42,13 +42,20 @@ namespace EducareBE.Controllers
         }
 
         [HttpPost("login")]
-        public async Task<IActionResult> LogIn(UserLoginDto request)
+        public IActionResult LogIn(UserLoginDto request)
         {
+            var user = _dbContext.Users
+                .Where(x => x.Email == request.Email && x.Password == request.Password)
+                .FirstOrDefault();
 
-            var itExists = await _dbContext.Users
-                .AnyAsync(x => x.Email == request.Email && x.Password == request.Password);
+            var resultId = -1;
+            if (user == null)
+            {
+                resultId = -1;
+            }
 
-            return Ok(itExists);
+            resultId = user.Id;
+            return Ok(resultId);
         }
 
         [HttpGet]
