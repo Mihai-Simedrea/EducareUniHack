@@ -27,7 +27,9 @@ namespace EducareBE.Controllers
         [HttpGet("{id}")]
         public async Task<IActionResult> GetUniverstityById(int id)
         {
-            var university = _dbContext.Universities.Include(x => x.Faculties).Where(x => x.Id == id).First();
+            var university = _dbContext.Universities
+                .Include(x => x.Faculties)
+                .Where(x => x.Id == id).First();
 
             return Ok(university);
         }

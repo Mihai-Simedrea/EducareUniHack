@@ -21,6 +21,7 @@ namespace EducareBE.Controllers
         public async Task<IActionResult> GetAllFields(int id)
         {
             var fields = await _dbContext.Fields
+                .Include(x => x.Courses)
                 .Where(x => x.FacultyId == id)
                 .ToListAsync();
             return Ok(fields);

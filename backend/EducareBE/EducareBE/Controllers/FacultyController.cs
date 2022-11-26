@@ -23,6 +23,7 @@ namespace EducareBE.Controllers
         public async Task<IActionResult> GetAllFaculties(int id)
         {
             var faculties = await _dbContext.Faculties
+                .Include(x => x.Fields)
                 .Where(x => x.UniversityId == id)
                 .ToListAsync();
             return Ok(faculties);

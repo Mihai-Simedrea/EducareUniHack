@@ -3,11 +3,11 @@
     public class Course : BaseEntity
     {
         public string Name { get; set;  }
-        public bool IsFavoirt { get; set; } = false;
+        public bool IsFavorite { get; set; }
         // one to one
 
         // one to many
         public int FieldId { get; set; }
-        public ICollection<Field?> Fields { get; set; }
+        public Field Field { get; set; }
     }
 }
