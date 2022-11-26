@@ -24,6 +24,14 @@ namespace EducareBE.Controllers
             return Ok(universites);
         }
 
+        [HttpGet("{id}")]
+        public async Task<IActionResult> GetUniverstityById(int id)
+        {
+            var university = _dbContext.Universities.Include(x => x.Faculties).Where(x => x.Id == id).First();
+
+            return Ok(university);
+        }
+
         [HttpPost("add-university")]
         public async Task<IActionResult> AddUniversity(string univesrityName)
         {
