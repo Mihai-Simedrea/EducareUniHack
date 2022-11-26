@@ -1,5 +1,6 @@
 ﻿using EducareBE.Models.Entities;
 using Microsoft.EntityFrameworkCore;
+using System.Xml.Linq;
 
 namespace EducareBE.Data
 {
@@ -52,6 +53,11 @@ namespace EducareBE.Data
             PopulateCourses(modelBuilder);
             PopulateSubjects (modelBuilder);
 
+            //PopulateUsers(modelBuilder);
+           // PopulateEnroledCourses(modelBuilder);
+           // PopulateFavoriteCourses(modelBuilder);
+            //PopulateLikes(modelBuilder);
+
         }
 
         public DbSet<User> Users { get; set; }
@@ -79,12 +85,7 @@ namespace EducareBE.Data
                 {
                     Id = 2,
                     Name = "Vest University of Timisoara"
-                },
-                new University
-                {
-                    Id = 2,
-                    Name = "Vest University of Timisoara"
-                },
+                },          
                 new University
                 {
                     Id = 3,
@@ -94,7 +95,32 @@ namespace EducareBE.Data
                 {
                     Id = 4,
                     Name = "Massachusetts Institute of Technology"
-                }
+                },
+                 new University
+                 {
+                Id = 5,
+                    Name = "Polytechnic University of Bucharest"
+                 },
+                  new University
+                  {
+                Id = 6,
+                    Name = "Polytechnic University of Iasi"
+                  },
+                   new University
+                   {
+                Id = 7,
+                    Name = "Carol Davila University of Medicine"
+                   },
+                    new University
+                    {
+                Id = 8,
+                    Name = "University of Medicine and Pharmacy of Craiova"
+                    },
+                     new University
+                     {
+                Id = 9,
+                    Name = "Lucian Blaga University of Sibiu"
+                     }
             );
         }
 
@@ -122,14 +148,123 @@ namespace EducareBE.Data
                 },
                 new Faculty
                 {
-                    Id = 3,
-                    Name = "Faculty of Mechanical Engineerin"
+                    Id = 4,
+                    Name = "Faculty of Mechanical Engineerin",
+                    UniversityId = 1
                 },
                 new Faculty
                 {
                     Id = 5,
                     Name = "Faculty of Finance and Banking",
+                    UniversityId = 1
+                },
+                 new Faculty
+                 {
+                     Id = 6,
+                     Name = "Automation And Computers",
+                     UniversityId = 5
+                 },
+                new Faculty
+                {
+                    Id = 7,
+                    Name = "Electronics and Telecomunication",
+                    UniversityId = 5
+                },
+                new Faculty
+                {
+                    Id = 8,
+                    Name = "Faculty Of Managemen And Transportation ",
+                    UniversityId = 5
+                },
+                new Faculty
+                {
+                    Id = 9,
+                    Name = "Faculty of Mechanical Engineerin",
+                    UniversityId = 5
+                },
+                new Faculty
+                {
+                    Id = 10,
+                    Name = "Faculty of Finance and Banking",
+                    UniversityId = 5
+                },
+                 new Faculty
+                 {
+                     Id = 11,
+                     Name = "Automation And Computers",
+                     UniversityId = 6
+                 },
+                new Faculty
+                {
+                    Id = 12,
+                    Name = "Electronics and Telecomunication",
+                    UniversityId = 6
+                },
+                new Faculty
+                {
+                    Id = 13,
+                    Name = "Faculty Of Management And Transportation ",
+                    UniversityId = 6
+                },
+                new Faculty
+                {
+                    Id = 14,
+                    Name = "Faculty of Mechanical Engineerin",
+                    UniversityId = 6
+                },
+                new Faculty
+                {
+                    Id = 15,
+                    Name = "Faculty of Finance and Banking",
+                    UniversityId = 6
+                },
+                 new Faculty
+                 {
+                     Id = 16,
+                     Name = "Faculty Of Mathemathics",
+                     UniversityId = 2
+                 },
+                new Faculty
+                {
+                    Id = 17,
+                    Name = "Faculty of Biology",
                     UniversityId = 2
+                },
+                new Faculty
+                {
+                    Id = 18,
+                    Name = "Faculty Of Managemen And Transportation ",
+                    UniversityId = 2
+                },
+                new Faculty
+                {
+                    Id = 19,
+                    Name = "Faculty of Mechanical Engineerin",
+                    UniversityId = 2
+                },
+                new Faculty
+                {
+                    Id = 20,
+                    Name = "Faculty of Finance and Banking",
+                    UniversityId = 2
+                },
+                 new Faculty
+                 {
+                     Id = 21,
+                     Name = "Faculty of General Medicine",
+                     UniversityId = 7
+                 },
+                new Faculty
+                {
+                    Id = 22,
+                    Name = "Faculty of Dental Medicine",
+                    UniversityId = 7
+                },
+                new Faculty
+                {
+                    Id = 23,
+                    Name = "Faculty of Chirurgy",
+                    UniversityId = 7
                 }
             );
         }
@@ -154,8 +289,80 @@ namespace EducareBE.Data
                 new Field
                 {
                     Id = 3,
+                    Name = "System Engineering",
+                    FacultyId = 1
+                },
+                 new Field
+                 {
+                     Id = 4,
+                     Name = "Telecomunications",
+                     FacultyId = 2
+                 },
+                new Field
+                {
+                    Id = 5,
+                    Name = "Transporting Engineering",
+                    FacultyId = 3
+                },
+                new Field
+                {
+                    Id = 6,
+                    Name = "Management Engineering",
+                    FacultyId = 4
+                },
+                 new Field
+                 {
+                     Id = 7,
+                     Name = "Finance",
+                     FacultyId = 5
+                 },
+                new Field
+                {
+                    Id = 8,
+                    Name = "Bussiness",
+                    FacultyId = 5
+                },
+                new Field
+                {
+                    Id = 9,
+                    Name = "Banking",
+                    FacultyId = 5
+                },
+                 new Field
+                 {
+                     Id = 10,
+                     Name = "Informatics",
+                     FacultyId = 1
+                 },
+                new Field
+                {
+                    Id = 11,
+                    Name = "Computers and Information Technology",
+                    FacultyId = 1
+                },
+                new Field
+                {
+                    Id = 12,
                     Name = "Informatics",
                     FacultyId = 2
+                },
+                new Field
+                {
+                    Id = 13,
+                    Name = "General Medicine",
+                    FacultyId = 21
+                },
+                new Field
+                {
+                    Id = 14,
+                    Name = "Dental Medicine",
+                    FacultyId = 22
+                },
+                new Field
+                {
+                    Id = 15,
+                    Name = "Chirurgy",
+                    FacultyId = 23
                 }
             );
         }
@@ -181,7 +388,7 @@ namespace EducareBE.Data
                 new Course
                 {
                     Id = 3,
-                    Name = "TD",
+                    Name = "PTDM",
                     Year = 4,
                     FieldId = 2
                 }
@@ -209,8 +416,59 @@ namespace EducareBE.Data
                     Id = 3,
                     Name = "Errors",
                     CourseId = 1
+                },
+                 new Subject
+                 {
+                     Id = 4,
+                     Name = "Sorting Algorims",
+                     CourseId = 2
+                 },
+                new Subject
+                {
+                    Id = 5,
+                    Name = "Advanced sorting algoritms",
+                    CourseId = 2
+                },
+                new Subject
+                {
+                    Id = 6,
+                    Name = "The Oscilloscope",
+                    CourseId = 3
                 }
             );
         }
+
+        private void PopulateUsers(ModelBuilder modelBuilder)
+        {
+            modelBuilder.Entity<User>()
+            .HasData(
+                new User
+                {
+                    Id = 1,
+                    Email = "florin.mischie@student.upt.ro",
+                    Password = "password",
+                    UserName = "Aleksandru"
+                },
+                new User
+                {
+                    Id = 2,
+                    Email = "test@student.upt.ro",
+                    Password = "password",
+                    UserName = "Aleksandru"
+                },
+                new User
+                {
+                    Id = 3,
+                    Email = "test2@student.upt.ro",
+                    Password = "password",
+                    UserName = "Aleksandru"
+                }
+            );
+
+        }
+
+        private void PopulateEnroledCourses(ModelBuilder modelBuilder) { return;  }
+        private void PopulateFavoriteCourses(ModelBuilder modelBuilder) { return; }
+        private void PopulateLikes(ModelBuilder modelBuilder) { return; }
     }
 }
