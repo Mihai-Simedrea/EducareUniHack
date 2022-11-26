@@ -5,7 +5,6 @@ export const Favorite = () => {
     const [inputText, setInputText] = useState('');
   return (
     <div>
-        <SearchBar searchedText={inputText} setSearchedText={setInputText}></SearchBar>
         <LabelBottomNavigation icon={3}></LabelBottomNavigation>
     </div>
   )
