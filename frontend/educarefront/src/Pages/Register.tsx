@@ -14,10 +14,17 @@ const Register=()=>{
     const [email,setEmail]=useState(" ");
     const [errorView,setErrorView]=useState("none");
     const userbackend=HandleUserData();
+    const [error,setError]=useState("none");
     const handleSubmit= async()=>{
         try {
        const res =await userbackend.Register(email,password,username);
        const resvalue=await res.json();
+       if(resvalue==true){
+        navigate("/");
+       }
+       else{
+        setError(' ');
+       }
        console.log(resvalue);
             
         } catch (error) {
@@ -66,7 +73,7 @@ const Register=()=>{
           flexDirection: "column",
           justifyContent: "flex-start",
           alignItems: "center",
-          height:'38rem',
+          height:'42rem',
           boxShadow:'10',
           gap:'10px',
           backgroundColor:'white',
@@ -114,7 +121,9 @@ const Register=()=>{
         <Button variant="contained" color="success" sx={{width:'30%'}} type="submit">Submit</Button>
       </Box>
       <Alert sx={{width:'70%',height:'2rem',display:errorView}} severity="error">Password Does Not Match</Alert>
+      <Alert sx={{width:'70%',height:'2.3rem',display:error,alignContent:'center',justifyContent:'center',marginTop:'10px'}} severity="error">Something Went Wrong</Alert>
       </Box>
+      
     </Box>
   );
 
