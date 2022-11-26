@@ -49,4 +49,5 @@ namespace EducareBE.Controllers
             return Ok(subjectsAddedBy);
 
         }
+    }
 }
