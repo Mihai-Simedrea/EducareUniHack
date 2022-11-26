@@ -36,12 +36,21 @@ namespace EducareBE.Data
                 .WithMany(s => s.EnrolledCourses)
                 .HasForeignKey(sc => sc.UserId);
 
+            modelBuilder.Entity<Like>()
+                .HasOne<User>(sc => sc.User)
+                .WithMany(s => s.Likes)
+                .HasForeignKey(sc => sc.UserId);
+
+            modelBuilder.Entity<Like>()
+                .HasOne<SubjectAddedBy>(sc => sc.SubjectAddedBy)
+                .WithMany(s => s.Likes)
+                .HasForeignKey(sc => sc.SubjectAddedById);
 
             PopulateUniversity(modelBuilder);
             PopulateFaculty(modelBuilder);
             PopulateFields(modelBuilder);
             PopulateCourses(modelBuilder);
-            PopulateSubects(modelBuilder);
+            PopulateSubjects (modelBuilder);
 
         }
 
@@ -54,7 +63,7 @@ namespace EducareBE.Data
         public DbSet<SubjectAddedBy> SubjectsAddedBy { get; set;}
         public DbSet<Profile> Profiles { get; set; }
         public DbSet<EnrolledCourses> EnrolledCourses { get; set; }
-
+        public DbSet<Like> Likes { get; set; }
 
 
         private void PopulateUniversity(ModelBuilder modelBuilder) 
@@ -153,8 +162,29 @@ namespace EducareBE.Data
             );
         }
 
-        private void PopulateSubects(ModelBuilder modelBuilder) 
-        { 
+        private void PopulateSubjects(ModelBuilder modelBuilder) 
+        {
+            modelBuilder.Entity<Subject>()
+            .HasData(
+                new Subject
+                {
+                    Id = 1,
+                    Name = "Objects and Classes",
+                    CourseId = 1
+                },
+                new Subject
+                {
+                    Id = 2,
+                    Name = "Polymorphism",
+                    CourseId = 1
+                },
+                new Subject
+                {
+                    Id = 3,
+                    Name = "Errors",
+                    CourseId = 1
+                }
+            );
         }
     }
 }

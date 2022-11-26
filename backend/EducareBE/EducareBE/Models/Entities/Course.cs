@@ -15,5 +15,6 @@
 
         // many to many
         public ICollection<EnrolledCourses>? EnrolledCourses { get; set; }
+
     }
 }
