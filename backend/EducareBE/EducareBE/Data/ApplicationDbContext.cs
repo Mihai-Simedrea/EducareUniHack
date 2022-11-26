@@ -25,6 +25,17 @@ namespace EducareBE.Data
                 .WithOne(b => b.User)
                 .HasForeignKey<Profile>(b => b.UserId);
 
+            modelBuilder.Entity<EnrolledCourses>()
+                .HasOne<Course>(sc => sc.Course)
+                .WithMany(s => s.EnrolledCourses)
+                .HasForeignKey(sc => sc.CourseId);
+
+
+            modelBuilder.Entity<EnrolledCourses>()
+                .HasOne<User>(sc => sc.User)
+                .WithMany(s => s.EnrolledCourses)
+                .HasForeignKey(sc => sc.UserId);
+
 
             PopulateUniversity(modelBuilder);
             PopulateFaculty(modelBuilder);

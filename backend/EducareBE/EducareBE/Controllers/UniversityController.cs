@@ -32,7 +32,7 @@ namespace EducareBE.Controllers
         public async Task<IActionResult> GetAllUniversitiesByName(string universityName)
         {
             var universities =
-                await _dbContext.Universities.Include(x => x.Faculties)
+                await _dbContext.Universities.Include(x => x.Faculties).ThenInclude(x => x.Fields).ThenInclude(x => x.Courses).ThenInclude(x => x.Subjects)
                 .Where(x => x.Name.Contains(universityName))
                 .ToListAsync();
 
