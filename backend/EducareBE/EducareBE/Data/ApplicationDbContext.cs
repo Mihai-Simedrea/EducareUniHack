@@ -36,5 +36,6 @@ namespace EducareBE.Data
         public DbSet<Subject> Subjects { get; set; }
         public DbSet<SubjectAddedBy> SubjectsAddedBy { get; set;}
         public DbSet<Profile> Profiles { get; set; }
+        public DbSet<EnrolledCourses> EnrolledCourses { get; set; }
     }
 }

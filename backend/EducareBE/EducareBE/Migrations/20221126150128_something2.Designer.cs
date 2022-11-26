@@ -4,6 +4,7 @@ using EducareBE.Data;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 #nullable disable
@@ -11,9 +12,10 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace EducareBE.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    partial class ApplicationDbContextModelSnapshot : ModelSnapshot
+    [Migration("20221126150128_something2")]
+    partial class something2
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -47,7 +49,7 @@ namespace EducareBE.Migrations
 
                     b.HasIndex("FieldId");
 
-                    b.ToTable("Courses", (string)null);
+                    b.ToTable("Courses");
                 });
 
             modelBuilder.Entity("EducareBE.Models.Entities.EnrolledCourses", b =>
@@ -98,7 +100,7 @@ namespace EducareBE.Migrations
 
                     b.HasIndex("UniversityId");
 
-                    b.ToTable("Faculties", (string)null);
+                    b.ToTable("Faculties");
                 });
 
             modelBuilder.Entity("EducareBE.Models.Entities.Field", b =>
@@ -120,7 +122,7 @@ namespace EducareBE.Migrations
 
                     b.HasIndex("FacultyId");
 
-                    b.ToTable("Fields", (string)null);
+                    b.ToTable("Fields");
                 });
 
             modelBuilder.Entity("EducareBE.Models.Entities.Profile", b =>
@@ -152,6 +154,10 @@ namespace EducareBE.Migrations
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
+                    b.Property<string>("UserEmail")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
                     b.Property<int>("UserId")
                         .HasColumnType("int");
 
@@ -160,7 +166,7 @@ namespace EducareBE.Migrations
                     b.HasIndex("UserId")
                         .IsUnique();
 
-                    b.ToTable("Profiles", (string)null);
+                    b.ToTable("Profiles");
                 });
 
             modelBuilder.Entity("EducareBE.Models.Entities.Subject", b =>
@@ -182,7 +188,7 @@ namespace EducareBE.Migrations
 
                     b.HasIndex("CourseId");
 
-                    b.ToTable("Subjects", (string)null);
+                    b.ToTable("Subjects");
                 });
 
             modelBuilder.Entity("EducareBE.Models.Entities.SubjectAddedBy", b =>
@@ -210,7 +216,7 @@ namespace EducareBE.Migrations
 
                     b.HasIndex("SubjectId");
 
-                    b.ToTable("SubjectsAddedBy", (string)null);
+                    b.ToTable("SubjectsAddedBy");
                 });
 
             modelBuilder.Entity("EducareBE.Models.Entities.University", b =>
@@ -233,7 +239,7 @@ namespace EducareBE.Migrations
 
                     b.HasKey("Id");
 
-                    b.ToTable("Universities", (string)null);
+                    b.ToTable("Universities");
                 });
 
             modelBuilder.Entity("EducareBE.Models.Entities.User", b =>
@@ -258,7 +264,7 @@ namespace EducareBE.Migrations
 
                     b.HasKey("Id");
 
-                    b.ToTable("Users", (string)null);
+                    b.ToTable("Users");
                 });
 
             modelBuilder.Entity("EducareBE.Models.Entities.Course", b =>

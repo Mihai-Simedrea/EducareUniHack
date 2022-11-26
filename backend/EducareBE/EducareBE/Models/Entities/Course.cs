@@ -11,5 +11,9 @@
         public int? FieldId { get; set; }
         public Field? Field { get; set; }
         public List<Subject>? Subjects { get; set; }
+
+
+        // many to many
+        public ICollection<EnrolledCourses>? EnrolledCourses { get; set; }
     }
 }
