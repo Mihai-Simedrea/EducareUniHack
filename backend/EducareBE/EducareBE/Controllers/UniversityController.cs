@@ -45,6 +45,7 @@ namespace EducareBE.Controllers
                     {
                         if (faculty.Fields != null)
                         {
+                            uni.TotalFields = faculty.Fields.Count;
                             foreach (var fields in faculty.Fields)
                             {
                                 if (fields.Courses != null)
