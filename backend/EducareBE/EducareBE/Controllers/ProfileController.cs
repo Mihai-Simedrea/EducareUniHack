@@ -17,18 +17,19 @@ namespace EducareBE.Controllers
             _dbContext = dbContext;
         }
 
-        [HttpGet("{userEmail}")]
-        public IActionResult GetProfile(string userEmail)
+        [HttpGet("{userId}")]
+        public async Task<IActionResult> GetProfile(int userId)
         {
-            return Ok(_dbContext.Profiles.Where(x => x.User.Email == userEmail));
+            var profile = await _dbContext.Profiles.Where(x => x.UserId == userId).FirstOrDefaultAsync();
+            return Ok(profile);
         }
 
-        [HttpPost("profile/{userEmail}")]
-        public async Task<IActionResult> CreateProfile(string userEmail, ProfileDto request)
+        [HttpPost("profile/{userId}")]
+        public async Task<IActionResult> CreateProfile(int userId, ProfileDto request)
         {
             var profile = new Profile
             {
-                UserEmail = userEmail,
+                UserId = userId,
                 UniversityName = request.UniversityName,
                 FieldName = request.FieldName,
                 FacultyName = request.FacultyName,
@@ -38,7 +39,7 @@ namespace EducareBE.Controllers
             await _dbContext.Profiles.AddAsync(profile);
             await _dbContext.SaveChangesAsync();
 
-            return Ok(profile);
+            return Ok(profile.UserId);
         }
 
     }
