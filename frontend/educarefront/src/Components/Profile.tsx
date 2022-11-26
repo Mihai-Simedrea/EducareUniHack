@@ -2,30 +2,52 @@ import { Box, Avatar, Typography, Button } from "@mui/material";
 import { useState, useEffect } from "react";
 import useLocal from "../CustomHooks/useLocal";
 import { useNavigate, useParams } from "react-router-dom";
+import HandleUserData from "../endpoints/HandleUserData";
+type ProfileResponse={
+    universityName:string;
+    fieldName:string;
+    facultyName:string;
+    numberOfLikes:string;
+    numberOfPosts:string;
+    users:{userName:string;}
+
+}
 const Profile = () => {
-  const { emailrouter } = useParams();
+  const { uid } = useParams();
+  const userback=HandleUserData();
   const navigate = useNavigate();
   const [university, setUniversity] = useState<string | null>(" ");
   const [field, setField] = useState<string | null>(" ");
   const [degree, setDegree] = useState<string | null>(" ");
-  let email: string;
   const [buttonView, setButtonView] = useState<string | null>(" ");
   const [contentLike, setContentLike] = useState<string | null>(" ");
   const [posts, setPosts] = useState<string | null>(" ");
+  const [userName,setUsername]=useState(' ');
   const local = useLocal();
+  const handleOtherView=async ()=>{
+    const res=await userback.GetProfile(uid as string);
+    const data=await res.json() as ProfileResponse;
+    setUniversity(data.universityName);
+    setDegree(data.facultyName);
+    setField(data.fieldName);
+    setPosts(data.numberOfPosts);
+    setContentLike(data.numberOfLikes);
+    setUsername(data.users.userName);
+  }
 
   useEffect(() => {
-    console.log(emailrouter);
-    if (local.getLocalEntry("university") != null) {
-      if (emailrouter == local.getLocalEntry("email")) {
+    console.log(uid);
+    if (local.getLocalEntry("uid") != null) {
+      if (uid == local.getLocalEntry("uid")) {
         setUniversity(local.getLocalEntry("university"));
         setDegree(local.getLocalEntry("degree"));
         setField(local.getLocalEntry("field"));
         setPosts(local.getLocalEntry("posts"));
-        setContentLike(local.getLocalEntry("like"));
+        setContentLike(local.getLocalEntry("likes"));
       }
       else{
         setButtonView('none');
+        handleOtherView();
       }
     }
   }, []);
@@ -57,6 +79,7 @@ const Profile = () => {
           sx={{ width: "10rem", height: "10rem" }}
           src={require("../Assets/images/profile.jpg")}
         ></Avatar>
+        <Typography variant='h6'>{userName}</Typography>
         <Box
           sx={{
             width: "70%",

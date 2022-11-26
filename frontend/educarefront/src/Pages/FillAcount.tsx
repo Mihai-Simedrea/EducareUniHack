@@ -12,10 +12,45 @@ import {
 } from "@mui/material";
 import InputLabel from "@mui/material/InputLabel";
 import { height } from "@mui/system";
-import { useNavigate } from "react-router-dom";
+import { useNavigate,Navigate} from "react-router-dom";
 import { useState, useEffect } from "react";
+import useLocal from "../CustomHooks/useLocal";
+import HandleUserData from "../endpoints/HandleUserData";
 
-const FillAcount = () => {
+type usesrBody={
+    numberOfLikes:string,
+    numberOfPosts:string;
+}
+const FillAcount =() => {
+ const navigate=useNavigate();
+ const userback=HandleUserData();
+ const local=useLocal();
+ const uid=local.getLocalEntry("uid");
+ const handleSubmit=async()=>{
+    const res=await userback.UpdateProfileData(university,field,degree,year,uid);
+    local.createLocalEntry("university",university);
+    local.createLocalEntry("field",field);
+    local.createLocalEntry("year",year);
+    const profileres=await userback.GetProfile(uid);
+    const profiledata= await profileres.json() as usesrBody;
+    console.log(profiledata);
+    local.createLocalEntry("posts",profiledata.numberOfPosts);
+    local.createLocalEntry("likes",profiledata.numberOfLikes);
+}
+const [status,setStatus]=useState(0);
+const checkFill=async()=>{
+    const res=await userback.GetProfile(uid);
+    if(res.status!=204){
+        navigate('/Home');
+    }
+    
+}
+useEffect(()=>{
+    checkFill();
+
+},[])
+
+
   const University = [
     "Universitatea Politehnica Timisoara",
     "Harvard",
@@ -25,7 +60,6 @@ const FillAcount = () => {
   const Field = ["AC", "ETC", "Mecanica", "Constructii"];
   const Degree = ["CTI", "IS", "ETTI", "Mecatronica", "IngCivil"];
   const Year = ["1", "2", "3", "4", "not in university"];
-
   const [university, setUniversity] = useState("");
   const [field, setField] = useState("");
   const [degree, setDegree] = useState("");
@@ -56,6 +90,7 @@ const FillAcount = () => {
         component="form"
         onSubmit={(e) => {
           e.preventDefault();
+          handleSubmit();
         }}
       >
         <Box
@@ -144,9 +179,9 @@ const FillAcount = () => {
                 required
                 labelId="demo-simple-select-label"
                 sx={{ width: "100%" }}
-                value={degree}
+                value={field}
                 onChange={(e) => {
-                  setDegree(e.target.value);
+                  setField(e.target.value);
                 }}
               >
                 {Field.map((e) => {
@@ -177,12 +212,12 @@ const FillAcount = () => {
                 required
                 labelId="demo-simple-select-label"
                 sx={{ width: "100%" }}
-                value={field}
+                value={degree}
                 onChange={(e) => {
-                  setField(e.target.value);
+                  setDegree(e.target.value);
                 }}
               >
-                {Field.map((e) => {
+                {Degree.map((e) => {
                   return (
                     <MenuItem value={e} key={e}>
                       {e}

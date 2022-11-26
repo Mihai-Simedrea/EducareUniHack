@@ -1,26 +1,32 @@
-import { Card, Box, CardMedia,TextField,Typography,Button } from "@mui/material";
+import { Card, Box, CardMedia,TextField,Typography,Button,Alert} from "@mui/material";
 import { height } from "@mui/system";
 import {useNavigate} from "react-router-dom"
 import {useState} from "react";
 import { UserLoginDto, UsersClient } from "../api";
 import HandleUserData from "../endpoints/HandleUserData";
 import HandleUniversity from "../endpoints/HandleUniversity";
+import useLocal from "../CustomHooks/useLocal";
 const LogIn = () => {
     const navigate=useNavigate();
     const userend=HandleUserData();
-    const unibackend=HandleUniversity();
-
+    const local=useLocal();
     const [email,setEmail]=useState(" ");
     const [password,setPassword]=useState(" ");
+    const [error,setError]=useState("none");
     const handleSubmit= async ()=>{
         try {
        const res=await userend.Login(email,password);
         const resvalue=await res.json();
-        console.log(resvalue);
-        } catch (error) {
-            console.log(error);
-            
+  
+        if(resvalue!=null){
+            local.createLocalEntry('uid',resvalue);
+            navigate("/AccountData");
         }
+        else{
+            setError(' ');
+        }
+        } catch (error) {
+            console.log(error);  }
        
     }
   return (
@@ -52,7 +58,7 @@ const LogIn = () => {
           flexDirection: "column",
           justifyContent: "flex-start",
           alignItems: "center",
-          height:'30rem',
+          height:'33rem',
           boxShadow:'10',
           gap:'10px',
           backgroundColor:'white',
@@ -96,6 +102,7 @@ const LogIn = () => {
            navigate('/register');
         }} >Register</Button>
       </Box>
+      <Alert sx={{width:'70%',height:'2rem',display:error,alignContent:'center',justifyContent:'center',marginTop:'10px'}} severity="error">Incorrect Username or Password</Alert>
       </Box>
     </Box>
   );
