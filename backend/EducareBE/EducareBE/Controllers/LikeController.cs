@@ -6,6 +6,8 @@ using Microsoft.EntityFrameworkCore;
 
 namespace EducareBE.Controllers
 {
+    [ApiController]
+    [Route("api/[controller]")]
     public class LikeController : Controller
     {
         public ApplicationDbContext _dbContext;
@@ -15,6 +17,20 @@ namespace EducareBE.Controllers
         {
             _dbContext = dbContext;
             _mapper = mapper;
+        }
+
+        [HttpGet("get-number-of-likes/{materialId}")]
+        public IActionResult GetNumberOfLikesForUser(int materialId)
+        {
+            return Ok(_dbContext.Likes.Where(x => x.SubjectAddedById == materialId && x.LikesCount == 1)
+                .ToList().Count);
+        }
+
+        [HttpGet("get-number-of-dislikes/{materialId}")]
+        public IActionResult GetNumberOfDislikesForUser(int materialId)
+        {
+            return Ok(_dbContext.Likes.Where(x => x.SubjectAddedById == materialId && x.DislikesCount == 1)
+                .ToList().Count);
         }
 
         [HttpPost("{userId}/like/{materialId}")]
@@ -34,7 +50,10 @@ namespace EducareBE.Controllers
                 await _dbContext.Likes.AddAsync(like);
             }
 
-            like.LikesCount += 1;
+            if (like.DislikesCount == 0)
+            {
+                like.LikesCount = 1;
+            }
             // _dbContext.Entry(enrolledCourse).State = EntityState.Modified;
             await _dbContext.SaveChangesAsync();
 
@@ -57,8 +76,10 @@ namespace EducareBE.Controllers
                 };
                 await _dbContext.Likes.AddAsync(like);
             }
-
-            like.DislikesCount += 1;
+            if (like.LikesCount == 0)
+            {
+                like.DislikesCount = 1;
+            }
             // _dbContext.Entry(enrolledCourse).State = EntityState.Modified;
             await _dbContext.SaveChangesAsync();
 

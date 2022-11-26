@@ -48,7 +48,7 @@ export function SearchPage() {
         }
     };
 
-    // console.log(list);
+    console.log(list);
     //@ts-ignore
 
 
