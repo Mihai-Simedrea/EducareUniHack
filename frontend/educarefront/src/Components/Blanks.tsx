@@ -137,14 +137,13 @@ export const Blanks = (props: Props) => {
    }
   
   return (
-    // <>
-    //     <SimpleHeader text='Fill the blanks'></SimpleHeader>
+    <>
+        <SimpleHeader text='Fill the blanks'></SimpleHeader>
         
-    //     <form>
-    //         {afisare()}
-    //     </form>
-    //     <LabelBottomNavigation icon={1}></LabelBottomNavigation>
-    // </>
-    <Typography fontSize={"16px"}>{curs}</Typography>
+        <form>
+            {afisare()}
+        </form>
+        <LabelBottomNavigation icon={1}></LabelBottomNavigation>
+    </>
   )
 }
