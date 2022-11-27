@@ -16,7 +16,8 @@ namespace EducareBE.Migrations
                         .Annotation("SqlServer:Identity", "1, 1"),
                     Name = table.Column<string>(type: "nvarchar(max)", nullable: false),
                     TotalSubjects = table.Column<int>(type: "int", nullable: false),
-                    TotalExercices = table.Column<int>(type: "int", nullable: false)
+                    TotalExercices = table.Column<int>(type: "int", nullable: false),
+                    TotalFields = table.Column<int>(type: "int", nullable: false)
                 },
                 constraints: table =>
                 {
@@ -176,6 +177,7 @@ namespace EducareBE.Migrations
                     Id = table.Column<int>(type: "int", nullable: false)
                         .Annotation("SqlServer:Identity", "1, 1"),
                     Name = table.Column<string>(type: "nvarchar(max)", nullable: false),
+                    UserId = table.Column<int>(type: "int", nullable: false),
                     SubjectId = table.Column<int>(type: "int", nullable: true)
                 },
                 constraints: table =>
@@ -186,6 +188,32 @@ namespace EducareBE.Migrations
                         column: x => x.SubjectId,
                         principalTable: "Subjects",
                         principalColumn: "Id");
+                    table.ForeignKey(
+                        name: "FK_SubjectsAddedBy_Users_UserId",
+                        column: x => x.UserId,
+                        principalTable: "Users",
+                        principalColumn: "Id",
+                        onDelete: ReferentialAction.Cascade);
+                });
+
+            migrationBuilder.CreateTable(
+                name: "BlobContent",
+                columns: table => new
+                {
+                    Id = table.Column<int>(type: "int", nullable: false)
+                        .Annotation("SqlServer:Identity", "1, 1"),
+                    SubjectAddedById = table.Column<int>(type: "int", nullable: false),
+                    Content = table.Column<string>(type: "nvarchar(max)", nullable: false)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_BlobContent", x => x.Id);
+                    table.ForeignKey(
+                        name: "FK_BlobContent_SubjectsAddedBy_SubjectAddedById",
+                        column: x => x.SubjectAddedById,
+                        principalTable: "SubjectsAddedBy",
+                        principalColumn: "Id",
+                        onDelete: ReferentialAction.Cascade);
                 });
 
             migrationBuilder.CreateTable(
@@ -212,20 +240,42 @@ namespace EducareBE.Migrations
                         name: "FK_Likes_Users_UserId",
                         column: x => x.UserId,
                         principalTable: "Users",
-                        principalColumn: "Id",
-                        onDelete: ReferentialAction.Cascade);
+                        principalColumn: "Id");
                 });
 
             migrationBuilder.InsertData(
                 table: "Universities",
-                columns: new[] { "Id", "Name", "TotalExercices", "TotalSubjects" },
+                columns: new[] { "Id", "Name", "TotalExercices", "TotalFields", "TotalSubjects" },
                 values: new object[,]
                 {
-                    { 1, "Polytechnic University of Timisoara", 0, 0 },
-                    { 2, "Vest University of Timisoara", 0, 0 },
-                    { 3, "Vest University of Timisoara", 0, 0 },
-                    { 4, "Standford University", 0, 0 },
-                    { 5, "Massachusetts Institute of Technology", 0, 0 }
+                    { 1, "Polytechnic University of Timisoara", 0, 0, 0 },
+                    { 2, "Vest University of Timisoara", 0, 0, 0 },
+                    { 3, "Standford University", 0, 0, 0 },
+                    { 5, "Polytechnic University of Bucharest", 0, 0, 0 },
+                    { 6, "Polytechnic University of Iasi", 0, 0, 0 },
+                    { 7, "Carol Davila University of Medicine", 0, 0, 0 },
+                    { 8, "University of Medicine and Pharmacy of Craiova", 0, 0, 0 },
+                    { 9, "Lucian Blaga University of Sibiu", 0, 0, 0 },
+                    { 10, "Massachusetts Institute of Technology", 0, 0, 0 }
+                });
+
+            migrationBuilder.InsertData(
+                table: "Users",
+                columns: new[] { "Id", "Email", "Password", "UserName" },
+                values: new object[,]
+                {
+                    { 1, "jhon.smith@student.upt.ro", "password", "johnny47" },
+                    { 2, "makhur.khena@student.upt.ro", "password", "makhur.khena" },
+                    { 3, "zaya.del@student.upt.ro", "password", "zayaTheBest" },
+                    { 4, "gerdi.ninkhafk@student.upt.ro", "password", "ninkhafk99" },
+                    { 5, "rhiannon.bovun@student.upt.ro", "password", "bovun2003" },
+                    { 6, "rol.khihrerl@student.upt.ro", "password", "khihrerl007" },
+                    { 7, "shepard.hanni@student.upt.ro", "password", "hanni_" },
+                    { 8, "buiron.tin@student.mit.us", "password", "tin77" },
+                    { 9, "rell.findazrum@student.lca.de", "password", "rell_findar1" },
+                    { 10, "xandra.tiang@student.upt.ro", "password", "alexandra" },
+                    { 11, "andrew.techel@student.upt.ro", "password", "andreeew" },
+                    { 12, "gustavo.del@student.upt.ro", "password", "gustavo412" }
                 });
 
             migrationBuilder.InsertData(
@@ -237,23 +287,48 @@ namespace EducareBE.Migrations
                     { 2, "Electronics and Telecomunication", 1 },
                     { 3, "Faculty Of Managemen And Transportation ", 1 },
                     { 4, "Faculty of Mechanical Engineerin", 1 },
-                    { 5, "Faculty of Finance and Banking", 2 }
+                    { 5, "Faculty of Finance and Banking", 1 },
+                    { 6, "Automation And Computers", 5 },
+                    { 7, "Electronics and Telecomunication", 5 },
+                    { 8, "Faculty Of Managemen And Transportation ", 5 },
+                    { 9, "Faculty of Mechanical Engineerin", 5 },
+                    { 10, "Faculty of Finance and Banking", 5 },
+                    { 11, "Automation And Computers", 6 },
+                    { 12, "Electronics and Telecomunication", 6 },
+                    { 13, "Faculty Of Management And Transportation ", 6 },
+                    { 14, "Faculty of Mechanical Engineerin", 6 },
+                    { 15, "Faculty of Finance and Banking", 6 },
+                    { 16, "Faculty Of Mathemathics", 2 },
+                    { 17, "Faculty of Biology", 2 },
+                    { 18, "Faculty Of Managemen And Transportation ", 2 },
+                    { 19, "Faculty of Mechanical Engineerin", 2 },
+                    { 20, "Faculty of Finance and Banking", 2 },
+                    { 21, "Faculty of General Medicine", 7 },
+                    { 22, "Faculty of Dental Medicine", 7 },
+                    { 23, "Faculty of Chirurgy", 7 }
                 });
 
             migrationBuilder.InsertData(
                 table: "Fields",
                 columns: new[] { "Id", "FacultyId", "Name" },
-                values: new object[] { 1, 1, "Informatics" });
-
-            migrationBuilder.InsertData(
-                table: "Fields",
-                columns: new[] { "Id", "FacultyId", "Name" },
-                values: new object[] { 2, 1, "Computers and Information Technology" });
-
-            migrationBuilder.InsertData(
-                table: "Fields",
-                columns: new[] { "Id", "FacultyId", "Name" },
-                values: new object[] { 3, 2, "Informatics" });
+                values: new object[,]
+                {
+                    { 1, 1, "Informatics" },
+                    { 2, 1, "Computers and Information Technology" },
+                    { 3, 1, "System Engineering" },
+                    { 4, 2, "Telecomunications" },
+                    { 5, 3, "Transporting Engineering" },
+                    { 6, 4, "Management Engineering" },
+                    { 7, 5, "Finance" },
+                    { 8, 5, "Bussiness" },
+                    { 9, 5, "Banking" },
+                    { 10, 1, "Informatics" },
+                    { 11, 1, "Computers and Information Technology" },
+                    { 12, 2, "Informatics" },
+                    { 13, 21, "General Medicine" },
+                    { 14, 22, "Dental Medicine" },
+                    { 15, 23, "Chirurgy" }
+                });
 
             migrationBuilder.InsertData(
                 table: "Courses",
@@ -268,34 +343,72 @@ namespace EducareBE.Migrations
             migrationBuilder.InsertData(
                 table: "Courses",
                 columns: new[] { "Id", "FieldId", "IsFavorite", "Name", "Year" },
-                values: new object[] { 3, 2, false, "TD", 4 });
+                values: new object[] { 3, 2, false, "PTDM", 4 });
+
+            migrationBuilder.InsertData(
+                table: "EnrolledCourses",
+                columns: new[] { "Id", "CourseId", "IsEnrolled", "IsFavoirte", "UserId" },
+                values: new object[,]
+                {
+                    { 1, 1, true, false, 1 },
+                    { 2, 2, true, false, 1 },
+                    { 3, 2, false, false, 1 }
+                });
 
             migrationBuilder.InsertData(
                 table: "Subjects",
                 columns: new[] { "Id", "CourseId", "Name" },
-                values: new object[] { 1, 1, "Objects and Classes" });
-
-            migrationBuilder.InsertData(
-                table: "Subjects",
-                columns: new[] { "Id", "CourseId", "Name" },
-                values: new object[] { 2, 1, "Polymorphism" });
-
-            migrationBuilder.InsertData(
-                table: "Subjects",
-                columns: new[] { "Id", "CourseId", "Name" },
-                values: new object[] { 3, 1, "Errors" });
+                values: new object[,]
+                {
+                    { 1, 1, "Objects and Classes" },
+                    { 2, 1, "Polymorphism" },
+                    { 3, 1, "Errors" },
+                    { 4, 2, "Sorting Algorims" },
+                    { 5, 2, "Advanced sorting algoritms" },
+                    { 6, 3, "The Oscilloscope" }
+                });
 
             migrationBuilder.InsertData(
                 table: "SubjectsAddedBy",
-                columns: new[] { "Id", "Name", "SubjectId" },
+                columns: new[] { "Id", "Name", "SubjectId", "UserId" },
                 values: new object[,]
                 {
-                    { 1, "Objects", 1 },
-                    { 2, "Classes", 1 },
-                    { 3, "ClassesMaterial", 1 },
-                    { 4, "Poly", 2 },
-                    { 5, "ErrorMaterial", 3 }
+                    { 1, "Definition", 1, 1 },
+                    { 2, "Lab Example", 1, 2 },
+                    { 3, "Coruse Example", 1, 1 },
+                    { 6, "Definition", 2, 2 },
+                    { 7, "Lab Example", 2, 2 },
+                    { 8, "Coruse Example", 2, 3 }
                 });
+
+            migrationBuilder.InsertData(
+                table: "Likes",
+                columns: new[] { "Id", "DislikesCount", "LikesCount", "SubjectAddedById", "UserId" },
+                values: new object[,]
+                {
+                    { 1, 0, 1, 1, 1 },
+                    { 2, 0, 1, 1, 2 },
+                    { 3, 0, 1, 1, 3 },
+                    { 4, 0, 1, 1, 4 },
+                    { 5, 0, 1, 1, 4 },
+                    { 6, 0, 1, 1, 5 },
+                    { 7, 0, 1, 1, 6 },
+                    { 8, 0, 1, 1, 7 },
+                    { 9, 0, 1, 1, 8 },
+                    { 10, 0, 1, 1, 10 },
+                    { 11, 0, 1, 1, 11 },
+                    { 12, 1, 0, 1, 12 },
+                    { 13, 0, 1, 2, 2 },
+                    { 14, 0, 1, 2, 3 },
+                    { 15, 0, 1, 2, 4 },
+                    { 16, 0, 0, 2, 5 },
+                    { 17, 0, 1, 2, 9 }
+                });
+
+            migrationBuilder.CreateIndex(
+                name: "IX_BlobContent_SubjectAddedById",
+                table: "BlobContent",
+                column: "SubjectAddedById");
 
             migrationBuilder.CreateIndex(
                 name: "IX_Courses_FieldId",
@@ -347,10 +460,18 @@ namespace EducareBE.Migrations
                 name: "IX_SubjectsAddedBy_SubjectId",
                 table: "SubjectsAddedBy",
                 column: "SubjectId");
+
+            migrationBuilder.CreateIndex(
+                name: "IX_SubjectsAddedBy_UserId",
+                table: "SubjectsAddedBy",
+                column: "UserId");
         }
 
         protected override void Down(MigrationBuilder migrationBuilder)
         {
+            migrationBuilder.DropTable(
+                name: "BlobContent");
+
             migrationBuilder.DropTable(
                 name: "EnrolledCourses");
 
@@ -364,10 +485,10 @@ namespace EducareBE.Migrations
                 name: "SubjectsAddedBy");
 
             migrationBuilder.DropTable(
-                name: "Users");
+                name: "Subjects");
 
             migrationBuilder.DropTable(
-                name: "Subjects");
+                name: "Users");
 
             migrationBuilder.DropTable(
                 name: "Courses");

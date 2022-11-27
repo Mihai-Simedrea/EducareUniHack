@@ -66,6 +66,8 @@ namespace EducareBE.Controllers
                 }
                 uni.TotalFields = totalFields;
                 uni.TotalSubjects = totalSubjects;
+                totalFields = 0;
+                totalSubjects = 0;
             }
 
             return Ok(_mapper.Map<List<GetUniversityViewModel>>(universities));

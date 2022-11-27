@@ -40,7 +40,8 @@ namespace EducareBE.Data
             modelBuilder.Entity<Like>()
                 .HasOne<User>(sc => sc.User)
                 .WithMany(s => s.Likes)
-                .HasForeignKey(sc => sc.UserId);
+                .HasForeignKey(sc => sc.UserId)
+                .OnDelete(DeleteBehavior.NoAction);
 
             modelBuilder.Entity<Like>()
                 .HasOne<SubjectAddedBy>(sc => sc.SubjectAddedBy)
@@ -91,11 +92,6 @@ namespace EducareBE.Data
                     Id = 3,
                     Name = "Standford University"
                 },
-                new University
-                {
-                    Id = 5,
-                    Name = "Massachusetts Institute of Technology"
-                },
                  new University
                  {
                 Id = 5,
@@ -120,7 +116,13 @@ namespace EducareBE.Data
                      {
                 Id = 9,
                     Name = "Lucian Blaga University of Sibiu"
-                     }
+                     },
+                     
+                new University
+                {
+                    Id = 10,
+                    Name = "Massachusetts Institute of Technology"
+                }
             );
         }
 
@@ -639,43 +641,36 @@ namespace EducareBE.Data
                 },
                 new Like
                 {
-                    Id = 4,
+                    Id = 5,
                     UserId = 4,
                     SubjectAddedById = 1,
                     LikesCount = 1,
                 },
                 new Like
                 {
-                    Id = 5,
+                    Id = 6,
                     UserId = 5,
                     SubjectAddedById = 1,
                     LikesCount = 1,
                 },
                 new Like
                 {
-                    Id = 6,
+                    Id = 7,
                     UserId = 6,
                     SubjectAddedById = 1,
                     LikesCount = 1,
                 },
                 new Like
                 {
-                    Id = 7,
+                    Id = 8,
                     UserId = 7,
                     SubjectAddedById = 1,
                     LikesCount = 1,
                 },
                 new Like
                 {
-                    Id = 8,
-                    UserId = 8,
-                    SubjectAddedById = 1,
-                    LikesCount = 1,
-                },
-                new Like
-                {
                     Id = 9,
-                    UserId = 9,
+                    UserId = 8,
                     SubjectAddedById = 1,
                     LikesCount = 1,
                 },
@@ -718,15 +713,22 @@ namespace EducareBE.Data
                 {
                     Id = 15,
                     UserId = 4,
-                    SubjectAddedById = 1,
+                    SubjectAddedById = 2,
                     LikesCount = 1,
                 },
                 new Like
                 {
                     Id = 16,
                     UserId = 5,
-                    SubjectAddedById = 1,
+                    SubjectAddedById = 2,
                     DislikesCount = 0
+                },
+                new Like
+                {
+                    Id = 17,
+                    UserId = 9,
+                    SubjectAddedById = 2,
+                    LikesCount = 1,
                 }
             );
             return; 
