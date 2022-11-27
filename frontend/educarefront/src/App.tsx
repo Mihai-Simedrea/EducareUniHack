@@ -10,6 +10,8 @@ import {SearchPage} from "./Pages/SearchPage";
 import PageWithField from './Pages/PageWithFields';
 import PageWithCourse from './Pages/PageWithCourses';
 import PageWithSpecilization from './Pages/PageWithSpecialization';
+import {Poo} from "./Pages/Poo";
+import {Blanks} from "./Components/Blanks";
 function App() {
   const [exerciseNumber, setExerciseNumber] = useState(0)
   return (
@@ -25,6 +27,10 @@ function App() {
       <Route path="/Field/:unid" element={<PageWithField/>}/>
       <Route path="/Degree/:did" element={<PageWithCourse/>}/>
       <Route path="/Specialization/:spid" element={<PageWithSpecilization/>}/>
+      <Route path="/Course" element={<Poo/>}/>
+      <Route path="/Blanks" element={<Blanks curs={"O ierarhie este o clasificare sau o ordonare a abstractiunilor. Programarea orientata pe obiecte este o metoda de implementare a programelor. In care acestea sunt organizate ca si colectii de obiecte care coopereaza ıntre ele. Fiecare obiect reprezentand instanta unei clase. Fiecare clasa fiind membra unei ierarhii de clase ce sunt unite prin relatii de mostenire."}/>}/>
+
+
     </Routes>
     
     </BrowserRouter>

@@ -20,49 +20,49 @@ export type HeartCard= {
 export const Home = () => {
     const fieldback=HandleFields();
     const universitybac=HandleUniversity();
-  //   const list:HeartCard[]=[{
-  //      courseAbbreviation:"POO",
-  //      universityName:"Universitate Politehnica Timisoara",
-  //      fieldName:"AC",
-  //      degreeAbbreviation:"CTI",
-  //      year:2,
-  //      isFavourite:true},
-  //      {
-  //      courseAbbreviation:"PCDD",
-  //      universityName:"Universitate Politehnica  Bucuresti",
-  //      fieldName:"AC",
-  //      degreeAbbreviation:"IS",
-  //      year:2,
-  //      isFavourite:true},
-  //      {
-  //      courseAbbreviation:"Inteligenta Artificiala",
-  //      universityName:"Universitate Tehnica Cluj",
-  //      fieldName:"AC",
-  //      degreeAbbreviation:"CTI",
-  //      year:3,
-  //      isFavourite:false},
-  //      {
-  //      courseAbbreviation:"POO",
-  //      universityName:"Universitate Politehnica Timisoara",
-  //      fieldName:"AC",
-  //      degreeAbbreviation:"CTI",
-  //      year:2,
-  //      isFavourite:true},
-  //      {
-  //      courseAbbreviation:"PCDD",
-  //      universityName:"Universitate Politehnica  Bucuresti",
-  //      fieldName:"AC",
-  //      degreeAbbreviation:"IS",
-  //      year:2,
-  //      isFavourite:true},
-  //      {
-  //      courseAbbreviation:"Inteligenta Artificiala",
-  //      universityName:"Universitate Tehnica Cluj",
-  //      fieldName:"AC",
-  //      degreeAbbreviation:"CTI",
-  //      year:3,
-  //      isFavourite:false},
-  // ];
+    const list:HeartCard[]=[{
+       courseAbbreviation:"POO",
+       universityName:"Universitate Politehnica Timisoara",
+       fieldName:"AC",
+       degreeAbbreviation:"CTI",
+       year:'2',
+       isFavourite:true},
+       {
+       courseAbbreviation:"PCDD",
+       universityName:"Universitate Politehnica  Bucuresti",
+       fieldName:"AC",
+       degreeAbbreviation:"IS",
+       year:'2',
+       isFavourite:true},
+       {
+       courseAbbreviation:"Inteligenta Artificiala",
+       universityName:"Universitate Tehnica Cluj",
+       fieldName:"AC",
+       degreeAbbreviation:"CTI",
+       year:'2',
+       isFavourite:false},
+       {
+       courseAbbreviation:"POO",
+       universityName:"Universitate Politehnica Timisoara",
+       fieldName:"AC",
+       degreeAbbreviation:"CTI",
+       year:'2',
+       isFavourite:true},
+       {
+       courseAbbreviation:"PCDD",
+       universityName:"Universitate Politehnica  Bucuresti",
+       fieldName:"AC",
+       degreeAbbreviation:"IS",
+       year:'2',
+       isFavourite:true},
+       {
+       courseAbbreviation:"Inteligenta Artificiala",
+       universityName:"Universitate Tehnica Cluj",
+       fieldName:"AC",
+       degreeAbbreviation:"CTI",
+       year:'2',
+       isFavourite:false},
+  ];
     const [searchList,setSearchList]=useState<HeartCard[]>()
     const [inputText, setInputText] = useState('');
     const local=useLocal();
@@ -70,16 +70,16 @@ export const Home = () => {
     const courseback=HandleCourses();
     // const [list,setList]=useState<HeartCard[]>();
     const handleChange=async()=>{
-    //   if(inputText==''){
-    //     setSearchList(list)
-    //   }
-    //   else{
-    //   const data=list.filter((e)=>{
-    //       return e.courseAbbreviation.includes(inputText)==true
-    //     })
-    //     setSearchList(data); }
-    //   // setList(resvalue);
-    // 
+      if(inputText==''){
+        setSearchList(list)
+      }
+      else{
+      const data=list.filter((e)=>{
+          return e.courseAbbreviation.includes(inputText)==true
+        })
+        setSearchList(data); }
+      // setList(resvalue);
+
     }
     useEffect(()=>{
 
@@ -99,6 +99,7 @@ export const Home = () => {
             year={e.year}
             isFavourite={e.isFavourite}
             fieldName={e.fieldName}
+            id={e.year}
             ></CourseCard>
 
 

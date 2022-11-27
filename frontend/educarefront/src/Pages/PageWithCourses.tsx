@@ -43,7 +43,9 @@ useEffect(()=>{
                         isFavourite={true}
                         degreeAbbreviation={e.fieldName}
                         fieldName={e.facultyName}
-                        year={e.year}/>
+                        year={e.year}
+                        id={e.id}
+                        />
 
                     ))
 

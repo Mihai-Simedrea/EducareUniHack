@@ -2,7 +2,7 @@ import {Box, Card, CardContent, Typography} from "@mui/material";
 import heartblack from '../Assets/images/heart-black.png'
 import heartred from '../Assets/images/heart-red.png'
 import {useEffect, useState} from "react";
-
+import {Link} from "react-router-dom"
 interface Props {
     courseAbbreviation: string;
     universityName: string;
@@ -10,11 +10,12 @@ interface Props {
     degreeAbbreviation: string;
     year: string;
     isFavourite: boolean;
+    id:string;
 }
 
 export function CourseCard(props: Props) {
 
-    const {courseAbbreviation, fieldName, universityName, year, degreeAbbreviation, isFavourite} = props;
+    const {courseAbbreviation, fieldName, universityName, year, degreeAbbreviation, isFavourite,id} = props;
     const styles = {
         container: {
             borderRadius: "30px",
@@ -49,7 +50,7 @@ export function CourseCard(props: Props) {
                     marginBottom: "12px",
                 }}>
                     <Typography sx={styles.textTitle}>
-                        {courseAbbreviation}
+                      <Link to={`/Course/:${id}`}  style={{textDecoration:'none',color:'black'}}>{courseAbbreviation}</Link>
                     </Typography>
 
                     {favourite ?

@@ -7,7 +7,9 @@
     <list default="true" id="716c660c-5dfc-4213-904e-f4f6a0d33a4b" name="Changes" comment="SearchPage WIP">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/frontend/educarefront/src/App.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/frontend/educarefront/src/App.tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/frontend/educarefront/src/Components/CourseHeader.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/frontend/educarefront/src/Components/CourseHeader.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/frontend/educarefront/src/Components/CourseCard.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/frontend/educarefront/src/Components/CourseCard.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/frontend/educarefront/src/Pages/Home.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/frontend/educarefront/src/Pages/Home.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/frontend/educarefront/src/Pages/PageWithCourses.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/frontend/educarefront/src/Pages/PageWithCourses.tsx" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
