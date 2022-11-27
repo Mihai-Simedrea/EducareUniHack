@@ -1,5 +1,7 @@
 import React, { useState } from 'react'
+import {Link} from "react-router-dom"
 import "./CardMaterials.css"
+import  {Button}  from "@mui/material"
 import {AiFillLike} from "react-icons/ai"
 import {AiFillDislike} from "react-icons/ai"
 interface Props{
@@ -23,7 +25,18 @@ export default function CardMaterials(props: Props) {
             <p>{date}</p>
         </div>
         <div className='card-material-buttons'>
-            <button className='btn-memoreaza'>Memoreaza</button>
+            
+        <Button
+              component = {Link}
+            variant="contained"
+            color="success"
+            sx={{ width: "30%" }}
+            type="submit"
+            to="../Blanks"
+          >
+              Submit
+          </Button>
+
             <div className='like-dis'>
                 <p>{likes}</p>
                 <h3 onClick={()=>{setLiked(!liked); if(disliked){setDisliked(false)}}}><AiFillLike color={liked?"#66bb6a":"#000000"} ></AiFillLike></h3>
