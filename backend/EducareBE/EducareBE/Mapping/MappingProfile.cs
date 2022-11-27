@@ -20,7 +20,7 @@ namespace EducareBE.Mapping
                 .ForMember(dest => dest.FacultyName, opts => opts.MapFrom(src => src.Field.Faculty.Name))
                 .ForMember(dest => dest.UniversityName, opts => opts.MapFrom(src => src.Field.Faculty.University.Name));
 
-            CreateMap<Subject, GetAllSubjectsViewModel>().ReverseMap();
+            CreateMap<Subject, GetAllSubjectsViewModel>();
             CreateMap<SubjectAddedBy, GetAllSubjectsAddedByViewModel>().ReverseMap();
         }
       
