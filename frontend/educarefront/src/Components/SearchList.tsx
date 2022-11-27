@@ -32,7 +32,7 @@ export function SearchList(props: Props) {
                         nrOfMaterialsUploaded={element.totalSubjects}
                         nrOfExercises={element.totalExercices}
                         nrOfFields={element.totalFields}
-                        isUniversity={searchBy === "University"}
+                        isUniversity={searchBy === "Field"}
                         id={element.id}
                     />
                 })
