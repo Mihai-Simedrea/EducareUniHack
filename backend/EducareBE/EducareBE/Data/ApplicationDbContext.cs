@@ -72,7 +72,7 @@ namespace EducareBE.Data
         public DbSet<EnrolledCourses> EnrolledCourses { get; set; }
         public DbSet<Like> Likes { get; set; }
         public DbSet<BlobContent> BlobContents { get; set; }
-        public DbSet<Exercise> Exercises { get; set; }  
+        // public DbSet<Exercise> Exercises { get; set; }  
 
 
         private void PopulateUniversity(ModelBuilder modelBuilder) 
@@ -459,42 +459,42 @@ namespace EducareBE.Data
                     Id = 1,
                     Name = "Definition",
                     SubjectId = 1,
-                    User = UserList[0],
+                    UserId = 1,
                 },
                 new SubjectAddedBy
                 {
                     Id = 2,
                     Name = "Lab Example",
                     SubjectId = 1,
-                    User = UserList[1],
+                    UserId = 2,
                 },
                 new SubjectAddedBy
                 {
                     Id = 3,
                     Name = "Coruse Example",
                     SubjectId = 1,
-                    User = UserList[0],
+                    UserId = 3,
                 },
                 new SubjectAddedBy
                 {
                     Id = 6,
                     Name = "Definition",
                     SubjectId = 2,
-                    User = UserList[1],
+                    UserId = 2,
                 },
                 new SubjectAddedBy
                 {
                     Id = 7,
                     Name = "Lab Example",
                     SubjectId = 2,
-                    User = UserList[1],
+                    UserId = 1,
                 },
                 new SubjectAddedBy
                 {
                     Id = 8,
                     Name = "Coruse Example",
                     SubjectId = 2,
-                    User = UserList[2],
+                    UserId = 3,
                 }
             );
         }
