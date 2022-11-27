@@ -13,24 +13,6 @@ import PageWithSpecilization from './Pages/PageWithSpecialization';
 function App() {
   const [exerciseNumber, setExerciseNumber] = useState(0)
   return (
-<<<<<<< Updated upstream
-
-     <BrowserRouter>
-     <Routes>
-       <Route path='/' element={<LogIn/>} />
-       <Route path='/register' element={<Register/>}/>
-       <Route path='/AccountData' element={<FillAcount/>}/>
-       <Route path="/Profile/:emailrouter" element={<Profile/>}/>
-       <Route path="/search" element={<SearchPage/>}></Route>
-       <Route path='/Home' element={<Home/>}/>
-       <Route path="/Profile/:uid" element={<Profile/>}/>
-       <Route path="/Field/:unid" element={<PageWithField/>}/>
-       <Route path="/Degree/:did" element={<></>}/>
-     </Routes>
-
-     </BrowserRouter>
-
-=======
     <BrowserRouter>
     <Routes>
       <Route path='/' element={<LogIn/>} />
@@ -46,8 +28,6 @@ function App() {
     </Routes>
     
     </BrowserRouter>
-    
->>>>>>> Stashed changes
   );
 }
 
