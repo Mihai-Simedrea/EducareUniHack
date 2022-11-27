@@ -1,7 +1,8 @@
+import HandleUniversity from "../endpoints/HandleUniversity";
+import {useEffect} from "react";
 import UniversityOrFieldCard from "./UniversityOrFieldCard";
 import {UniversityOrField} from "../Pages/SearchPage";
 import {Box} from "@mui/material";
-
 
 interface Props {
     searchedText: string;
@@ -27,17 +28,16 @@ export function SearchList(props: Props) {
                 list?.map((element, index) => {
                     //console.log(element.id)
                     return  <UniversityOrFieldCard
-                        key={index}
+                        key={element.id}
                         universityOrFieldName={element.name}
                         nrOfMaterialsUploaded={element.totalSubjects}
                         nrOfExercises={element.totalExercices}
-                        nrOfFields={element.totalFields}
-                        isUniversity={searchBy === "Field"}
+                        nrOfFields={element.totalExercices}
+                        isUniversity={true}
                         id={element.id}
                     />
                 })
             }
-            <Box sx={{marginTop:"142px"}}></Box>
 
         </Box>
     )

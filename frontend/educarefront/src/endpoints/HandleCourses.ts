@@ -30,7 +30,7 @@ const HandleCourses=()=>{
                     'Content-Type':'application/json'}
             })
         },
-        async GetCourseByUniversity(id:string){
+        async GetCourseByField(id:string| undefined){
             return await fetch(`https://educare-hackathon.azurewebsites.net/api/Course/${id}`,{
                 method:"GET",
                 headers:{
