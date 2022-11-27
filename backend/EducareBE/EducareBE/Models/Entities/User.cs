@@ -14,6 +14,7 @@
 
         // one to many
         public List<SubjectAddedBy>? SubjectsAddedBy { get; set; }
+        public List<Exercise>? Exercises { get; set; }
 
         // many to many
         public ICollection<EnrolledCourses>? EnrolledCourses { get; set; }
