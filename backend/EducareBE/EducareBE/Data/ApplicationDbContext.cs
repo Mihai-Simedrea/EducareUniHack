@@ -52,12 +52,11 @@ namespace EducareBE.Data
             PopulateFields(modelBuilder);
             PopulateCourses(modelBuilder);
             PopulateSubjects (modelBuilder);
-           // PopulateSubjectsAddedBy(modelBuilder);
+            PopulateSubjectsAddedBy(modelBuilder);
 
-            //PopulateUsers(modelBuilder);
-           // PopulateEnroledCourses(modelBuilder);
-           // PopulateFavoriteCourses(modelBuilder);
-            //PopulateLikes(modelBuilder);
+            PopulateUsers(modelBuilder);
+            PopulateEnroledCourses(modelBuilder);
+            PopulateLikes(modelBuilder);
 
         }
 
@@ -446,30 +445,291 @@ namespace EducareBE.Data
                 new User
                 {
                     Id = 1,
-                    Email = "florin.mischie@student.upt.ro",
+                    Email = "jhon.smith@student.upt.ro",
                     Password = "password",
-                    UserName = "Aleksandru"
+                    UserName = "johnny47"
                 },
                 new User
                 {
                     Id = 2,
-                    Email = "test@student.upt.ro",
+                    Email = "makhur.khena@student.upt.ro",
                     Password = "password",
-                    UserName = "Aleksandru"
+                    UserName = "makhur.khena"
                 },
                 new User
                 {
                     Id = 3,
-                    Email = "test2@student.upt.ro",
+                    Email = "zaya.del@student.upt.ro",
                     Password = "password",
-                    UserName = "Aleksandru"
+                    UserName = "zayaTheBest"
+                },
+                new User
+                {
+                    Id = 4,
+                    Email = "gerdi.ninkhafk@student.upt.ro",
+                    Password = "password",
+                    UserName = "ninkhafk99"
+                },
+                new User
+                {
+                    Id = 5,
+                    Email = "rhiannon.bovun@student.upt.ro",
+                    Password = "password",
+                    UserName = "bovun2003"
+                },
+                new User
+                {
+                    Id = 6,
+                    Email = "rol.khihrerl@student.upt.ro",
+                    Password = "password",
+                    UserName = "khihrerl007"
+                },
+                 new User
+                 {
+                     Id = 7,
+                     Email = "shepard.hanni@student.upt.ro",
+                     Password = "password",
+                     UserName = "hanni_"
+                 },
+                new User
+                {
+                    Id = 8,
+                    Email = "buiron.tin@student.mit.us",
+                    Password = "password",
+                    UserName = "tin77"
+                },
+                new User
+                {
+                    Id = 9,
+                    Email = "rell.findazrum@student.lca.de",
+                    Password = "password",
+                    UserName = "rell_findar1"
+                },
+                new User
+                {
+                    Id = 10,
+                    Email = "xandra.tiang@student.upt.ro",
+                    Password = "password",
+                    UserName = "alexandra"
+                },
+                new User
+                {
+                    Id = 11,
+                    Email = "andrew.techel@student.upt.ro",
+                    Password = "password",
+                    UserName = "andreeew"
+                },
+                new User
+                {
+                    Id = 12,
+                    Email = "gustavo.del@student.upt.ro",
+                    Password = "password",
+                    UserName = "gustavo412"
                 }
             );
-
         }
 
-        private void PopulateEnroledCourses(ModelBuilder modelBuilder) { return;  }
-        private void PopulateFavoriteCourses(ModelBuilder modelBuilder) { return; }
-        private void PopulateLikes(ModelBuilder modelBuilder) { return; }
+        private void PopulateSubjectsAddedBy(ModelBuilder modelBuilder)
+        {
+            modelBuilder.Entity<SubjectAddedBy>()
+            .HasData(
+                new SubjectAddedBy
+                {
+                    Id = 1,
+                    Name = "Definition",
+                    SubjectId = 1,
+                    UserId = 1
+                },
+                new SubjectAddedBy
+                {
+                    Id = 2,
+                    Name = "Lab Example",
+                    SubjectId = 1,
+                    UserId = 2
+                },
+                new SubjectAddedBy
+                {
+                    Id = 3,
+                    Name = "Coruse Example",
+                    SubjectId = 1,
+                    UserId = 1
+                },
+                new SubjectAddedBy
+                {
+                    Id = 6,
+                    Name = "Definition",
+                    SubjectId = 2,
+                    UserId = 2
+                },
+                new SubjectAddedBy
+                {
+                    Id = 7,
+                    Name = "Lab Example",
+                    SubjectId = 2,
+                    UserId = 2
+                },
+                new SubjectAddedBy
+                {
+                    Id = 8,
+                    Name = "Coruse Example",
+                    SubjectId = 2,
+                    UserId = 3
+                }
+            );
+        }
+
+        private void PopulateEnroledCourses(ModelBuilder modelBuilder) {
+            modelBuilder.Entity<EnrolledCourses>()
+           .HasData(
+                new EnrolledCourses
+                {
+                    Id = 1,
+                    CourseId = 1,
+                    UserId = 1,
+                    IsEnrolled = true,
+                },
+                new EnrolledCourses
+                {
+                    Id = 2,
+                    CourseId = 2,
+                    UserId = 1,
+                    IsEnrolled = true,
+                },
+                new EnrolledCourses
+                {
+                    Id = 3,
+                    CourseId = 2,
+                    UserId = 1,
+                    IsFavoirte = false
+                }
+            );
+            return;  
+        }
+        private void PopulateLikes(ModelBuilder modelBuilder)
+        {
+            modelBuilder.Entity<Like>()
+            .HasData( 
+                new Like
+                {
+                    Id = 1,
+                    UserId= 1,
+                    SubjectAddedById = 1,
+                    LikesCount = 1,
+                },
+                new Like
+                {
+                    Id = 2,
+                    UserId = 2,
+                    SubjectAddedById = 1,
+                    LikesCount = 1,
+                },
+                new Like
+                {
+                    Id = 3,
+                    UserId = 3,
+                    SubjectAddedById = 1,
+                    LikesCount = 1,
+                },
+                new Like
+                {
+                    Id = 4,
+                    UserId = 4,
+                    SubjectAddedById = 1,
+                    LikesCount = 1,
+                },
+                new Like
+                {
+                    Id = 4,
+                    UserId = 4,
+                    SubjectAddedById = 1,
+                    LikesCount = 1,
+                },
+                new Like
+                {
+                    Id = 5,
+                    UserId = 5,
+                    SubjectAddedById = 1,
+                    LikesCount = 1,
+                },
+                new Like
+                {
+                    Id = 6,
+                    UserId = 6,
+                    SubjectAddedById = 1,
+                    LikesCount = 1,
+                },
+                new Like
+                {
+                    Id = 7,
+                    UserId = 7,
+                    SubjectAddedById = 1,
+                    LikesCount = 1,
+                },
+                new Like
+                {
+                    Id = 8,
+                    UserId = 8,
+                    SubjectAddedById = 1,
+                    LikesCount = 1,
+                },
+                new Like
+                {
+                    Id = 9,
+                    UserId = 9,
+                    SubjectAddedById = 1,
+                    LikesCount = 1,
+                },
+                new Like
+                {
+                    Id = 10,
+                    UserId = 10,
+                    SubjectAddedById = 1,
+                    LikesCount = 1,
+                },
+                new Like
+                {
+                    Id = 11,
+                    UserId = 11,
+                    SubjectAddedById = 1,
+                    LikesCount = 1,
+                },
+                new Like
+                {
+                    Id = 12,
+                    UserId = 12,
+                    SubjectAddedById = 1,
+                    DislikesCount = 1
+                },
+                new Like
+                {
+                    Id = 13,
+                    UserId = 2,
+                    SubjectAddedById = 2,
+                    LikesCount = 1,
+                },
+                new Like
+                {
+                    Id = 14,
+                    UserId = 3,
+                    SubjectAddedById = 2,
+                    LikesCount = 1,
+                },
+                new Like
+                {
+                    Id = 15,
+                    UserId = 4,
+                    SubjectAddedById = 1,
+                    LikesCount = 1,
+                },
+                new Like
+                {
+                    Id = 16,
+                    UserId = 5,
+                    SubjectAddedById = 1,
+                    DislikesCount = 0
+                }
+            );
+            return; 
+        }
     }
 }

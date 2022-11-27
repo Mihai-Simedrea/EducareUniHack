@@ -12,6 +12,9 @@
         //public int? FacultyId { get; set; }     
         // public int? FiledId { get; set; } 
 
+        // one to many
+        public List<SubjectAddedBy>? SubjectsAddedBy { get; set; }
+
         // many to many
         public ICollection<EnrolledCourses>? EnrolledCourses { get; set; }
         public ICollection<Like>? Likes { get; set; }
