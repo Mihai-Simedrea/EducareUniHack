@@ -9,6 +9,7 @@ using static System.Reflection.Metadata.BlobBuilder;
 using EducareBE.Models.Entities;
 using AutoMapper;
 using EducareBE.Data;
+using Microsoft.EntityFrameworkCore;
 
 namespace EducareBE.Controllers
 {
@@ -45,6 +46,15 @@ namespace EducareBE.Controllers
             await _dbContext.BlobContents.AddAsync(file);
             await _dbContext.SaveChangesAsync();
             return Ok(file);
+        }
+
+        [HttpGet("get-pdf-file-by-subject-id/{subjectAddedById}")]
+        public async Task<IActionResult> GetAllPdfOfSubjectAddedBy(int subjectAddedById)
+        {
+            var container = new BlobContainerClient(blobStorageConnectionString, blobStorageContainerName);
+            var pdf = await _dbContext.BlobContents.Where(x => x.SubjectAddedById == subjectAddedById).FirstOrDefaultAsync();
+            var blobClient = container.GetBlobClient(pdf.Content);
+            return Ok(await blobClient.OpenReadAsync());
         }
 
         [HttpPost("upload-pdf-file/{path}")]

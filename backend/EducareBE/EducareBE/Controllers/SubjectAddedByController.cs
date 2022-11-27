@@ -31,11 +31,11 @@ namespace EducareBE.Controllers
             return Ok(_mapper.Map<List<GetAllSubjectsAddedByViewModel>>(subjectsAddedBy));
         }
 
-        [HttpPost("add-subject-added-by/{id}")]
-        public async Task<IActionResult> AddAllSubjectsAddedBy(int id, string subjectsAddedByName)
+        [HttpPost("{userId}/add-subject-added-by/{materialName}/for/{subjectId}")]
+        public async Task<IActionResult> AddAllSubjectsAddedBy(int userId, string materialName, int subjectId)
         {
             var itExists = await _dbContext.SubjectsAddedBy
-                .AnyAsync(x => x.Name == subjectsAddedByName && x.SubjectId == id);
+                .AnyAsync(x => x.Name == materialName && x.SubjectId == subjectId);
             if (itExists)
             {
                 return Ok(false);
@@ -43,8 +43,9 @@ namespace EducareBE.Controllers
 
             var subjectAddedBy = new SubjectAddedBy
             {
-                SubjectId = id,
-                Name = subjectsAddedByName,
+                UserId = userId,
+                SubjectId = subjectId,
+                Name = materialName,
             };
 
             await _dbContext.SubjectsAddedBy.AddAsync(subjectAddedBy);
