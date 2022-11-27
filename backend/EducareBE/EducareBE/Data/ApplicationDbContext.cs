@@ -48,8 +48,6 @@ namespace EducareBE.Data
                 .WithMany(s => s.Likes)
                 .HasForeignKey(sc => sc.SubjectAddedById);
 
-
-
             PopulateUniversity(modelBuilder);
             PopulateFaculty(modelBuilder);
             PopulateFields(modelBuilder);

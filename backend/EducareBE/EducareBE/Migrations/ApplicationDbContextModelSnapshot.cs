@@ -22,6 +22,28 @@ namespace EducareBE.Migrations
 
             SqlServerModelBuilderExtensions.UseIdentityColumns(modelBuilder, 1L, 1);
 
+            modelBuilder.Entity("EducareBE.Models.Entities.BlobContent", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int");
+
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"), 1L, 1);
+
+                    b.Property<string>("Content")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<int>("SubjectAddedById")
+                        .HasColumnType("int");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("SubjectAddedById");
+
+                    b.ToTable("BlobContent");
+                });
+
             modelBuilder.Entity("EducareBE.Models.Entities.Course", b =>
                 {
                     b.Property<int>("Id")
@@ -956,6 +978,17 @@ namespace EducareBE.Migrations
                         });
                 });
 
+            modelBuilder.Entity("EducareBE.Models.Entities.BlobContent", b =>
+                {
+                    b.HasOne("EducareBE.Models.Entities.SubjectAddedBy", "SubjectAddedBy")
+                        .WithMany("Blobs")
+                        .HasForeignKey("SubjectAddedById")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.Navigation("SubjectAddedBy");
+                });
+
             modelBuilder.Entity("EducareBE.Models.Entities.Course", b =>
                 {
                     b.HasOne("EducareBE.Models.Entities.Field", "Field")
@@ -1082,6 +1115,8 @@ namespace EducareBE.Migrations
 
             modelBuilder.Entity("EducareBE.Models.Entities.SubjectAddedBy", b =>
                 {
+                    b.Navigation("Blobs");
+
                     b.Navigation("Likes");
                 });
 

@@ -197,6 +197,26 @@ namespace EducareBE.Migrations
                 });
 
             migrationBuilder.CreateTable(
+                name: "BlobContent",
+                columns: table => new
+                {
+                    Id = table.Column<int>(type: "int", nullable: false)
+                        .Annotation("SqlServer:Identity", "1, 1"),
+                    SubjectAddedById = table.Column<int>(type: "int", nullable: false),
+                    Content = table.Column<string>(type: "nvarchar(max)", nullable: false)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_BlobContent", x => x.Id);
+                    table.ForeignKey(
+                        name: "FK_BlobContent_SubjectsAddedBy_SubjectAddedById",
+                        column: x => x.SubjectAddedById,
+                        principalTable: "SubjectsAddedBy",
+                        principalColumn: "Id",
+                        onDelete: ReferentialAction.Cascade);
+                });
+
+            migrationBuilder.CreateTable(
                 name: "Likes",
                 columns: table => new
                 {
@@ -386,6 +406,11 @@ namespace EducareBE.Migrations
                 });
 
             migrationBuilder.CreateIndex(
+                name: "IX_BlobContent_SubjectAddedById",
+                table: "BlobContent",
+                column: "SubjectAddedById");
+
+            migrationBuilder.CreateIndex(
                 name: "IX_Courses_FieldId",
                 table: "Courses",
                 column: "FieldId");
@@ -444,6 +469,9 @@ namespace EducareBE.Migrations
 
         protected override void Down(MigrationBuilder migrationBuilder)
         {
+            migrationBuilder.DropTable(
+                name: "BlobContent");
+
             migrationBuilder.DropTable(
                 name: "EnrolledCourses");
 
