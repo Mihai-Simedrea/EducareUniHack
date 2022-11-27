@@ -15,7 +15,7 @@ type Course={
     facultyName:string;
     fieldName:string;
 }
-const PageWithFields=()=>{
+const PageWithCourse=()=>{
 const {did}=useParams();
 const coursesback=HandleCourses();
 const [list,setList]=useState<Course[]>();
@@ -23,23 +23,24 @@ const [inputText,setInputText]=useState<string>('');
 const getdata=async()=>{
 const res=await coursesback.GetCourseByField(did);
 const resdata=await res.json();
+console.log(resdata);
  setList(resdata);
+
 }
 useEffect(()=>{
-    getdata();})
-
+    getdata();},[])
     return(
          <div>
          <SearchBar searchBy={"Field"} searchedText={inputText} setSearchedText={setInputText}></SearchBar>
-         
          <Box>
               <Box sx={{width:'350px',height:"100%",display:"flex",flexDirection:'column',justifyContent:'flex-start',alignItems:'center',marginTop:'150px',gap:'20px'}}>
                 {
                     list?.map((e)=>(
                         <CourseCard
+                        key={e.name}
                         courseAbbreviation={e.name}
                         universityName={e.universityName}
-                        isFavourite={false}
+                        isFavourite={true}
                         degreeAbbreviation={e.fieldName}
                         fieldName={e.facultyName}
                         year={e.year}/>
@@ -66,4 +67,4 @@ useEffect(()=>{
 
 }
 
- export default PageWithFields;
+ export default PageWithCourse;

@@ -38,7 +38,7 @@ export default function UniversityOrFieldCard(props: Props) {
                     {isUniversity ?
                         <Link to={`/Field/${id}`}
                               style={{textDecoration: "none", color: "black"}}> {universityOrFieldName}</Link>
-                        : <Link to={`/Degree/${id}`}
+                        : <Link to={`/Specialization/${id}`}
                                 style={{textDecoration: "none", color: "black"}}> {universityOrFieldName}</Link>
                     }
 
