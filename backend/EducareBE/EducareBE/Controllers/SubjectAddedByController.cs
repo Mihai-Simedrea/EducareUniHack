@@ -4,6 +4,7 @@ using EducareBE.Models.Entities;
 using EducareBE.Models.ViewModels;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
+using System.Drawing.Drawing2D;
 
 namespace EducareBE.Controllers
 {
@@ -28,7 +29,18 @@ namespace EducareBE.Controllers
                 .Include(x => x.Subject)
                 .Where(x => x.SubjectId == id)
                 .ToListAsync();
-            return Ok(_mapper.Map<List<GetAllSubjectsAddedByViewModel>>(subjectsAddedBy));
+
+            var subjectsAddedByViewModel = _mapper.Map<List<GetAllSubjectsAddedByViewModel>>(subjectsAddedBy);
+            foreach (var subject in subjectsAddedByViewModel)
+            {
+                subject.AddedByName = await _dbContext
+                    .Users
+                    .Where(x => x.Id == subject.UserId)
+                    .Select(x => x.UserName)
+                    .FirstOrDefaultAsync();
+            }
+                   
+            return Ok(subjectsAddedByViewModel);
         }
 
         [HttpPost("{userId}/add-subject-added-by/{materialName}/for/{subjectId}")]

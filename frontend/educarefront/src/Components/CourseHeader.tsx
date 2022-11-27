@@ -1,7 +1,7 @@
 import {Box, Button, Typography} from "@mui/material";
 import {useEffect, useState} from "react";
-import heartred from "../Assets/Images/heart-red.png";
-import heartblack from "../Assets/Images/heart-black.png";
+import heartred from "../Assets/images/heart-red.png";
+import heartblack from "../Assets/images/heart-black.png";
 
 interface Props {
     courseAbbreviation: string;
@@ -19,6 +19,7 @@ export function CourseHeader(props: Props) {
                 borderBottomRightRadius: "20px",
                 borderBottomLeftRadius: "20px",
                 //backgroundColor: "violet",
+                width: "100vw",
 
             },
             container: {

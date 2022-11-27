@@ -32,12 +32,13 @@ namespace EducareBE.Controllers
         public async Task<IActionResult> GetAllUniversitiesByName(string universityName)
         {
             var universities =
-                await _dbContext.Universities.Include(x => x.Faculties).ThenInclude(x => x.Fields).ThenInclude(x => x.Courses).ThenInclude(x => x.Subjects)
+                await _dbContext.Universities.Include(x => x.Faculties).ThenInclude(x => x.Fields).ThenInclude(x => x.Courses).ThenInclude(x => x.Subjects).ThenInclude(x => x.Exercises)
                 .Where(x => x.Name.Contains(universityName))
                 .ToListAsync();
 
             int totalFields = 0;
             int totalSubjects = 0;
+            int totalExercises = 0;
             foreach (var uni in universities)
             {
                 uni.TotalExercices = -1;
@@ -57,7 +58,20 @@ namespace EducareBE.Controllers
                                         if (course.Subjects != null)
                                         {
                                             totalSubjects += course.Subjects.Count;
+                                            foreach (var subject in course.Subjects)
+                                            {
+                                                if (subject.SubjectsAddedBy != null)
+                                                {
+                                                    totalSubjects += subject.SubjectsAddedBy.Count;
+                                                }
+
+                                                if (subject.Exercises != null)
+                                                {
+                                                    totalExercises += subject.Exercises.Count;
+                                                }
+                                            }
                                         }
+                                        
                                     }
                                 }
                             }
@@ -66,8 +80,10 @@ namespace EducareBE.Controllers
                 }
                 uni.TotalFields = totalFields;
                 uni.TotalSubjects = totalSubjects;
+                uni.TotalExercices = totalExercises;
                 totalFields = 0;
                 totalSubjects = 0;
+                totalExercises = 0;
             }
 
             return Ok(_mapper.Map<List<GetUniversityViewModel>>(universities));
