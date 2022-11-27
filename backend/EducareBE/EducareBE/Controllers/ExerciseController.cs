@@ -7,6 +7,7 @@ using Microsoft.EntityFrameworkCore;
 
 namespace EducareBE.Controllers
 {
+    /*
     [ApiController]
     [Route("api/[controller]")]
     public class ExerciseController: Controller
@@ -54,4 +55,5 @@ namespace EducareBE.Controllers
         }
 
     }
+    */
 }

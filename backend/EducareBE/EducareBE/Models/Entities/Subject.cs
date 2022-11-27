@@ -9,6 +9,6 @@
         public Course? Course{ get; set; }
 
         public List<SubjectAddedBy>? SubjectsAddedBy { get; set; }
-        public List<Exercise>? Exercises { get; set; }
+        // public List<Exercise>? Exercises { get; set; }
     }
 }
