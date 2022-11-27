@@ -25,8 +25,12 @@ namespace EducareBE.Controllers
         public async Task<IActionResult> GetAllCourses(int id)
         {
             var courses = await _dbContext.Courses
+                .Include(x => x.Field)
+                .ThenInclude(x => x.Faculty)
+                .ThenInclude(x => x.University)
                 .Where(x => x.FieldId == id)
                 .ToListAsync();
+
             return Ok(_mapper.Map<List<GetCourseViewModel>>(courses));
         }
 

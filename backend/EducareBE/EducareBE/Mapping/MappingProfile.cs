@@ -16,7 +16,10 @@ namespace EducareBE.Mapping
 
             CreateMap<University, GetUniversityViewModel>().ReverseMap();
             CreateMap<Field, GetFieldsViewModel>().ReverseMap();
-            CreateMap<Course, GetCourseViewModel>().ReverseMap();
+            CreateMap<Course, GetCourseViewModel>()
+                .ForMember(dest => dest.FacultyName, opts => opts.MapFrom(src => src.Field.Faculty.Name))
+                .ForMember(dest => dest.UniversityName, opts => opts.MapFrom(src => src.Field.Faculty.University.Name));
+
             CreateMap<Subject, GetAllSubjectsViewModel>().ReverseMap();
             CreateMap<SubjectAddedBy, GetAllSubjectsAddedByViewModel>().ReverseMap();
         }

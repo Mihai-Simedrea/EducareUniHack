@@ -152,7 +152,7 @@ namespace EducareBE.Data
                 new Faculty
                 {
                     Id = 4,
-                    Name = "Faculty of Mechanical Engineerin",
+                    Name = "Faculty of Mechanical Engineering",
                     UniversityId = 1
                 },
                 new Faculty
