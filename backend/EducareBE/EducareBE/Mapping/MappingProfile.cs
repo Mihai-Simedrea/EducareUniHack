@@ -22,7 +22,7 @@ namespace EducareBE.Mapping
 
             CreateMap<Subject, GetAllSubjectsViewModel>();
             CreateMap<SubjectAddedBy, GetAllSubjectsAddedByViewModel>()
-                .ForMember(dest => dest.AddedByName, opts => opts.MapFrom(src => src.User.UserName) ;
+                .ForMember(dest => dest.AddedByName, opts => opts.MapFrom(src => src.User.UserName));
         }
       
     }
