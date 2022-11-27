@@ -21,7 +21,8 @@ namespace EducareBE.Mapping
                 .ForMember(dest => dest.UniversityName, opts => opts.MapFrom(src => src.Field.Faculty.University.Name));
 
             CreateMap<Subject, GetAllSubjectsViewModel>();
-            CreateMap<SubjectAddedBy, GetAllSubjectsAddedByViewModel>().ReverseMap();
+            CreateMap<SubjectAddedBy, GetAllSubjectsAddedByViewModel>()
+                .ForMember(dest => dest.AddedByName, opts => opts.MapFrom(src => src.User.UserName));
         }
       
     }
