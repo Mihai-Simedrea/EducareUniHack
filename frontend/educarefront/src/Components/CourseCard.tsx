@@ -50,7 +50,7 @@ export function CourseCard(props: Props) {
                     marginBottom: "12px",
                 }}>
                     <Typography sx={styles.textTitle}>
-                      <Link to={`/Course/:${id}`}  style={{textDecoration:'none',color:'black'}}>{courseAbbreviation}</Link>
+                      <Link to={`/Course`}  style={{textDecoration:'none',color:'black'}}>{courseAbbreviation}</Link>
                     </Typography>
 
                     {favourite ?
