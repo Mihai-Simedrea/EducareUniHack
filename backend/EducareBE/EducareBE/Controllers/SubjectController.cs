@@ -4,6 +4,7 @@ using EducareBE.Models.Entities;
 using EducareBE.Models.ViewModels;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
+using System.ComponentModel;
 
 namespace EducareBE.Controllers
 {
@@ -27,6 +28,13 @@ namespace EducareBE.Controllers
                 .Include(x => x.Course)
                 .Where(x => x.CourseId == id)
                 .ToListAsync();
+
+            var subjectsViewModel = _mapper.Map<List<GetAllSubjectsViewModel>>(subjects);
+            foreach (var subject in subjectsViewModel)
+            {
+                subject.Materials = await _dbContext.SubjectsAddedBy.CountAsync(x => x.Id == subject.Id);
+            }
+
             return Ok(_mapper.Map<List<GetAllSubjectsViewModel>>(subjects));
         }
 
