@@ -8,7 +8,7 @@ interface Props{
   icon:number
 }
 export default function LabelBottomNavigation(props: Props) {
-  const {icon} = props
+  const {icon} = props;
   return (
     <div className='navbar'>
       <h1><HiHome color={icon === 1 ? "#66bb6a":"#070707"}></HiHome></h1>

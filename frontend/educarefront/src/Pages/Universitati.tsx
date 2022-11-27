@@ -6,16 +6,7 @@ import { ApiClient } from '../api';
 const Universitati = () => {
     const userback=new ApiClient();
     const [inputText, setInputText] = useState('');
-    const handleGetUni=async()=>{
-        const obj=await userback.universityGet()
-
-    }
-    useEffect(()=>{
-  
-        
-
-
-    },[inputText])
+    
   return (
     <div>
         <SearchBar searchedText={inputText} setSearchedText={setInputText}></SearchBar>
