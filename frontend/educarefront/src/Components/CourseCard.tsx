@@ -8,7 +8,7 @@ interface Props {
     universityName: string;
     fieldName: string;
     degreeAbbreviation: string;
-    year: number;
+    year: string;
     isFavourite: boolean;
 }
 

@@ -11,7 +11,7 @@ const HandleUniversity = () => {
         }
       );
     },
-    async GetUniversityById(id:string){
+    async GetUniversityById(id:string|undefined){
         return await fetch(  `https://educare-hackathon.azurewebsites.net/api/University/${id}`,{
             method:"GET",
             headers:{
