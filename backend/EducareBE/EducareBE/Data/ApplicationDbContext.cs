@@ -48,6 +48,7 @@ namespace EducareBE.Data
                 .WithMany(s => s.Likes)
                 .HasForeignKey(sc => sc.SubjectAddedById);
 
+
             PopulateUniversity(modelBuilder);
             PopulateFaculty(modelBuilder);
             PopulateFields(modelBuilder);
@@ -459,7 +460,7 @@ namespace EducareBE.Data
                     Id = 1,
                     Name = "Definition",
                     SubjectId = 1,
-                    UserId = 1,
+                    UserId = 1
                 },
                 new SubjectAddedBy
                 {
@@ -668,7 +669,7 @@ namespace EducareBE.Data
                     Id = 2,
                     Email = "makhur.khena@student.upt.ro",
                     Password = "password",
-                    UserName = "makhur.khena"
+                    UserName = "makhur123"
                 },
                 new User
                 {
