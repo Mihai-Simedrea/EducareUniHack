@@ -9,7 +9,7 @@
         
 
         public string UniversityName { get; set; }  
-        public string FieldUniversity { get; set; }  
+        public string FacultyName { get; set; }  
         public string FieldName { get; set;  }
 
     }
