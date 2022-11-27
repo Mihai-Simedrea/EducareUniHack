@@ -1,6 +1,6 @@
 import {Box, Card, CardContent, Typography} from "@mui/material";
-import heartblack from '../Assets/Images/heart-black.png'
-import heartred from '../Assets/Images/heart-red.png'
+import heartblack from '../Assets/images/heart-black.png'
+import heartred from '../Assets/images/heart-red.png'
 import {useEffect, useState} from "react";
 
 interface Props {
@@ -9,12 +9,12 @@ interface Props {
     fieldName: string;
     degreeAbbreviation: string;
     year: number;
-    onHeartPress: () => void;
     isFavourite: boolean;
 }
 
 export function CourseCard(props: Props) {
-    const {courseAbbreviation, fieldName, universityName, year, degreeAbbreviation, onHeartPress, isFavourite} = props;
+
+    const {courseAbbreviation, fieldName, universityName, year, degreeAbbreviation, isFavourite} = props;
     const styles = {
         container: {
             borderRadius: "30px",
@@ -36,11 +36,7 @@ export function CourseCard(props: Props) {
     let [click, setClick] = useState(0);
     const [favourite, setFavourite] = useState(isFavourite);
 
-    useEffect(() => {
-        if (click != 0) {
-            onHeartPress()
-        }
-    }, [favourite]);
+
 
     return (
         <Card sx={styles.container}>

@@ -36,6 +36,8 @@ namespace EducareBE.Controllers
                 .Where(x => x.Name.Contains(universityName))
                 .ToListAsync();
 
+            int totalFields = 0;
+            int totalSubjects = 0;
             foreach (var uni in universities)
             {
                 uni.TotalExercices = -1;
@@ -45,6 +47,7 @@ namespace EducareBE.Controllers
                     {
                         if (faculty.Fields != null)
                         {
+                            totalFields += faculty.Fields.Count;
                             foreach (var fields in faculty.Fields)
                             {
                                 if (fields.Courses != null)
@@ -53,7 +56,7 @@ namespace EducareBE.Controllers
                                     {
                                         if (course.Subjects != null)
                                         {
-                                            uni.TotalSubjects = course.Subjects.Count;
+                                            totalSubjects += course.Subjects.Count;
                                         }
                                     }
                                 }
@@ -61,6 +64,10 @@ namespace EducareBE.Controllers
                         }
                     }
                 }
+                uni.TotalFields = totalFields;
+                uni.TotalSubjects = totalSubjects;
+                totalFields = 0;
+                totalSubjects = 0;
             }
 
             return Ok(_mapper.Map<List<GetUniversityViewModel>>(universities));
