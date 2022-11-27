@@ -278,7 +278,7 @@ useEffect(()=>{
             color="success"
             sx={{ width: "30%" }}
             type="submit"
-            to="/search"
+            to="/Home"
           >
               Submit
           </Button>
