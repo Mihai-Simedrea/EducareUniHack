@@ -71,6 +71,7 @@ namespace EducareBE.Data
         public DbSet<Profile> Profiles { get; set; }
         public DbSet<EnrolledCourses> EnrolledCourses { get; set; }
         public DbSet<Like> Likes { get; set; }
+        public DbSet<BlobContent> BlobContents { get; set; }
 
 
         private void PopulateUniversity(ModelBuilder modelBuilder) 
