@@ -446,90 +446,7 @@ namespace EducareBE.Data
         {
             modelBuilder.Entity<User>()
             .HasData(
-                new User
-                {
-                    Id = 1,
-                    Email = "jhon.smith@student.upt.ro",
-                    Password = "password",
-                    UserName = "johnny47"
-                },
-                new User
-                {
-                    Id = 2,
-                    Email = "makhur.khena@student.upt.ro",
-                    Password = "password",
-                    UserName = "makhur.khena"
-                },
-                new User
-                {
-                    Id = 3,
-                    Email = "zaya.del@student.upt.ro",
-                    Password = "password",
-                    UserName = "zayaTheBest"
-                },
-                new User
-                {
-                    Id = 4,
-                    Email = "gerdi.ninkhafk@student.upt.ro",
-                    Password = "password",
-                    UserName = "ninkhafk99"
-                },
-                new User
-                {
-                    Id = 5,
-                    Email = "rhiannon.bovun@student.upt.ro",
-                    Password = "password",
-                    UserName = "bovun2003"
-                },
-                new User
-                {
-                    Id = 6,
-                    Email = "rol.khihrerl@student.upt.ro",
-                    Password = "password",
-                    UserName = "khihrerl007"
-                },
-                 new User
-                 {
-                     Id = 7,
-                     Email = "shepard.hanni@student.upt.ro",
-                     Password = "password",
-                     UserName = "hanni_"
-                 },
-                new User
-                {
-                    Id = 8,
-                    Email = "buiron.tin@student.mit.us",
-                    Password = "password",
-                    UserName = "tin77"
-                },
-                new User
-                {
-                    Id = 9,
-                    Email = "rell.findazrum@student.lca.de",
-                    Password = "password",
-                    UserName = "rell_findar1"
-                },
-                new User
-                {
-                    Id = 10,
-                    Email = "xandra.tiang@student.upt.ro",
-                    Password = "password",
-                    UserName = "alexandra"
-                },
-                new User
-                {
-                    Id = 11,
-                    Email = "andrew.techel@student.upt.ro",
-                    Password = "password",
-                    UserName = "andreeew"
-                },
-                new User
-                {
-                    Id = 12,
-                    Email = "gustavo.del@student.upt.ro",
-                    Password = "password",
-                    UserName = "gustavo412"
-                }
+               UserList
             );
         }
 
@@ -542,42 +459,42 @@ namespace EducareBE.Data
                     Id = 1,
                     Name = "Definition",
                     SubjectId = 1,
-                    UserId = 1
+                    User = UserList[0],
                 },
                 new SubjectAddedBy
                 {
                     Id = 2,
                     Name = "Lab Example",
                     SubjectId = 1,
-                    UserId = 2
+                    User = UserList[1],
                 },
                 new SubjectAddedBy
                 {
                     Id = 3,
                     Name = "Coruse Example",
                     SubjectId = 1,
-                    UserId = 1
+                    User = UserList[0],
                 },
                 new SubjectAddedBy
                 {
                     Id = 6,
                     Name = "Definition",
                     SubjectId = 2,
-                    UserId = 2
+                    User = UserList[1],
                 },
                 new SubjectAddedBy
                 {
                     Id = 7,
                     Name = "Lab Example",
                     SubjectId = 2,
-                    UserId = 2
+                    User = UserList[1],
                 },
                 new SubjectAddedBy
                 {
                     Id = 8,
                     Name = "Coruse Example",
                     SubjectId = 2,
-                    UserId = 3
+                    User = UserList[2],
                 }
             );
         }
@@ -735,5 +652,94 @@ namespace EducareBE.Data
             );
             return; 
         }
+
+
+        private List<User> UserList = new List<User>
+            {
+                new User
+                {
+                    Id = 1,
+                    Email = "jhon.smith@student.upt.ro",
+                    Password = "password",
+                    UserName = "johnny47"
+                },
+                new User
+                {
+                    Id = 2,
+                    Email = "makhur.khena@student.upt.ro",
+                    Password = "password",
+                    UserName = "makhur.khena"
+                },
+                new User
+                {
+                    Id = 3,
+                    Email = "zaya.del@student.upt.ro",
+                    Password = "password",
+                    UserName = "zayaTheBest"
+                },
+                new User
+                {
+                    Id = 4,
+                    Email = "gerdi.ninkhafk@student.upt.ro",
+                    Password = "password",
+                    UserName = "ninkhafk99"
+                },
+                new User
+                {
+                    Id = 5,
+                    Email = "rhiannon.bovun@student.upt.ro",
+                    Password = "password",
+                    UserName = "bovun2003"
+                },
+                new User
+                {
+                    Id = 6,
+                    Email = "rol.khihrerl@student.upt.ro",
+                    Password = "password",
+                    UserName = "khihrerl007"
+                },
+                 new User
+                 {
+                     Id = 7,
+                     Email = "shepard.hanni@student.upt.ro",
+                     Password = "password",
+                     UserName = "hanni_"
+                 },
+                new User
+                {
+                    Id = 8,
+                    Email = "buiron.tin@student.mit.us",
+                    Password = "password",
+                    UserName = "tin77"
+                },
+                new User
+                {
+                    Id = 9,
+                    Email = "rell.findazrum@student.lca.de",
+                    Password = "password",
+                    UserName = "rell_findar1"
+                },
+                new User
+                {
+                    Id = 10,
+                    Email = "xandra.tiang@student.upt.ro",
+                    Password = "password",
+                    UserName = "alexandra"
+                },
+                new User
+                {
+                    Id = 11,
+                    Email = "andrew.techel@student.upt.ro",
+                    Password = "password",
+                    UserName = "andreeew"
+                },
+                new User
+                {
+                    Id = 12,
+                    Email = "gustavo.del@student.upt.ro",
+                    Password = "password",
+                    UserName = "gustavo412"
+                }
+            };
     }
 }
