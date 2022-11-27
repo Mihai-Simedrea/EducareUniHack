@@ -1,3 +1,4 @@
+import { Typography } from '@mui/material';
 import { borderRadius } from '@mui/system';
 import e from 'express';
 import { validateHeaderName } from 'http';
@@ -49,6 +50,31 @@ export const Blanks = (props: Props) => {
    const [input9, setInput9] = useState("");
    const [input10, setInput10] = useState("");
    const [ids, setIds] = useState(0);
+   const afisare = ()=>{
+    for(let j = 1; j <= 10; j++){
+        let k = 0;
+        let i:number;
+        for(i = k; curs[i][curs[i].length-1] === '.'; i++){
+            if(rand.find(e=>e===i)){
+                return  <input type={"submit"}
+                style={{
+                    border:"none",
+                    padding:"8px 20px",
+                    color:"white",
+                    background:"#66bb6a",
+                    position:"fixed",
+                    left:"160px",
+                    bottom:"150px",
+                    borderRadius:"20px"
+                }}></input>
+            }
+            else{
+                return curs[i] + ""
+            }
+        }
+        k = i+1;
+    }
+}
    const onChange = (e:React.FormEvent<HTMLInputElement>): void =>{
         switch(+e.currentTarget.id){
             case 1:
@@ -111,33 +137,14 @@ export const Blanks = (props: Props) => {
    }
   
   return (
-    <>
-        <SimpleHeader text='Fill the blanks'></SimpleHeader>
-        <form>
-            {()=>{
-                for(let j = 1; j <= 10; j++){
-                    let k = 0;
-                    let i;
-                    for(i = k; curs[i][curs[i].length-1] === '.'; i++){
-                        if(rand.find(i)){
-                            return  <input type={"submit"}
-                            style={{
-                                border:"none",
-                                padding:"8px 20px",
-                                color:"white",
-                                background:"#66bb6a",
-                                position:"fixed",
-                                left:"160px",
-                                bottom:"150px",
-                                borderRadius:"20px"
-                            }}></input>
-                        }
-                    }
-                    k = i+1;
-                }
-            }}
-        </form>
-        <LabelBottomNavigation icon={1}></LabelBottomNavigation>
-    </>
+    // <>
+    //     <SimpleHeader text='Fill the blanks'></SimpleHeader>
+        
+    //     <form>
+    //         {afisare()}
+    //     </form>
+    //     <LabelBottomNavigation icon={1}></LabelBottomNavigation>
+    // </>
+    <Typography fontSize={"16px"}>{curs}</Typography>
   )
 }
