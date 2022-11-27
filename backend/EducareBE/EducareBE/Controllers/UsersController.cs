@@ -52,6 +52,7 @@ namespace EducareBE.Controllers
             if (user == null)
             {
                 resultId = -1;
+                return Ok(resultId);
             }
 
             resultId = user.Id;
