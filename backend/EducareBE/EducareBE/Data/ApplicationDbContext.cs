@@ -75,6 +75,8 @@ namespace EducareBE.Data
         // public DbSet<Exercise> Exercises { get; set; }  
         // 
 
+        public DbSet<Exercise> Exercises { get; set; }
+
         private void PopulateUniversity(ModelBuilder modelBuilder) 
         {
             modelBuilder.Entity<University>()
