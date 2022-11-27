@@ -7,7 +7,6 @@ using Microsoft.EntityFrameworkCore;
 
 namespace EducareBE.Controllers
 {
-    /*
     [ApiController]
     [Route("api/[controller]")]
     public class ExerciseController: Controller
@@ -28,32 +27,31 @@ namespace EducareBE.Controllers
                 .Include(x => x.Subject)
                 .Where(x => x.SubjectId == id)
                 .ToListAsync();
-            return Ok(_mapper.Map<List<GetAllSubjectsAddedByViewModel>>(exercises));
+            return Ok(exercises);
         }
 
-        [HttpPost("{userId}/add-exercise/{materialName}/for/{subjectId}")]
-        public async Task<IActionResult> AddExercise(int userId, string exerciseName, int exerciseId)
+        [HttpPost("{userId}/add-exercise/{exerciseName}/for/{subjectId}")]
+        public async Task<IActionResult> AddExercise(int userId, string exerciseName, int subjectId)
         {
             var itExists = await _dbContext.SubjectsAddedBy
-                .AnyAsync(x => x.Name == exerciseName && x.SubjectId == exerciseId);
+                .AnyAsync(x => x.Name == exerciseName && x.SubjectId == subjectId);
             if (itExists)
             {
                 return Ok(false);
             }
 
-            var subjectAddedBy = new SubjectAddedBy
+            var exercise = new Exercise
             {
                 UserId = userId,
-                SubjectId = exerciseId,
+                SubjectId = subjectId,
                 Name = exerciseName,
             };
 
-            await _dbContext.SubjectsAddedBy.AddAsync(subjectAddedBy);
+            await _dbContext.Exercises.AddAsync(exercise);
             await _dbContext.SaveChangesAsync();
 
-            return Ok(subjectAddedBy);
+            return Ok(exercise);
         }
 
     }
-    */
 }
