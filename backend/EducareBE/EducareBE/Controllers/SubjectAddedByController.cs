@@ -54,26 +54,26 @@ namespace EducareBE.Controllers
             return Ok(subjectAddedBy);
         }
 
-        [HttpPost("{id}/like")]
-        public async Task<IActionResult> LikeSubjectAddedBy(int id)
-        {
-            var subjectAddedBy = await _dbContext.SubjectsAddedBy
-                .Where(x => x.Id == id)
-                .FirstOrDefaultAsync();
+        //[HttpPost("{id}/like")]
+        //public async Task<IActionResult> LikeSubjectAddedBy(int id)
+        //{
+        //    var subjectAddedBy = await _dbContext.SubjectsAddedBy
+        //        .Where(x => x.Id == id)
+        //        .FirstOrDefaultAsync();
 
-            //subjectAddedBy.Likes = subjectAddedBy.Likes += 1;
-            // TODO:
+        //    //subjectAddedBy.Likes = subjectAddedBy.Likes += 1;
+        //    // TODO:
 
 
 
-            return Ok();
-        }
+        //    return Ok();
+        //}
 
-        [HttpPost("{id}/dislike")]
-        public async Task<IActionResult> DislikeSubjectAddedBy(int id)
-        {
+        //[HttpPost("{id}/dislike")]
+        //public async Task<IActionResult> DislikeSubjectAddedBy(int id)
+        //{
 
-            return Ok();
-        }
+        //    return Ok();
+        //}
     }
 }
