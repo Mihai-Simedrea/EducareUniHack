@@ -3,6 +3,7 @@ import { useState, useEffect } from "react";
 import useLocal from "../CustomHooks/useLocal";
 import { useNavigate, useParams } from "react-router-dom";
 import HandleUserData from "../endpoints/HandleUserData";
+import LabelBottomNavigation from "./LabelBottomNavigation";
 type ProfileResponse={
     universityName:string;
     fieldName:string;
@@ -61,6 +62,7 @@ const Profile = () => {
         flexDirection: "column",
         alignItems: "center",
         justifyContent: "center",
+          alignSelf:'center'
       }}
     >
       <Box
@@ -71,8 +73,7 @@ const Profile = () => {
           flexDirection: "column",
           alignItems: "center",
           justifyContent: "center",
-          boxShadow: "10",
-          borderRadius:'30px'
+            borderRadius:'30px'
         }}
       >
         <Avatar
@@ -90,11 +91,11 @@ const Profile = () => {
             justifyContent: "center",
           }}
         >
-          <Typography variant="subtitle1">{university}</Typography>
-          <Typography variant="subtitle1">{field}</Typography>
-          <Typography variant="subtitle1">{degree}</Typography>
-          <Typography>Likes Recevide: {contentLike}</Typography>
-          <Typography>Posts Uploaded: {posts}</Typography>
+          <Typography variant="subtitle1">Universitatea Politehinica Timisoara</Typography>
+          <Typography variant="subtitle1">Automatica si Calculatoare</Typography>
+          <Typography variant="subtitle1">CTI</Typography>
+          <Typography>Likes Recevide: 0</Typography>
+          <Typography>Posts Uploaded: 0</Typography>
         </Box>
         <Box
           sx={{
@@ -109,7 +110,7 @@ const Profile = () => {
         >
           <Button
             variant="contained"
-            sx={{ width: "9rem", display: buttonView }}
+            sx={{ width: "9rem"}}
             onClick={() => {
               navigate("/AccountData");
             }}
@@ -119,13 +120,14 @@ const Profile = () => {
           </Button>
           <Button
             variant="contained"
-            sx={{ width: "9rem", display: buttonView }}
+            sx={{ width: "9rem"}}
             color="success"
           >
             Log Out
           </Button>
         </Box>
       </Box>
+        <LabelBottomNavigation icon={4}></LabelBottomNavigation>
     </Box>
   );
 };
