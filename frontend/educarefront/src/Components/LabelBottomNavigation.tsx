@@ -12,7 +12,7 @@ interface Props {
 }
 
 export default function LabelBottomNavigation(props: Props) {
-    const {icon} = props
+    const {icon} = props;
     return (
         <div className='navbar'>
             <Box component={Link} to="/Home"><h1><HiHome color={icon === 1 ? "#66bb6a" : "#070707"}></HiHome></h1>
